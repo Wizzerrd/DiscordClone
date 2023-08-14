@@ -23,6 +23,7 @@
 .login-fields input{
     display: block;
     background-color: 	#1e2124;
+    color: white;
 }
 
 .login-box button, .login-box input[type="submit"] {

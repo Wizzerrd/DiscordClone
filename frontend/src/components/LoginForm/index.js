@@ -1,12 +1,12 @@
-import { Redirect, useState, useEffect } from 'react';
-import { Link,  useParams } from 'react-router-dom';
+import {  useState } from 'react';
+import { Redirect, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {login} from '../../store/session'
 
 import './login.css'
 
-export default function UserForm(){
+export default function LoginForm(){
     const dispatch = useDispatch()
 
     const [userObj, setUserObj] = useState({
@@ -29,7 +29,10 @@ export default function UserForm(){
         })
     }
 
+    if (sessionUser) return <Redirect to="/channels" />
+
     return(
+        
         <div className='login-zone'>
             <div className='login-box'>
                 <div className='login-fields'>
