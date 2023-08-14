@@ -38,7 +38,7 @@ module DiscordClone
 
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore,
-      key: '_discord_session',
+      key: '_session_token',
       same_site: :lax, 
       secure: Rails.env.production?
   end
