@@ -2,6 +2,12 @@ class Api::UsersController < ApplicationController
   wrap_parameters include: User.attribute_names + ['password']
 
   def show
+    @user = User.find(params[:id])
+    if @user
+      render json: { user: @user }
+    else
+      render json: { errors: 'User Not Found' }, status: 404
+    end
   end
 
   def create
@@ -24,6 +30,14 @@ class Api::UsersController < ApplicationController
   end
 
   def destroy
+    user = current_user
+    if current_user
+      logout!
+      user.destroy
+      render json: { message: 'success' }
+    else
+      render json: {message: 'unauthorized'}, status: :unauthorized
+    end
   end
 
   private
