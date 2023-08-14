@@ -5,7 +5,6 @@ class User < ApplicationRecord
   
   validate :valid_username
   validate :old_enough
-  
   validate :valid_password
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }

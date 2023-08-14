@@ -1,24 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import UserForm from './components/UserForm';
+import Splash from './components/Splash'
+import Channel from './components/Channel'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+        <Route path='/login' element={<UserForm />}/>
+        <Route path='/register' element={<UserForm />}/>
+        <Route path='/' element={<Splash />} />
+        <Route path='/channels' element={<Channel />} />
+    </Routes>
   );
 }
 

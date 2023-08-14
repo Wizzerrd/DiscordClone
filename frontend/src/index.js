@@ -24,7 +24,7 @@ function Root() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <App/>
       </BrowserRouter>
     </Provider>
   );
@@ -33,13 +33,11 @@ function Root() {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const renderApplication = () => {
-
   root.render(
     <React.StrictMode>
       <Root />
     </React.StrictMode>
   );
-
 }
 
 if (sessionStorage.getItem("X-CSRF-Token") === null) {
@@ -47,7 +45,6 @@ if (sessionStorage.getItem("X-CSRF-Token") === null) {
 } else {
   renderApplication();
 }
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

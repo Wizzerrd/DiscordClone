@@ -1,0 +1,40 @@
+:root {
+    --box-height: 408px;
+    --box-width: 784px
+}
+
+.login-box{
+    position: absolute;
+    top: calc(50vh - (var(--box-height) / 2));
+    left: calc(50vw - (var(--box-width) / 2));
+    width: var(--box-width);
+    height: var(--box-height);
+    display: flex;
+    justify-content: space-evenly;
+    background-color: 		#424549;
+    color: white;
+}
+
+.login-fields{
+    display: flex;
+    flex-direction: column;
+}
+
+.login-fields input{
+    display: block;
+    background-color: 	#1e2124;
+}
+
+.login-box button, .login-box input[type="submit"] {
+    background-color:#7289da;
+    color: white;
+}
+.demo-buttons{
+    display: flex;
+    flex-direction: column;
+}
+.other-stuff{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly
+}
