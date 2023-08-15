@@ -7,16 +7,17 @@ import {login} from '../../store/session'
 import './login.css'
 
 export default function LoginForm(){
-    const dispatch = useDispatch()
+    const dispatch = useDispatch() 
 
     const [userObj, setUserObj] = useState({
-        username: '',
-        email: '',
         credential:'',
         password: ''
     })
 
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({
+        credential:'',
+        password:''
+    });
 
     const sessionUser = useSelector(state => state.session.user);
     
@@ -24,8 +25,20 @@ export default function LoginForm(){
     
     function handleSubmit(e){
         e.preventDefault()
-        dispatch(login(credential, password)).catch(res => {
-            console.log(res)
+
+        setErrors({
+            credential:'',
+            password:''
+        })
+
+        return dispatch(login(userObj)).catch( async res => {
+            let data;
+            try {
+                data = await res.clone().json();
+            } catch {
+                data = await res.text(); 
+                setErrors(data.errors);
+            }
         })
     }
 
@@ -39,9 +52,9 @@ export default function LoginForm(){
                     <h3>Welcome back!</h3>
                     <h4>We're so excited to see you again!</h4>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="credential">EMAIL OR PHONE NUMBER</label>
+                        <label htmlFor="credential">EMAIL OR USERNAME</label>{errors.credential && <p className="error-message">{errors.credential}</p>}
                         <input value={credential} id="credential" type="text" onChange={(e) => setUserObj({...userObj, credential: e.target.value})}></input>
-                        <label value={password} htmlFor="password">PASSWORD</label>
+                        <label value={password} htmlFor="password">PASSWORD</label>{errors.password && <p className="error-message">- {errors.password}</p>}
                         <input id="password" type="password" onChange={(e) => setUserObj({...userObj, password: e.target.value})}></input>
                         <input type='submit' value="Log In"/>
                     </form>
@@ -58,9 +71,7 @@ export default function LoginForm(){
                         <h3>Log in with a Demo Account</h3>
                         <p>Select a user from above to try the app's features instantly</p>
                     </div>
-
                 </div>
-
             </div>
         </div>
     )

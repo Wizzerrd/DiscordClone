@@ -1,34 +1,32 @@
 :root {
-    --login-box-height: 408px;
-    --login-box-width: 784px
+    --register-box-height: 480px;
+    --register-box-width: 562px
 }
 
-.login-box{
+.register-box{
     position: absolute;
-    top: calc(50vh - (var(--login-box-height) / 2));
-    left: calc(50vw - (var(--login-box-width) / 2));
-    width: var(--login-box-width);
-    height: var(--login-box-height);
+    top: calc(50vh - (var(--register-box-height) / 2));
+    left: calc(50vw - (var(--register-box-width) / 2));
+    width: var(--register-box-width);
+    height: var(--register-box-height);
     display: flex;
     justify-content: space-evenly;
     background-color: 		#424549;
     color: white;
 }
 
-.login-fields{
+.register-fields{
     display: flex;
     flex-direction: column;
-    margin: 5%;
 }
 
-.login-fields input{
+.register-fields input{
     display: block;
     background-color: 	#1e2124;
     color: white;
-    width: 100%;
 }
 
-.login-box button, .login-box input[type="submit"] {
+.register-box button, .register-box input[type="submit"] {
     background-color:#7289da;
     color: white;
     width: 100%;
