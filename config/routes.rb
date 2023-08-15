@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resource :session, only: [:show, :create, :destroy]
   end
 
-  get '*path', to: 'static_pages#frontend', constraint: lambda {|req| !req.xhr? && req.format.html?}
+  get '*path', to: 'static_pages#frontend', constraints: lambda {|req| !req.xhr? && req.format.html?}
 
   root to: 'static_pages#frontend'
 

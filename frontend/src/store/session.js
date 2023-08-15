@@ -20,7 +20,8 @@ export const removeSessionUser = () => ({
 });
 
 export const login = (user) => async dispatch => {
-  const {credential, password} = user
+  let {credential, password} = user
+  credential ||= user.username;
 
   const res = await csrfFetch('/api/session', {
     method: 'POST',
