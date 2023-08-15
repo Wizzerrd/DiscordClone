@@ -12,10 +12,10 @@ export default function RegisterForm(){
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const [errors, setErrors] = useState({
-        email: '',
-        username: '',
-        password: '',
-        dob: ''
+        email: [],
+        username: [],
+        password: [],
+        dob: []
     });
 
     const [userObj, setUserObj] = useState({
@@ -32,20 +32,13 @@ export default function RegisterForm(){
     
     function handleSubmit(e){
         e.preventDefault()
-        setErrors({
-            email: '',
-            username: '',
-            password: '',
-            dob: ''
-        })
 
-        dispatch(sessionActions.signup(userObj)).catch( async res => {
-            let data;
-            try{
-                data = await res.clone().json()
-            } catch {
-                data = await res.json()
-                setErrors(data)
+        return dispatch(sessionActions.signup(userObj)).catch( async res => {
+            const data = await res.json()
+            if(data.errors){
+                console.log(data)
+                setErrors({...data.errors})
+                console.log(errors)
             }
         })
     }
@@ -58,14 +51,14 @@ export default function RegisterForm(){
                 <div className='register-fields'>
                     <h3>Create an account</h3>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="email">EMAIL</label>
+                        <label htmlFor="email">EMAIL</label>{errors.email.length > 0 && <p className="error-message"> - {errors.email[0]}</p>}
                         <input value={email} id="email" type="email" onChange={(e) => setUserObj({...userObj, email: e.target.value})}></input>
-                        <label htmlFor="username">USERNAME</label>
+                        <label htmlFor="username">USERNAME</label>{errors.username.length > 0 && <p className="error-message"> - {errors.username[0]}</p>}
                         <input value={username} id="username" type="text" onChange={(e) => setUserObj({...userObj, username: e.target.value})}></input>
-                        <label value={password} htmlFor="password">PASSWORD</label>
+                        <label value={password} htmlFor="password">PASSWORD</label>{errors.password.length > 0 && <p className="error-message"> - {errors.password[0]}</p>}
                         <input id="password" type="password" onChange={(e) => setUserObj({...userObj, password: e.target.value})}></input>
                         <input type='submit' value="Continue"/>
-                        <label>DATE OF BIRTH</label>
+                        <label>DATE OF BIRTH</label>{errors.dob.length > 0 && <p className="error-message"> - {errors.dob[0]}</p>}
 
                         <div>
                             <select onChange={(e) => {
