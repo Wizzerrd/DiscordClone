@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates :session_token, :dob, presence: true
 
   def self.find_by_credentials(cred, pass)
-    if cred.include?('@')
+    if cred && cred.include?('@')
       user = User.find_by(email: cred)
     else
       user = User.find_by(username: cred)

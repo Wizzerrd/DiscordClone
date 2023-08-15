@@ -15,8 +15,7 @@ export default function LoginForm(){
     })
 
     const [errors, setErrors] = useState({
-        credential:'',
-        password:''
+        errors:''
     });
 
     const sessionUser = useSelector(state => state.session.user);
@@ -26,18 +25,10 @@ export default function LoginForm(){
     function handleSubmit(e){
         e.preventDefault()
 
-        setErrors({
-            credential:'',
-            password:''
-        })
-
         return dispatch(login(userObj)).catch( async res => {
-            let data;
-            try {
-                data = await res.clone().json();
-            } catch {
-                data = await res.text(); 
-                setErrors(data.errors);
+            let data = await res.json();
+            if(data.errors){
+                setErrors(data);
             }
         })
     }
@@ -69,9 +60,9 @@ export default function LoginForm(){
                     <h3>Welcome back!</h3>
                     <h4>We're so excited to see you again!</h4>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="credential">EMAIL OR USERNAME</label>{errors.credential && <p className="error-message">{errors.credential}</p>}
+                        <label className={errors.errors && "error-message"} htmlFor="credential">EMAIL OR USERNAME</label>{errors.errors && <p className="error-message"> - {errors.errors}</p>}
                         <input value={credential} id="credential" type="text" onChange={(e) => setUserObj({...userObj, credential: e.target.value})}></input>
-                        <label value={password} htmlFor="password">PASSWORD</label>{errors.password && <p className="error-message">- {errors.password}</p>}
+                        <label className={errors.errors && "error-message"} value={password} htmlFor="password">PASSWORD</label>{errors.errors && <p className="error-message"> - {errors.errors}</p>}
                         <input id="password" type="password" onChange={(e) => setUserObj({...userObj, password: e.target.value})}></input>
                         <input type='submit' value="Log In"/>
                     </form>

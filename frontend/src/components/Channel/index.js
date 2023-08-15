@@ -6,15 +6,11 @@ export default function Channel(){
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user);
 
-    function handleLogout(){
-        dispatch(logout());
-    }
-
     if (!sessionUser) return <Redirect to="/login" />
     
     return (
         <>
-        <button onClick={handleLogout}>Log Out</button>
+            <button onClick={()=>dispatch(logout())}>Log Out</button>
         </>
     )
 }

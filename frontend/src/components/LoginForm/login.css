@@ -42,3 +42,8 @@
     flex-direction: column;
     justify-content: space-evenly
 }
+
+.error-message{
+    display: inline;
+    color: hsl(358 calc(1*92.9%) 72.4%/1);
+}
