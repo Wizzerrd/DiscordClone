@@ -42,6 +42,23 @@ export default function LoginForm(){
         })
     }
 
+    function handleDemoLogin(e){
+        e.preventDefault()
+        let demoUser;
+        if(e.target.value === '1'){
+            demoUser = {
+                username: 'Boolean',
+                password: 'truefalse'
+            }
+        } else {
+            demoUser = {
+                username: 'Quanta',
+                password: 'emerging'
+            }
+        }
+        return dispatch(login(demoUser))
+    }
+
     if (sessionUser) return <Redirect to="/channels" />
 
     return(
@@ -64,8 +81,8 @@ export default function LoginForm(){
                 <div className='other-stuff'>
 
                     <div className='demo-buttons'>
-                        <button>Demo User 1</button>
-                        <button>Demo User 2</button>
+                        <button onClick={handleDemoLogin} value={'1'}>Demo User 1</button>
+                        <button onClick={handleDemoLogin} value={'2'}>Demo User 2</button>
                     </div>
                     <div>
                         <h3>Log in with a Demo Account</h3>
