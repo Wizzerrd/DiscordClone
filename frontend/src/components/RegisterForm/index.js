@@ -6,6 +6,7 @@ import {login, register} from '../../store/session'
 
 import * as sessionActions from '../../store/session'
 
+import '../LoginForm/login.css'
 import './register.css'
 
 export default function RegisterForm(){
@@ -36,9 +37,7 @@ export default function RegisterForm(){
         return dispatch(sessionActions.signup(userObj)).catch( async res => {
             const data = await res.json()
             if(data.errors){
-                console.log(data)
                 setErrors({...data.errors})
-                console.log(errors)
             }
         })
     }
@@ -49,18 +48,17 @@ export default function RegisterForm(){
         <div className='register-zone'>
             <div className='register-box'>
                 <div className='register-fields'>
-                    <h3>Create an account</h3>
+                    <h1>Create an account</h1>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="email">EMAIL</label>{errors.email.length > 0 && <p className="error-message"> - {errors.email[0]}</p>}
-                        <input value={email} id="email" type="email" onChange={(e) => setUserObj({...userObj, email: e.target.value})}></input>
+                        <input className='input-field' value={email} id="email" type="email" onChange={(e) => setUserObj({...userObj, email: e.target.value})}></input>
                         <label htmlFor="username">USERNAME</label>{errors.username.length > 0 && <p className="error-message"> - {errors.username[0]}</p>}
-                        <input value={username} id="username" type="text" onChange={(e) => setUserObj({...userObj, username: e.target.value})}></input>
+                        <input className='input-field' value={username} id="username" type="text" onChange={(e) => setUserObj({...userObj, username: e.target.value})}></input>
                         <label value={password} htmlFor="password">PASSWORD</label>{errors.password.length > 0 && <p className="error-message"> - {errors.password[0]}</p>}
-                        <input id="password" type="password" onChange={(e) => setUserObj({...userObj, password: e.target.value})}></input>
-                        <input type='submit' value="Continue"/>
+                        <input className='input-field' id="password" type="password" onChange={(e) => setUserObj({...userObj, password: e.target.value})}></input>
                         <label>DATE OF BIRTH</label>{errors.dob.length > 0 && <p className="error-message"> - {errors.dob[0]}</p>}
 
-                        <div>
+                        <div className='date-fields'>
                             <select onChange={(e) => {
                                     const newDate = new Date(dob);
                                     newDate.setMonth(parseInt(e.target.value) - 1); 
@@ -114,8 +112,10 @@ export default function RegisterForm(){
 
                             </select>
                         </div>
+
+                        <input className='discord-button' type='submit' value="Continue"/>
                     </form>
-                    <p><Link to='/login'>Already have an account?</Link></p>
+                    <div className='.register-link-div'><Link to='/login'>Already have an account?</Link></div>
                 </div>
             </div>
         </div>

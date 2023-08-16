@@ -1,7 +1,15 @@
 :root {
-    --register-box-height: 480px;
-    --register-box-width: 562px
+    --register-box-width: 480px;
+    --register-box-height: 562px;
+    --input-box-background: hsl(225 calc(1*6.3%) 12.5%/1);
+    --error-color: hsl(358 calc(1*92.9%) 72.4%/1);
+    --button-color: #5865F2;
+    --hover-color: #3d46a5;
+    --small-text-color: #B5BAC1;
+    --big-text-color: #F2F3F5;
+    --link-color: #00A8FC;
 }
+
 
 .register-box{
     position: absolute;
@@ -10,33 +18,46 @@
     width: var(--register-box-width);
     height: var(--register-box-height);
     display: flex;
-    justify-content: space-evenly;
-    background-color: 		#424549;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #313338;
     color: white;
+    border-radius: 5px;
 }
 
 .register-fields{
-    display: flex;
-    flex-direction: column;
+    width: 90%;
 }
 
-.register-fields input{
-    display: block;
-    background-color: 	#1e2124;
-    color: white;
+.register-box h1{
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--big-text-color);
+    text-align: center;
+    margin-top: 10%;
+    margin-bottom: 5%;
 }
 
-.register-box button, .register-box input[type="submit"] {
-    background-color:#7289da;
-    color: white;
-    width: 100%;
+.register-fields label{
+    font-size: 12px;
+    color: var(--small-text-color);
+    font-weight: bold;
 }
+
 .demo-buttons{
     display: flex;
     flex-direction: column;
 }
+
 .other-stuff{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly
+}
+
+.date-fields{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

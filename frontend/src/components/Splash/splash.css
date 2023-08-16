@@ -1,5 +1,11 @@
-.nav-bar{
+.splash-first{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+}
+
+.full-logo{
+    width: 124px;
+}
+
+.splash-first-img{
+    width: 650;
 }
