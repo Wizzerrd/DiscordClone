@@ -50,7 +50,7 @@ export default function LoginForm(){
         return dispatch(login(demoUser))
     }
 
-    if (sessionUser) return <Redirect to="/channels" />
+    if (sessionUser) return <Redirect to="/channels/@me" />
 
     return(
         
