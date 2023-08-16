@@ -17,11 +17,18 @@ ApplicationRecord.transaction do
   
     puts "Creating users..."
     # Create one user with an easy to remember username, email, and password:
-    User.create!(
-      username: 'pi', 
-      email: 'pi@pi.pi', 
-      password: 'password',
+    User.create(
+      username: 'Quanta', 
+      email: 'demo2@lol.lol', 
+      password: 'emergent',
       dob: Date.new(2000)
+    )
+
+    User.create(
+      username: 'Boolean', 
+      email: 'demo1@lol.lol', 
+      password: 'truefalse',
+      dob: Date.new(1999)
     )
   
     puts "Done!"

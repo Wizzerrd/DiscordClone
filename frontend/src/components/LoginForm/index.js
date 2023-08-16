@@ -44,7 +44,7 @@ export default function LoginForm(){
         } else {
             demoUser = {
                 username: 'Quanta',
-                password: 'emerging'
+                password: 'emergent'
             }
         }
         return dispatch(login(demoUser))
@@ -63,12 +63,12 @@ export default function LoginForm(){
                     </div>
                     <form className='login-form' onSubmit={handleSubmit}>
                         <div>
-                            <label className={errors.errors && "error-message"} htmlFor="credential">EMAIL OR USERNAME</label>{errors.errors && <p className="error-message"> - {errors.errors}</p>}
+                            <label htmlFor="credential">EMAIL OR USERNAME</label>{errors.errors && <p className="error-message"> - {errors.errors}</p>}
                             <input className='input-field' value={credential} id="credential" type="text" onChange={(e) => setUserObj({...userObj, credential: e.target.value})}></input>
                         </div>
 
                         <div>
-                            <label className={errors.errors && "error-message"} value={password} htmlFor="password">PASSWORD</label>{errors.errors && <p className="error-message"> - {errors.errors}</p>}
+                            <label value={password} htmlFor="password">PASSWORD</label>{errors.errors && <p className="error-message"> - {errors.errors}</p>}
                             <input className='input-field' id="password" type="password" onChange={(e) => setUserObj({...userObj, password: e.target.value})}></input>
                         </div>
 

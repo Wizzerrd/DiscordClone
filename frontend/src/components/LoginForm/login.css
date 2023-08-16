@@ -121,6 +121,8 @@ body{
 .error-message{
     display: inline;
     color: var(--error-color);
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .register-link-div{

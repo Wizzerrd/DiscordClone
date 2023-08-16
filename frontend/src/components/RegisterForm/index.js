@@ -50,13 +50,13 @@ export default function RegisterForm(){
                 <div className='register-fields'>
                     <h1>Create an account</h1>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="email">EMAIL</label>{errors.email.length > 0 && <p className="error-message"> - {errors.email[0]}</p>}
+                        <label htmlFor="email">EMAIL</label>{errors.email && errors.email.length > 0 && <p className="error-message"> - {errors.email[0]}</p>}
                         <input className='input-field' value={email} id="email" type="email" onChange={(e) => setUserObj({...userObj, email: e.target.value})}></input>
-                        <label htmlFor="username">USERNAME</label>{errors.username.length > 0 && <p className="error-message"> - {errors.username[0]}</p>}
+                        <label htmlFor="username">USERNAME</label>{errors.username && errors.username.length > 0 && <p className="error-message"> - {errors.username[0]}</p>}
                         <input className='input-field' value={username} id="username" type="text" onChange={(e) => setUserObj({...userObj, username: e.target.value})}></input>
-                        <label value={password} htmlFor="password">PASSWORD</label>{errors.password.length > 0 && <p className="error-message"> - {errors.password[0]}</p>}
+                        <label htmlFor="password">PASSWORD</label>{errors.password && errors.password.length > 0 && <p className="error-message"> - {errors.password[0]}</p>}
                         <input className='input-field' id="password" type="password" onChange={(e) => setUserObj({...userObj, password: e.target.value})}></input>
-                        <label>DATE OF BIRTH</label>{errors.dob.length > 0 && <p className="error-message"> - {errors.dob[0]}</p>}
+                        <label>DATE OF BIRTH</label>{errors.dob && errors.dob.length > 0 && <p className="error-message"> - {errors.dob[0]}</p>}
 
                         <div className='date-fields'>
                             <select onChange={(e) => {
@@ -115,7 +115,7 @@ export default function RegisterForm(){
 
                         <input className='discord-button' type='submit' value="Continue"/>
                     </form>
-                    <div className='.register-link-div'><Link to='/login'>Already have an account?</Link></div>
+                    <div className='register-link-div'><Link to='/login'>Already have an account?</Link></div>
                 </div>
             </div>
         </div>
