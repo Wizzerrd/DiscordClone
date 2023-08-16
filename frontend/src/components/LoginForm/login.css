@@ -1,6 +1,17 @@
 :root {
     --login-box-height: 408px;
-    --login-box-width: 784px
+    --login-box-width: 784px;
+    --input-box-background: hsl(225 calc(1*6.3%) 12.5%/1);
+    --error-color: hsl(358 calc(1*92.9%) 72.4%/1);
+    --button-color: #5865F2;
+    --hover-color: #3d46a5;
+    --small-text-color: #B5BAC1;
+    --big-text-color: #F2F3F5;
+    --link-color: #00A8FC;
+}
+
+body{
+    background-color: #5865F2;
 }
 
 .login-box{
@@ -10,40 +21,133 @@
     width: var(--login-box-width);
     height: var(--login-box-height);
     display: flex;
-    justify-content: space-evenly;
-    background-color: 		#424549;
+    justify-content: space-between;
+    background-color: 		#313338;
     color: white;
+    border-radius: 5px;
+    box-shadow: #313338;
 }
 
 .login-fields{
     display: flex;
     flex-direction: column;
-    margin: 5%;
+    justify-content: flex-start;
+    margin-top: 2.5%;
+    margin-left: 5%;
+    width: 50%;
 }
 
-.login-fields input{
+.input-field{
     display: block;
-    background-color: 	#1e2124;
+    background-color: var(--input-box-background) ;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 10px;
     color: white;
     width: 100%;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
-.login-box button, .login-box input[type="submit"] {
-    background-color:#7289da;
+.login-fields label{
+    font-size: 12px;
+    color: var(--small-text-color);
+    font-weight: bold;
+}
+
+.login-form > div{
+    margin-top: 10px;
+}
+
+.login-fields-welcome{
+    text-align: center;
+}
+
+.login-fields-welcome h1{
+    font-size: 24px;
+    color: var(--big-text-color);
+    font-weight: bold;
+    padding: 10px;
+}
+
+.login-fields-welcome h2{
+    font-size: 16px;
+    color: var(--small-text-color);
+    padding: 10px;
+}
+
+.discord-button {
+    background-color: var(--button-color);
     color: white;
     width: 100%;
+    padding: 9px 16px;
+    margin: 0 0 8px;
+    border: 0;
+    border-radius: 3px;
 }
+
+.discord-button:hover{
+    transition: background-color 0.25s ease;
+    cursor: pointer;
+    background-color: var(--hover-color);
+}
+
 .demo-buttons{
     display: flex;
     flex-direction: column;
 }
+
 .other-stuff{
+    margin-right: 5%;
+    width: 30%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.other-stuff h1{
+    color: var(--big-text-color);
+    font-size: 24px;
+    margin: 0 0 8px;
+}
+
+.other-stuff p{
+    color: var(--small-text-color);
+    font-size: 16px;
 }
 
 .error-message{
     display: inline;
-    color: hsl(358 calc(1*92.9%) 72.4%/1);
+    color: var(--error-color);
+}
+
+.register-link-div{
+    font-size: 14px;
+    color: var(--small-text-color);
+}
+
+.register-link-div a{
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+.register-link-div a:hover{
+    text-decoration: underline;
+}
+
+select{
+    background-color: var(--input-box-background);
+    border: none;
+    border-radius: 3px;
+    color: var(--small-text-color);
+    padding: 5px;
+    width: 32%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+select:hover{
+    cursor: pointer;
 }
