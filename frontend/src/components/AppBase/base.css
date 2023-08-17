@@ -1,5 +1,53 @@
 .god-button{
     position: absolute;
     top: 50vh;
-    right: 0;
+    left: 0;
+}
+
+.app-main{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    background-color: #313338;
+}
+
+.server-scroller{
+    display: flex;
+    flex-direction: column;
+    width: 72px;
+    align-items: center;
+    background-color: hsl( 225 calc( 1 *6.3%) 12.5% /1);
+    overflow: auto;
+    padding-top: 10px;
+}
+
+.server-list-item{
+    background-color: #313338;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    transition: all 0.25s ease;
+}
+
+.server-list-item-selected{
+    border-radius: 17px;
+}
+
+.server-list-item:hover{
+    background-color: #5865F2;
+    cursor: pointer;
+}
+
+#add-server-button{
+    display: flex;
+    flex-direction: column;
+    color: #23A559;
+    text-align: center;
+    justify-content: center;
+}
+
+#add-server-button:hover{
+    color: white;
+    background-color: #23A559;
+    border-radius: 17px;
 }

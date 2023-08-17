@@ -4,7 +4,7 @@ import { logout } from '../../store/session';
 
 export default function Channel(){
 
-    const dispatch = useDispatch()
+
     
 
 

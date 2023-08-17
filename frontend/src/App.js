@@ -20,7 +20,11 @@ function App() {
           <Route exact path='/login' component={LoginForm}/>
           <Route exact path='/register' component={RegisterForm}/>
 
-          <Route path='/channels/@me'>
+          {/* <Route path='/channels/@me'>
+            <AppBase sessionUser={sessionUser} />
+          </Route> */}
+
+          <Route path='/channels/:serverId'>
             <AppBase sessionUser={sessionUser} />
           </Route>
 

@@ -1,0 +1,50 @@
+.left-panel{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background-color: #2B2D31;
+    width: 240px;
+    height: 100%;
+    align-items: center;
+}
+
+.left-panel-drop-down{
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid #1F2023;
+}
+
+.search-bar{
+    width: 90%;
+    background-color: var(--input-box-background) ;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.left-panel > div{
+    width: 100%;
+    padding: 5px;
+}
+
+.dm-label-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-panel-option{
+
+}
+
+.left-panel-option-selected{
+    background-color: #4E505899;
+}
+
+.left-panel-option:hover{
+    transition: background-color 0.25s ease;
+    background-color: #35373C;
+}
