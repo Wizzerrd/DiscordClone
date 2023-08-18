@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_16_204954) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_17_173140) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,36 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_204954) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "channels", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title", null: false
+    t.bigint "server_id"
+    t.bigint "owner_id"
+    t.index ["owner_id"], name: "index_channels_on_owner_id"
+    t.index ["server_id"], name: "index_channels_on_server_id"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "membershipable_type", null: false
+    t.bigint "membershipable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["membershipable_id"], name: "index_memberships_on_membershipable_id"
+    t.index ["membershipable_type", "membershipable_id"], name: "index_memberships_on_membership"
+    t.index ["membershipable_type"], name: "index_memberships_on_membershipable_type"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "servers", force: :cascade do |t|
+    t.bigint "owner_id", null: false
+    t.string "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_servers_on_owner_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "username", null: false
@@ -58,4 +88,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_204954) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "memberships", "users"
+  add_foreign_key "servers", "users", column: "owner_id"
 end

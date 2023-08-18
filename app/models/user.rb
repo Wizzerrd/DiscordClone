@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint           not null, primary key
+#  email           :string           not null
+#  username        :string           not null
+#  password_digest :string           not null
+#  session_token   :string           not null
+#  bio             :text
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  dob             :date             not null
+#
 class User < ApplicationRecord
   before_validation :ensure_session_token
   
@@ -10,6 +24,21 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :email, :username, :session_token, uniqueness: true
   validates :session_token, :dob, presence: true
+
+  has_many :memberships
+
+  has_many :servers,
+    through: :memberships
+
+  has_many :owned_servers,
+    foreign_key: :user,
+    class_name: :Server,
+    dependent: :destroy
+
+  has_many :owned_channels,
+    foreign_key: :user,
+    class_name: :Channel,
+    dependent: :destroy
 
   def self.find_by_credentials(cred, pass)
     if cred && cred.include?('@')

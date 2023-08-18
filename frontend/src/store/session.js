@@ -39,7 +39,7 @@ export const login = (user) => async dispatch => {
 export const logout = () => async (dispatch) => {
   const res = await csrfFetch("/api/session", {
     method: "DELETE"
-  });
+  })
   storeCurrentUser(null);
   dispatch(removeSessionUser());
   return res;
@@ -50,9 +50,7 @@ export const signup = (user) => async (dispatch) => {
     method: "POST",
     body: JSON.stringify(user)
   });
-  
   dispatch(login(user))
-
 };
 
 const storeCurrentUser = user => {

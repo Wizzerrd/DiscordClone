@@ -1,0 +1,24 @@
+:root{
+    --server-box-width: 440px;
+    --server-box-height: 558px;
+}
+
+.new-server-foreground{
+    background-color: white;
+    position: absolute;
+    top: calc(50vh - (var(--server-box-height) / 2));
+    left: calc(50vw - (var(--server-box-width) / 2));
+    width: var(--server-box-width);
+    height: var(--server-box-height);
+    border-radius: 3px;
+}
+
+.new-server-foreground-green{
+    background-color: green;
+    position: absolute;
+    top: calc(50vh - (var(--server-box-height) / 2));
+    left: calc(50vw - (var(--server-box-width) / 2));
+    width: var(--server-box-width);
+    height: var(--server-box-height);
+    border-radius: 3px;
+}

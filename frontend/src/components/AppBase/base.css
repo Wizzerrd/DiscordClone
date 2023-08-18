@@ -41,13 +41,20 @@
 #add-server-button{
     display: flex;
     flex-direction: column;
-    color: #23A559;
-    text-align: center;
+    align-items: center;
     justify-content: center;
 }
 
-#add-server-button:hover{
+.plus-icon{
+    height: 16px;
+    
+}
+
+.green-plus-icon:hover{
     color: white;
+}
+
+#add-server-button:hover{
     background-color: #23A559;
     border-radius: 17px;
 }
