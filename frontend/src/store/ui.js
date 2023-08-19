@@ -19,10 +19,21 @@ export const setModalPage = page => ({
     page
 })
 
+// Right Panel
+
 export const TOGGLE_RIGHT_PANEL = 'ui/TOGGLE_RIGHT_PANEL'
 
 export const toggleRightPanel = () => ({
     type: TOGGLE_RIGHT_PANEL
+})
+
+// Server Selection for Scrollbar
+
+export const SELECT_SERVER = 'ui/SELECT_SERVER'
+
+export const selectServer = serverId => ({
+    type: SELECT_SERVER,
+    serverId
 })
 
 // Reducer
@@ -33,7 +44,8 @@ export const uiInitialState = {
     centerPanel: 'friends',
     leftPanelChannelList: false,
     rightPanel: false,
-    modalPage: 0
+    modalPage: 0,
+    selectedServer: -1
 }
 
 export default function uiReducer(state = uiInitialState, action){
@@ -44,6 +56,8 @@ export default function uiReducer(state = uiInitialState, action){
             return({...state, modalPage: action.page})
         case TOGGLE_RIGHT_PANEL:
             return({...state, rightPanel: !state.rightPanel})
+        case SELECT_SERVER:
+            return({...state, selectedServer: action.serverId})
         case UI_TO_DEFAULT:
             return uiInitialState
         default:

@@ -40,7 +40,7 @@ export default function serversReducer(state = {}, action){
         case SET_SERVERS:
             return({...state, servers: action.servers})
         case ADD_SERVER:
-            return({...state, servers: {...state.servers, [action.server.id]: action.server}})
+            return({...state.servers, [action.server.id]: action.server})
         case ADD_SERVERS:
             return({...state, ...action.servers})
         default:

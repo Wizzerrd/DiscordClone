@@ -1,5 +1,5 @@
 :root{
-    --button-color: #23A559;
+    --green-button-color: #23A559;
 }
 
 .server-scroller{
@@ -45,12 +45,24 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--button-color);
+    color: var(--green-button-color);
     font-size: 24px;
 }
 
 #add-server-button:hover{
-    --button-color: white;
+    --green-button-color: white;
+    background-color: #23A559;
+    border-radius: 17px;
+}
+
+.chosen{
+    background-color: #5865F2;
+    color: white;
+    border-radius: 17px;
+}
+
+.making-server{
+    --green-button-color: white;
     background-color: #23A559;
     border-radius: 17px;
 }
