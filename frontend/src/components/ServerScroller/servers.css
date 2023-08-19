@@ -35,6 +35,7 @@
 
 .server-list-item:hover{
     background-color: #5865F2;
+    color: white;
     cursor: pointer;
     border-radius: 17px;
 }
