@@ -1,13 +1,33 @@
-import { setModalPage } from '../../../../store/ui'
+import { setModalPage, setModalType } from '../../../../store/ui'
 import './newserver.css'
+
+import { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { createServer } from '../../../../store/servers';
+import { fetchUser } from '../../../../store/users';
 
 export default function NewServerModal({ modalPage }){
     const dispatch = useDispatch()
 
     const { user } = useSelector(state => state.session);
+
+    const [serverObj, setServerObj] = useState({
+        owner_id: user.id,
+        title: `${user.username}'s server`
+    })
+
+    function handleSubmit(e){
+        e.preventDefault();
+        dispatch(createServer(serverObj)).catch( async res => {
+            let data = res.json
+            console.log(data)
+        })
+
+        dispatch(fetchUser(user.id))
+        dispatch(setModalType(false))
+    }
 
     switch(modalPage){
         case 0:
@@ -27,11 +47,11 @@ export default function NewServerModal({ modalPage }){
                     </div>
                     <div>
                         <h2>SERVER NAME</h2>
-                        <input type='text' className='new-server-text-input'></input>
+                        <input value={serverObj.title} onChange={(e) => setServerObj({...serverObj, title: e.target.value})} type='text' className='new-server-text-input'></input>
                     </div>
                     <div className='new-server-bottom-buttons'>
                         <label className='new-server-back' onClick={()=>dispatch(setModalPage(modalPage - 1))}>Back</label>
-                        <div className='discord-button button-small' >Create</div>
+                        <div onClick={handleSubmit} className='discord-button button-small' >Create</div>
                     </div>
                 </div>
             )

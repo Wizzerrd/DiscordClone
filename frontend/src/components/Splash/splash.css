@@ -6,6 +6,17 @@
     width: 124px;
 }
 
-.splash-first-img{
-    width: 650;
+.svg-image{
+    width: 100%;
+    box-sizing: content-box;
+    position: relative;
+
+}
+
+.splash-first{
+    display: flex;
+    align-items: end;
+    background-color: #404EED;
+    background-image: url('../../Assets/splash-back.png');
+    height: 626px;
 }

@@ -28,17 +28,20 @@ class User < ApplicationRecord
   has_many :memberships
 
   has_many :servers,
-    through: :memberships
+    through: :memberships,
+    source: :membershipable,
+    source_type: :Server
+
+  has_many :channels,
+    through: :memberships,
+    source: :membershipable,
+    source_type: :Channel
 
   has_many :owned_servers,
-    foreign_key: :user,
-    class_name: :Server,
-    dependent: :destroy
+    as: :ownershipable
 
   has_many :owned_channels,
-    foreign_key: :user,
-    class_name: :Channel,
-    dependent: :destroy
+    as: :ownershipable
 
   def self.find_by_credentials(cred, pass)
     if cred && cred.include?('@')

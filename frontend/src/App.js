@@ -7,10 +7,14 @@ import RegisterForm from './components/RegisterForm';
 import NotFound from './components/NotFound';
 import AppBase from './components/AppBase';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchUser } from './store/users';
 
 
 function App() {
 
+  const dispatch = useDispatch()
   const sessionUser = useSelector(state => state.session.user);
   
   return (
@@ -19,10 +23,6 @@ function App() {
           <Route exact path='/' component={Splash} />
           <Route exact path='/login' component={LoginForm}/>
           <Route exact path='/register' component={RegisterForm}/>
-
-          {/* <Route path='/channels/@me'>
-            <AppBase sessionUser={sessionUser} />
-          </Route> */}
 
           <Route path='/channels/:serverId'>
             <AppBase sessionUser={sessionUser} />
