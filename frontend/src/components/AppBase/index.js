@@ -15,9 +15,7 @@ export default function AppBase({sessionUser}){
     const dispatch = useDispatch()
     const {serverId, channelId} = useParams()
 
-    useEffect(()=>{
-        dispatch(fetchUser(sessionUser.id))
-    }, [sessionUser])
+    const {selectedServer} = useSelector(state => state.ui)
 
     if (!sessionUser) return <Redirect to="/login" />
 

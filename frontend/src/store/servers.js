@@ -35,6 +35,12 @@ export const createServer = (server) => async dispatch => {
     }
 }
 
+export const fetchServer = serverId => async dispatch => {
+    const res = await csrfFetch(`/api/servers/${serverId}`)
+    let data = await res.json()
+    return data
+}
+
 export default function serversReducer(state = {}, action){
     switch(action.type){
         case SET_SERVERS:

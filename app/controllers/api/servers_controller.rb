@@ -13,7 +13,9 @@ class Api::ServersController < ApplicationController
     def create
         @server = Server.new(server_params)
         if @server.save
-            Membership.create!({membershipable_id: @server.id, membershipable_type:'Server', user_id: @server.owner_id})
+            Membership.create({membershipable_id: @server.id, membershipable_type:'Server', user_id: @server.owner_id})
+            channel = Channel.create({title:'general', server_id: @server.id, owner_id: @server.owner_id})
+            Membership.create({membershipable_id: channel.id, membershipable_type:'Channel', user_id: @server.owner_id})
             render 'api/servers/show'
         else
             render json: {errors: @server.errors}, status: :unprocessable_entity

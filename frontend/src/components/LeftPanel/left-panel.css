@@ -40,10 +40,11 @@
 
 }
 
-.left-panel-option-selected{
-    background-color: #4E505899;
+.left-panel-option:hover{
+    background-color: #35373C;
+    cursor: pointer;
 }
 
-.left-panel-option:hover{
+.in-channel{
     background-color: #35373C;
 }

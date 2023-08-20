@@ -1,3 +1,6 @@
+import { dumpChannels, setChannels } from "./channels"
+import { fetchServer } from "./servers"
+
 export const UI_TO_DEFAULT = 'ui/UI_TO_DEFAULT'
 
 export const uiToDefault = () => ({
@@ -31,9 +34,28 @@ export const toggleRightPanel = () => ({
 
 export const SELECT_SERVER = 'ui/SELECT_SERVER'
 
-export const selectServer = serverId => ({
-    type: SELECT_SERVER,
+export const SET_SERVER = 'ui/SET_SERVER'
+
+export const setServer = serverId => ({
+    type: SET_SERVER,
     serverId
+})
+
+export const selectServer = serverId => async dispatch => {
+    if (serverId > 0) {
+        let {channels} = await dispatch(fetchServer(serverId))
+        dispatch(setChannels(channels))
+    }
+    dispatch(setServer(serverId))
+}
+
+export const SELECT_CHANNEL = 'ui/SELECT_CHANNEL'
+
+export const SET_CHANNEL = 'ui/SET_CHANNEL'
+
+export const selectChannel = channelId => ({
+    type: SELECT_CHANNEL,
+    channelId
 })
 
 // Reducer
@@ -45,7 +67,8 @@ export const uiInitialState = {
     leftPanelChannelList: false,
     rightPanel: false,
     modalPage: 0,
-    selectedServer: -1
+    selectedServer: -1,
+    selectedChannel: -1
 }
 
 export default function uiReducer(state = uiInitialState, action){
@@ -56,7 +79,7 @@ export default function uiReducer(state = uiInitialState, action){
             return({...state, modalPage: action.page})
         case TOGGLE_RIGHT_PANEL:
             return({...state, rightPanel: !state.rightPanel})
-        case SELECT_SERVER:
+        case SET_SERVER:
             return({...state, selectedServer: action.serverId})
         case UI_TO_DEFAULT:
             return uiInitialState

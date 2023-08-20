@@ -1,9 +1,15 @@
-import { useParams } from "react-router-dom/cjs/react-router-dom.min"
+import { Redirect, useParams } from "react-router-dom/cjs/react-router-dom.min"
 import UserPreview from "../UserPreview"
 
 import './left-panel.css'
+import { useSelector } from "react-redux"
 
 export default function LeftPanel({serverId}){
+
+    const {servers, channels} = useSelector(state => state.entities)
+    const { currentServer, currentChannel} = useSelector(state => state.ui)
+    const channelList = Object.values(channels)
+    
     
     if(serverId === '@me'){
         return(
@@ -25,21 +31,23 @@ export default function LeftPanel({serverId}){
                         </div>
                         <div className="left-panel-dms">
                         </div>
-                        <UserPreview/>
+                        {/* <UserPreview/> */}
                 </div>
             </>
         )
     } else {
         return(
             <>
+                <Redirect to={`/channels/${serverId}/`} />
                 <div className="left-panel">
                     <div className="left-panel-drop-down">
         
                     </div>
-                    <div className="text-channels-drop-down">
-                        
-                    </div>
-                    <UserPreview/>
+                    <label>Text Channels</label>
+                    <ul className="text-channels-drop-down">
+                        {channelList.map(channel => <li className="left-panel-option" key={channel.id}>{channel.title}</li>)}
+                    </ul>
+                    {/* <UserPreview/> */}
                 </div>
             </>
         )

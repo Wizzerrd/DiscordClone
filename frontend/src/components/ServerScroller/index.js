@@ -25,6 +25,11 @@ export default function ServerScroller(){
         else if (server === 0 && modalType === 'newServer' ) className += ' making-server'
         return className
     }
+
+    const reId = () => {
+        if (selectedServer < 0) return '@me'
+        else return selectedServer
+    }
     
     return(
         <div className='server-scroller'>
@@ -43,6 +48,7 @@ export default function ServerScroller(){
                 </div>
 
             </div>
+            <Redirect to={`/channels/${reId()}`}/>
         </div>
     )
 }

@@ -20,26 +20,6 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  def update
-    @user = current_user
-    if @user.update(update_params)
-      render 'api/users/show'
-    else
-      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    user = current_user
-    if current_user
-      logout!
-      user.destroy
-      render json: { message: 'success' }
-    else
-      render json: {message: 'unauthorized'}, status: :unauthorized
-    end
-  end
-
   private
 
   def user_params
