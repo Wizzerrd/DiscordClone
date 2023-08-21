@@ -1,0 +1,12 @@
+.god-button{
+    position: absolute;
+    top: 50vh;
+    left: 0;
+}
+
+.app-main{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    background-color: #313338;
+}

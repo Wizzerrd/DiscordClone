@@ -4,14 +4,10 @@
     --input-box-background: hsl(225 calc(1*6.3%) 12.5%/1);
     --error-color: hsl(358 calc(1*92.9%) 72.4%/1);
     --button-color: #5865F2;
-    --hover-color: #3d46a5;
+    --hover-color: #4752C4;
     --small-text-color: #B5BAC1;
     --big-text-color: #F2F3F5;
     --link-color: #00A8FC;
-}
-
-body{
-    background-color: #5865F2;
 }
 
 .login-box{

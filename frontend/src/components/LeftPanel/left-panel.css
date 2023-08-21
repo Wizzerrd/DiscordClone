@@ -1,0 +1,91 @@
+:root{
+    --label-text-color: #949BA4;
+    --channel-link-color: #949BA4;
+}
+
+.left-panel{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background-color: #2B2D31;
+    width: 240px;
+    height: 100%;
+    align-items: center;
+}
+
+.left-panel-drop-down{
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid #1F2023;
+}
+
+.search-bar{
+    width: 90%;
+    background-color: var(--input-box-background) ;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.left-panel > div{
+    width: 100%;
+    padding: 5px;
+}
+
+.dm-label-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-panel-option{
+}
+
+.left-panel-option:hover{
+    background-color: #35373C;
+    cursor: pointer;
+}
+
+.in-channel{
+    background-color: #35373C;
+}
+
+.label-for-channels-drop-down{
+    display: flex;
+    justify-content: space-between;
+    color: var(--label-text-color);
+}
+
+.label-for-channels-drop-down > * {
+    padding: 5px;
+}
+
+.label-for-channels-drop-down:hover{
+    cursor: pointer;
+}
+
+.label-for-channels-drop-down > label {
+    width: 100%;
+    cursor: pointer;
+}
+
+.label-for-channels-drop-down > label:hover{
+    color: #DBDED6;
+}
+
+
+.label-for-channels-drop-down > div:hover{
+    color: #DBDED6;
+}
+
+.channels-drop-down a{
+    text-decoration: none;
+    color: var(--channel-link-color);
+}
+
+.channels-drop-down > div:hover{
+    --channel-link-color: white;
+}

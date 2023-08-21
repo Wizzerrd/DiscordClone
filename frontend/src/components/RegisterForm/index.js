@@ -42,7 +42,7 @@ export default function RegisterForm(){
         })
     }
 
-    if (sessionUser) return <Redirect to="/channels" />
+    if (sessionUser) return <Redirect to="/channels/@me" />
 
     return(
         <div className='register-zone'>

@@ -1,4 +1,5 @@
 import csrfFetch, { storeCSRFToken } from './csrf'; // Import your custom csrfFetch function
+import { uiToDefault } from './ui';
 
 export const SET_SESSION_USER = 'session/SET_SESSION_USER';
 export const REMOVE_SESSION_USER = 'session/REMOVE_SESSION_USER';
@@ -31,15 +32,16 @@ export const login = (user) => async dispatch => {
   const data = await res.json();
   storeCurrentUser(data.user);
   dispatch(setSessionUser(data.user));
+  dispatch(uiToDefault())
   
   return res;
   
 };
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async dispatch => {
   const res = await csrfFetch("/api/session", {
     method: "DELETE"
-  });
+  })
   storeCurrentUser(null);
   dispatch(removeSessionUser());
   return res;
@@ -50,9 +52,7 @@ export const signup = (user) => async (dispatch) => {
     method: "POST",
     body: JSON.stringify(user)
   });
-  
   dispatch(login(user))
-
 };
 
 const storeCurrentUser = user => {
