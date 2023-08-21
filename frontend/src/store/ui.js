@@ -45,6 +45,7 @@ export const selectServer = serverId => async dispatch => {
     if (serverId > 0) {
         let {channels} = await dispatch(fetchServer(serverId))
         dispatch(setChannels(channels))
+        dispatch(selectChannel(Number(Object.keys(channels)[0])))
     }
     dispatch(setServer(serverId))
 }
@@ -53,8 +54,12 @@ export const SELECT_CHANNEL = 'ui/SELECT_CHANNEL'
 
 export const SET_CHANNEL = 'ui/SET_CHANNEL'
 
-export const selectChannel = channelId => ({
-    type: SELECT_CHANNEL,
+export const selectChannel = channelId => async dispatch => {
+    dispatch(setChannel(channelId))
+}
+
+export const setChannel = channelId => ({
+    type: SET_CHANNEL,
     channelId
 })
 
@@ -81,6 +86,8 @@ export default function uiReducer(state = uiInitialState, action){
             return({...state, rightPanel: !state.rightPanel})
         case SET_SERVER:
             return({...state, selectedServer: action.serverId})
+        case SET_CHANNEL:
+            return({...state, selectedChannel: action.channelId})
         case UI_TO_DEFAULT:
             return uiInitialState
         default:

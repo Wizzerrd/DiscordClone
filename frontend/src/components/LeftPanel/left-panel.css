@@ -1,3 +1,7 @@
+:root{
+    --label-text-color: #949BA4;
+}
+
 .left-panel{
     display: flex;
     flex-direction: column;
@@ -37,7 +41,6 @@
 }
 
 .left-panel-option{
-
 }
 
 .left-panel-option:hover{
@@ -47,4 +50,36 @@
 
 .in-channel{
     background-color: #35373C;
+}
+
+.label-for-channels-drop-down{
+    display: flex;
+    justify-content: space-between;
+    color: var(--label-text-color);
+}
+
+.label-for-channels-drop-down > * {
+    padding: 5px;
+}
+
+.label-for-channels-drop-down:hover{
+    cursor: pointer;
+}
+
+.label-for-channels-drop-down > label {
+    width: 100%;
+    cursor: pointer;
+}
+
+.label-for-channels-drop-down > label:hover{
+    color: #DBDED6;
+}
+
+
+.label-for-channels-drop-down > div:hover{
+    color: #DBDED6;
+}
+
+.channels-drop-down{
+
 }

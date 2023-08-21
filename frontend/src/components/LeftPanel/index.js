@@ -3,8 +3,12 @@ import UserPreview from "../UserPreview"
 
 import './left-panel.css'
 import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { selectChannel, setModalPage, setModalType } from "../../store/ui"
 
 export default function LeftPanel({serverId}){
+
+    const dispatch = useDispatch()
 
     const {servers, channels} = useSelector(state => state.entities)
     const { currentServer, currentChannel } = useSelector(state => state.ui)
@@ -42,10 +46,14 @@ export default function LeftPanel({serverId}){
                     <div className="left-panel-drop-down">
         
                     </div>
-                    <label>Text Channels</label>
-                    <ul className="text-channels-drop-down">
-                        {channelList.map(channel => <li className="left-panel-option" key={channel.id}>{channel.title}</li>)}
-                    </ul>
+
+                    <div className="label-for-channels-drop-down">
+                        <label>Text Channels</label>
+                        <div onClick={()=>dispatch(setModalType('newChannel'))} id="add-channel-button">+</div>
+                    </div>
+                    <div className="channels-drop-down">
+                        {channelList.map(channel => <div onClick={() => dispatch(selectChannel(channel.id))} className="left-panel-option" key={channel.id}>{channel.title}</div>)}
+                    </div>
                     {/* <UserPreview/> */}
                 </div>
             </>
