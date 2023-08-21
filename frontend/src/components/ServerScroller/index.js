@@ -37,7 +37,7 @@ export default function ServerScroller({ serverId }){
 
             {/* Server Selectors */}
             <div className='server-list'>
-                {serverList.map( server => <Link key={server.id} to={`/channels/${server.id}`}><div className={amIChosen(server.id)}>{server.id}</div></Link>)}
+                {serverList.map( server => <Link key={server.id} to={`/channels/${server.id}/${server.primaryChannel}`}><div className={amIChosen(server.id)}>{server.id}</div></Link>)}
             </div>
 
             {/* New Server Selector */}

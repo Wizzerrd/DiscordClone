@@ -11,14 +11,17 @@
     width: 240px;
     height: 100%;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .left-panel-drop-down{
+    box-sizing: border-box;
     height: 48px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     border-bottom: 1px solid #1F2023;
+    color: #F2F3F5;
 }
 
 .search-bar{

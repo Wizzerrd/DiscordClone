@@ -28,7 +28,7 @@ export const createServer = (server) => async dispatch => {
     const res = await csrfFetch('/api/servers', {
         method:'POST',
         body: JSON.stringify(server)
-    })
+    }).throw(res)
     if (res.ok){
         let data = await res.json()
         dispatch(addServer(data.server))
@@ -46,7 +46,7 @@ export default function serversReducer(state = {}, action){
         case SET_SERVERS:
             return({...action.servers})
         case ADD_SERVER:
-            return({...state.servers, [action.server.id]: action.server})
+            return({...state, [action.server.id]: action.server})
         case ADD_SERVERS:
             return({...state, ...action.servers})
         default:

@@ -1,3 +1,5 @@
+import csrfFetch from "./csrf"
+
 export const DUMP_CHANNELS = 'channels/DUMP_CHANNELS'
 
 export const SET_CHANNELS  = 'channels/SET_CHANNELS'
@@ -24,6 +26,17 @@ export const addChannel = channel => ({
     type: ADD_CHANNEL,
     channel
 })
+
+export const createChannel = channel => async dispatch => {
+    const res = await csrfFetch('/api/channels', {
+        method:'POST',
+        body: JSON.stringify(channel)
+    })
+    if(res.ok){
+        let data = await res.json()
+        dispatch(addChannel(data))
+    }
+}
 
 export default function channelsReducer(state = {}, action){
     switch(action.type){

@@ -14,7 +14,7 @@ export default function LeftPanel({serverId}){
 
     const dispatch = useDispatch()
 
-    const { channels } = useSelector(state => state.entities)
+    const { channels, servers } = useSelector(state => state.entities)
     const channelList = Object.values(channels)
     
     
@@ -47,7 +47,7 @@ export default function LeftPanel({serverId}){
             <>
                 <div className="left-panel">
                     <div className="left-panel-drop-down">
-        
+                        {servers[serverId] && servers[serverId].title}
                     </div>
 
                     <div className="label-for-channels-drop-down">

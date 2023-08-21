@@ -10,7 +10,7 @@ class Api::ChannelsController < ApplicationController
 
     def create
         @channel = Channel.new(channel_params)
-        if @channel.save
+        if @channel.save!
             render 'api/channels/show'
         else
             render json: {errors: @channel.errors}, status: :unprocessable_entity
@@ -20,7 +20,7 @@ class Api::ChannelsController < ApplicationController
     private 
 
     def channel_params
-        params.require(:channel).permit(:title)
+        params.require(:channel).permit(:title, :owner_id, :server_id)
     end
 
 end

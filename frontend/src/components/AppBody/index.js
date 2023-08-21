@@ -1,12 +1,17 @@
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import RightPanel from "../RightPanel";
 import BodySelector from "./BodySelector";
 import TopBar from "./TopBar";
 
+import './app-body.css'
+
 export default function AppBody(){
+    const {serverId, channelId} = useParams()
+
     return(
         <div className="app-body-main">
-            <TopBar/>
-            <BodySelector/>
+            <TopBar channelId={channelId}/>
+            <BodySelector />
             <RightPanel/>
         </div>
     )

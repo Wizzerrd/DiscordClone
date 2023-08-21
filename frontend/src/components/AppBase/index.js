@@ -17,6 +17,7 @@ export default function AppBase(){
     const dispatch = useDispatch()
     const {serverId, channelId} = useParams()
     const sessionUser = useSelector(state => state.session.user);
+    const { channels } = useSelector(state => state.entities)
 
     useEffect(()=>{
         if(sessionUser){
@@ -27,14 +28,16 @@ export default function AppBase(){
     useEffect(()=>{
         dispatch(selectServer(serverId))
     }, [serverId])
-
+    
     useEffect(()=>{
         if(channelId){
             dispatch(setCenterPanel('messages'))
-        } else {
+        } else if(serverId === '@me') {
             dispatch(setCenterPanel('friends'))
         }
     }, [channelId])
+    
+
     
     return(
         <div className='app-main'>
@@ -43,7 +46,7 @@ export default function AppBase(){
             <button className='god-button' onClick={()=>dispatch(logout())}>Log Out</button>
             <ServerScroller serverId={serverId}/>
             <LeftPanel serverId={serverId} />
-            <AppBody/>
+            <AppBody  />
         </div> 
     )
 }
