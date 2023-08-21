@@ -7,7 +7,7 @@ import { useSelector } from "react-redux"
 export default function LeftPanel({serverId}){
 
     const {servers, channels} = useSelector(state => state.entities)
-    const { currentServer, currentChannel} = useSelector(state => state.ui)
+    const { currentServer, currentChannel } = useSelector(state => state.ui)
     const channelList = Object.values(channels)
     
     
@@ -38,7 +38,6 @@ export default function LeftPanel({serverId}){
     } else {
         return(
             <>
-                <Redirect to={`/channels/${serverId}/`} />
                 <div className="left-panel">
                     <div className="left-panel-drop-down">
         

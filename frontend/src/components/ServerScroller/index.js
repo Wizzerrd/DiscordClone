@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Link, useParams } from 'react-router-dom';
 import { logout } from '../../store/session';
@@ -14,7 +14,7 @@ export default function ServerScroller(){
 
     const dispatch = useDispatch()
 
-    const servers = useSelector(state => state.entities.servers)
+    const {servers, channels} = useSelector(state => state.entities)
     const { selectedServer, modalType } = useSelector(state => state.ui)
 
     const serverList = Object.values(servers)
@@ -28,7 +28,12 @@ export default function ServerScroller(){
 
     const reId = () => {
         if (selectedServer < 0) return '@me'
-        else return selectedServer
+        else {
+            let channelList = Object.keys(channels)
+            let url = `${selectedServer}/${channelList[0]}`
+            console.log(url)
+            return url
+        }
     }
     
     return(
@@ -48,7 +53,7 @@ export default function ServerScroller(){
                 </div>
 
             </div>
-            <Redirect to={`/channels/${reId()}`}/>
+            {selectedServer && <Redirect to={`/channels/${reId()}`}/>}
         </div>
     )
 }
