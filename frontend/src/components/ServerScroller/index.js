@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { logout } from '../../store/session';
 
 import { AiOutlinePlus } from 'react-icons/ai'
@@ -10,50 +10,43 @@ import { uiInitialState, setModalType, selectServer } from '../../store/ui';
 
 import './servers.css'
 
-export default function ServerScroller(){
+export default function ServerScroller({ serverId }){
 
     const dispatch = useDispatch()
 
-    const {servers, channels} = useSelector(state => state.entities)
+    const { servers } = useSelector(state => state.entities)
     const { selectedServer, modalType } = useSelector(state => state.ui)
-
     const serverList = Object.values(servers)
 
     function amIChosen(server){
         let className = 'server-list-item'
-        if (selectedServer && selectedServer === server) className += ' chosen'
+        if (String(serverId) === String(server)) className += ' chosen'
         else if (server === 0 && modalType === 'newServer' ) className += ' making-server'
         return className
-    }
-
-    const reId = () => {
-        if (selectedServer < 0) return '@me'
-        else {
-            let channelList = Object.keys(channels)
-            let url = `${selectedServer}/${channelList[0]}`
-            console.log(url)
-            return url
-        }
     }
     
     return(
         <div className='server-scroller'>
+
+            {/* Friends List Selector */}
             <div>
-                <div onClick={()=> dispatch(selectServer(-1))} id='friend-list-selector' className={amIChosen(-1)}>
+                <Link to={`/channels/@me`}><div id='friend-list-selector' className={amIChosen('@me')}>
                     <img src='https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg'/>
-                </div>
+                </div></Link>
             </div>
 
-            <ul className='server-list'>
-                {serverList.map( server => <li onClick={()=> dispatch(selectServer(server.id))} className={amIChosen(server.id)} key={server.id}>{server.id}</li>)}
-            </ul>
+            {/* Server Selectors */}
+            <div className='server-list'>
+                {serverList.map( server => <Link key={server.id} to={`/channels/${server.id}`}><div className={amIChosen(server.id)}>{server.id}</div></Link>)}
+            </div>
+
+            {/* New Server Selector */}
             <div>
                 <div onClick={e => dispatch(setModalType('newServer'))} className={amIChosen(0)} id='add-server-button'>
-                            <AiOutlinePlus/>
+                    <AiOutlinePlus/>
                 </div>
-
             </div>
-            {selectedServer && <Redirect to={`/channels/${reId()}`}/>}
+
         </div>
     )
 }

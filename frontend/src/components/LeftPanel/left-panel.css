@@ -1,5 +1,6 @@
 :root{
     --label-text-color: #949BA4;
+    --channel-link-color: #949BA4;
 }
 
 .left-panel{
@@ -80,6 +81,11 @@
     color: #DBDED6;
 }
 
-.channels-drop-down{
+.channels-drop-down a{
+    text-decoration: none;
+    color: var(--channel-link-color);
+}
 
+.channels-drop-down > div:hover{
+    --channel-link-color: white;
 }

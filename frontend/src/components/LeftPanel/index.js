@@ -1,4 +1,4 @@
-import { Redirect, useParams } from "react-router-dom/cjs/react-router-dom.min"
+import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min"
 import UserPreview from "../UserPreview"
 
 import './left-panel.css'
@@ -6,12 +6,16 @@ import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { selectChannel, setModalPage, setModalType } from "../../store/ui"
 
-export default function LeftPanel({serverId}){
+const landingRedirect = () => {
+    
+}
+
+export default function LeftPanel({serverId, channelId}){
 
     const dispatch = useDispatch()
 
-    const {servers, channels} = useSelector(state => state.entities)
-    const { currentServer, currentChannel } = useSelector(state => state.ui)
+    const { channels } = useSelector(state => state.entities)
+    const { currentChannel } = useSelector(state => state.ui)
     const channelList = Object.values(channels)
     
     
@@ -52,7 +56,7 @@ export default function LeftPanel({serverId}){
                         <div onClick={()=>dispatch(setModalType('newChannel'))} id="add-channel-button">+</div>
                     </div>
                     <div className="channels-drop-down">
-                        {channelList.map(channel => <div onClick={() => dispatch(selectChannel(channel.id))} className="left-panel-option" key={channel.id}>{channel.title}</div>)}
+                        {channelList.map(channel => <Link key={channel.id} to={`/channels/${serverId}/${channel.id}`}><div className="left-panel-option">{channel.title}</div></Link>)}
                     </div>
                     {/* <UserPreview/> */}
                 </div>

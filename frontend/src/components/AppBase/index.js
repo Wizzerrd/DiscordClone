@@ -9,13 +9,12 @@ import ModalBase from '../ModalBase';
 import ServerScroller from '../ServerScroller';
 import { useEffect, useState } from 'react';
 import { fetchUser } from '../../store/users';
+import { selectServer } from '../../store/ui';
 
 export default function AppBase(){
 
     const dispatch = useDispatch()
     const {serverId, channelId} = useParams()
-
-    const {selectedServer} = useSelector(state => state.ui)
     const sessionUser = useSelector(state => state.session.user);
 
     useEffect(()=>{
@@ -23,14 +22,18 @@ export default function AppBase(){
             dispatch(fetchUser(sessionUser.id))
         }
     }, [sessionUser])
+
+    useEffect(()=>{
+        dispatch(selectServer(serverId))
+    }, [serverId])
     
     return(
         <div className='app-main'>
             {!sessionUser && <Redirect to="/login" />}
             <ModalBase/>
             <button className='god-button' onClick={()=>dispatch(logout())}>Log Out</button>
-            <ServerScroller/>
-            <LeftPanel serverId={serverId}/>
+            <ServerScroller serverId={serverId}/>
+            <LeftPanel serverId={serverId} channelId={channelId}/>
         </div> 
     )
 }
