@@ -12,7 +12,7 @@ export const fetchUser = userId => async dispatch => {
     const res = await csrfFetch(`/api/users/${userId}`)
     const data = await res.json()
     if (res.ok){
-        dispatch(serverActions.addServers(data.servers))
+        dispatch(serverActions.setServers(data.servers))
     } else {
 
     }

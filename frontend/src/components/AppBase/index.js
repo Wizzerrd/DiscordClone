@@ -10,17 +10,23 @@ import ServerScroller from '../ServerScroller';
 import { useEffect, useState } from 'react';
 import { fetchUser } from '../../store/users';
 
-export default function AppBase({sessionUser}){
+export default function AppBase(){
 
     const dispatch = useDispatch()
     const {serverId, channelId} = useParams()
 
     const {selectedServer} = useSelector(state => state.ui)
+    const sessionUser = useSelector(state => state.session.user);
 
-    if (!sessionUser) return <Redirect to="/login" />
-
+    useEffect(()=>{
+        if(sessionUser){
+            dispatch(fetchUser(sessionUser.id))
+        }
+    }, [sessionUser])
+    
     return(
         <div className='app-main'>
+            {!sessionUser && <Redirect to="/login" />}
             <ModalBase/>
             <button className='god-button' onClick={()=>dispatch(logout())}>Log Out</button>
             <ServerScroller/>

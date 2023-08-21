@@ -10,22 +10,23 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchUser } from './store/users';
-
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 function App() {
 
   const dispatch = useDispatch()
+
   const sessionUser = useSelector(state => state.session.user);
-  
+
   return (
-      <Switch>
+    <Switch>
 
           <Route exact path='/' component={Splash} />
           <Route exact path='/login' component={LoginForm}/>
           <Route exact path='/register' component={RegisterForm}/>
 
           <Route path='/channels/:serverId'>
-            <AppBase sessionUser={sessionUser} />
+            <AppBase />
           </Route>
 
           <Route path='/channels/:serverId/:channelId'>

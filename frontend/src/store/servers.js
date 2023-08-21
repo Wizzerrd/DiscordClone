@@ -44,7 +44,7 @@ export const fetchServer = serverId => async dispatch => {
 export default function serversReducer(state = {}, action){
     switch(action.type){
         case SET_SERVERS:
-            return({...state, servers: action.servers})
+            return({...action.servers})
         case ADD_SERVER:
             return({...state.servers, [action.server.id]: action.server})
         case ADD_SERVERS:
