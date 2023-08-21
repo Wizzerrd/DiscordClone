@@ -9,7 +9,8 @@ import ModalBase from '../ModalBase';
 import ServerScroller from '../ServerScroller';
 import { useEffect, useState } from 'react';
 import { fetchUser } from '../../store/users';
-import { selectServer } from '../../store/ui';
+import { selectServer, setCenterPanel } from '../../store/ui';
+import AppBody from '../AppBody';
 
 export default function AppBase(){
 
@@ -26,6 +27,14 @@ export default function AppBase(){
     useEffect(()=>{
         dispatch(selectServer(serverId))
     }, [serverId])
+
+    useEffect(()=>{
+        if(channelId){
+            dispatch(setCenterPanel('messages'))
+        } else {
+            dispatch(setCenterPanel('friends'))
+        }
+    }, [channelId])
     
     return(
         <div className='app-main'>
@@ -33,7 +42,8 @@ export default function AppBase(){
             <ModalBase/>
             <button className='god-button' onClick={()=>dispatch(logout())}>Log Out</button>
             <ServerScroller serverId={serverId}/>
-            <LeftPanel serverId={serverId} channelId={channelId}/>
+            <LeftPanel serverId={serverId} />
+            <AppBody/>
         </div> 
     )
 }

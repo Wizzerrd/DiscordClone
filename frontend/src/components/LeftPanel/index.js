@@ -1,21 +1,20 @@
-import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min"
+import { Link, Redirect, useParams } from "react-router-dom/cjs/react-router-dom.min"
 import UserPreview from "../UserPreview"
 
 import './left-panel.css'
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
-import { selectChannel, setModalPage, setModalType } from "../../store/ui"
+import { setModalPage, setModalType } from "../../store/ui"
 
 const landingRedirect = () => {
-    
+
 }
 
-export default function LeftPanel({serverId, channelId}){
+export default function LeftPanel({serverId}){
 
     const dispatch = useDispatch()
 
     const { channels } = useSelector(state => state.entities)
-    const { currentChannel } = useSelector(state => state.ui)
     const channelList = Object.values(channels)
     
     

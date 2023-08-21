@@ -25,12 +25,12 @@ function App() {
           <Route exact path='/login' component={LoginForm}/>
           <Route exact path='/register' component={RegisterForm}/>
 
-          <Route path='/channels/:serverId'>
+          <Route exact path='/channels/:serverId'>
             <AppBase />
           </Route>
 
-          <Route path='/channels/:serverId/:channelId'>
-            <AppBase sessionUser={sessionUser} />
+          <Route exact path='/channels/:serverId/:channelId'>
+            <AppBase />
           </Route>
 
           <Route path='*' component={NotFound} />
