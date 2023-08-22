@@ -11,6 +11,23 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchUser } from './store/users';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import consumer from './consumer';
+
+// In a use effect
+//useEffect(() => {
+  // consumer.subscriptions.create(
+  //   {
+  //     channel: 'MessagesChannel'
+  //   },
+  //   {
+  //     received: message => {
+  //       console.log('Received Message: ', message)
+  //     }
+  //   }
+  // )
+  //
+  // return () => subscription.unsubscribe()
+// }, [channel])
 
 function App() {
 
