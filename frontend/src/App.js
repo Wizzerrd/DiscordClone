@@ -1,4 +1,3 @@
-import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import Splash from './components/Splash'

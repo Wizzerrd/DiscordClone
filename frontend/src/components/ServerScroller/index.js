@@ -4,7 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import { logout } from '../../store/session';
 
 import { AiOutlinePlus } from 'react-icons/ai'
-import { IconContext } from "react-icons";
 
 import { uiInitialState, setModalType, selectServer } from '../../store/ui';
 

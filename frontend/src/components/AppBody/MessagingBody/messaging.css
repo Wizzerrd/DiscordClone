@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    box-sizing: border-box;
     height: 100%;
-    box-sizing: content-box;
 }
 
 .messaging-box-holder{

@@ -12,13 +12,7 @@ export default function ModalBase(){
     const dispatch = useDispatch()
     const uiObj = useSelector(state => state.ui)
 
-  
     const { modalPage, modalType } = uiObj;
-   
-
-    useEffect(()=>{
-        dispatch(setModalType(modalType))
-    }, [modalType])
 
     if(uiObj.modalType){
         return(

@@ -7,9 +7,9 @@ import LeftPanel from '../LeftPanel';
 import ModalBase from '../ModalBase';
 
 import ServerScroller from '../ServerScroller';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { fetchUser } from '../../store/users';
-import { selectServer, setCenterPanel } from '../../store/ui';
+import { selectChannel, selectServer, setCenterPanel } from '../../store/ui';
 import AppBody from '../AppBody';
 
 export default function AppBase(){
@@ -32,12 +32,11 @@ export default function AppBase(){
     useEffect(()=>{
         if(channelId){
             dispatch(setCenterPanel('messages'))
+            dispatch(selectChannel(channelId))
         } else if(serverId === '@me') {
             dispatch(setCenterPanel('friends'))
         }
     }, [channelId])
-    
-
     
     return(
         <div className='app-main'>
