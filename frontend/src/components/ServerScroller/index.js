@@ -23,6 +23,10 @@ export default function ServerScroller({ serverId }){
         else if (server === 0 && modalType === 'newServer' ) className += ' making-server'
         return className
     }
+
+    useEffect(()=>{
+        dispatch(selectServer(serverId))
+    }, [serverId])
     
     return(
         <div className='server-scroller'>

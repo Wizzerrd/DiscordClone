@@ -6,8 +6,10 @@ import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { setModalPage, setModalType } from "../../store/ui"
 
-import { FaGear } from 'react-icons/fa'
+import { FaGear } from 'react-icons/fa' 
 import { AiOutlinePlus } from 'react-icons/ai'
+
+import {PiGearSixFill} from 'react-icons/pi'
 
 const landingRedirect = () => {
 
@@ -62,7 +64,12 @@ export default function LeftPanel({serverId}){
             <>
                 <div className="left-panel">
                     <div className="left-panel-drop-down">
-                        {servers[serverId] && servers[serverId].title}
+                        <div>
+                            {servers[serverId] && servers[serverId].title}
+                        </div>
+                        <div className="server-options-wheel">
+                            <PiGearSixFill/>
+                        </div>
                     </div>
 
                     <div className="label-for-channels-drop-down">

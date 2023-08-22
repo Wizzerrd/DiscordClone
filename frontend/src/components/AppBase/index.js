@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, Link, useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { logout } from '../../store/session';
 
 import './base.css'
@@ -17,17 +17,12 @@ export default function AppBase(){
     const dispatch = useDispatch()
     const {serverId, channelId} = useParams()
     const sessionUser = useSelector(state => state.session.user);
-    const { channels } = useSelector(state => state.entities)
-
+    
     useEffect(()=>{
         if(sessionUser){
             dispatch(fetchUser(sessionUser.id))
         }
     }, [sessionUser])
-
-    useEffect(()=>{
-        dispatch(selectServer(serverId))
-    }, [serverId])
     
     useEffect(()=>{
         if(channelId){

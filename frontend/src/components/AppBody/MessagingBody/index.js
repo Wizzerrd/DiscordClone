@@ -41,7 +41,7 @@ export default function MessagingBody(){
     }, [channelId, dispatch]);
 
     useEffect(()=>{
-        dispatch(fetchMessages(channelId))
+        if(channelId) dispatch(fetchMessages(channelId))
     }, [channelId])
 
     function handleSubmit(e){

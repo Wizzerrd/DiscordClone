@@ -11,11 +11,7 @@ export const addUser = payload => ({
 export const fetchUser = userId => async dispatch => {
     const res = await csrfFetch(`/api/users/${userId}`)
     const data = await res.json()
-    if (res.ok){
-        dispatch(serverActions.setServers(data.servers))
-    } else {
-
-    }
+    dispatch(serverActions.setServers(data.servers)) 
 }
 
 export const fetchOnlyUser = userId => async dispatch => {

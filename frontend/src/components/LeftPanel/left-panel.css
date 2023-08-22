@@ -1,6 +1,7 @@
 :root{
     --label-text-color: #949BA4;
     --channel-link-color: #949BA4;
+    --server-options-wheel-color: #2B2D31;
 }
 
 .left-panel{
@@ -18,8 +19,10 @@
     box-sizing: border-box;
     height: 48px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
+    align-items: center;
     border-bottom: 1px solid #1F2023;
     color: #F2F3F5;
 }
@@ -95,4 +98,19 @@
 .selected-channel{
     background-color: #35373C;
     color: white;
+}
+
+.left-panel-drop-down:hover{
+    --server-options-wheel-color: #F2F3F5;
+    background-color: #35373C;
+    cursor: pointer;
+}
+
+.server-options-wheel{
+    transition: color 0.25s ease;
+    color: var(--server-options-wheel-color)
+}
+
+.server-options-wheel:hover{
+    cursor: pointer;
 }
