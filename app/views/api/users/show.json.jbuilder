@@ -34,3 +34,24 @@ json.friends do
   end
   
 end
+
+json.incoming_friendships do
+  @user.incoming_friendships.each do |incoming_friendship|
+    accepted = false
+    @user.friendships.each do |friendship|
+      if friendship.receiver_id == incoming_friendship.sender_id
+        accepted = true
+        break
+      end
+    end
+
+    if accepted 
+      json.set! incoming_friendship.sender_id do
+        json.user_id incoming_friendship.sender_id
+        json.username incoming_friendship.sender.username
+      end
+    end
+    
+  end
+  
+end

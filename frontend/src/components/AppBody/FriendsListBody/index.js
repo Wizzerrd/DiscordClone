@@ -5,6 +5,7 @@ import { setCenterPanelPage } from "../../../store/ui"
 
 import './friends.css'
 import { addFriend, fetchOnlyUser, findUser } from "../../../store/users"
+import { receiveFriend } from "../../../store/friends"
 
 export default function FriendsListBody(){
 
@@ -12,25 +13,31 @@ export default function FriendsListBody(){
 
     const { centerPanelPage } = useSelector(state => state.ui)
     const { user } = useSelector(state => state.session)
-    const { friends } = useSelector(state => state.entities)
+    const { friends, incomingFriends } = useSelector(state => state.entities)
 
     const [newFriend, setNewFriend] = useState('')
     const [searchFriend, setSearchFriend] = useState('')
-    const [error, setError] = useState('')
+    const [message, setMessage] = useState('')
 
     function handleSubmit(e){
         e.preventDefault();
-        setError('')
+        setMessage('')
         dispatch(addFriend(newFriend, user.id)).catch(res => {
-            console.log(res)
-            setError('error')
-        }).then(res => {
-            console.log(res)
+            setMessage('error')
+        }).then( async res => {
+            if(res){
+                let data = await res.json()
+                console.log(data)
+                dispatch(receiveFriend({...data, username: newFriend}))
+                setNewFriend('')
+                setMessage('success')
+            }
         })
     }
 
     function ListOfFriends(){
         const friendsList = Object.values(friends)
+        const incomingFriendsList = Object.values(incomingFriends)
         if(centerPanelPage === 0){
             return(
                 friendsList.map(friend => {
@@ -44,11 +51,13 @@ export default function FriendsListBody(){
         } else if (centerPanelPage === 1) {
             return(
                 <>
+                    <h1>Outgoing</h1>
                     <div className="outgoing-requests">
                         {friendsList.map(friend => {if(!friend.accepted) return (<div className="friends-list-item" key={friend.userId}><h1>{friend.username}</h1></div>)})}
                     </div>
+                    <h1>Incoming</h1>
                     <div className="incoming-requests">
-
+                        {incomingFriendsList.map(incoming => <div className="friends-list-item" key={incoming.userId}><h1>{incoming.username}</h1></div>)}
                     </div>
                 </>
             )
@@ -63,7 +72,7 @@ export default function FriendsListBody(){
                     <h3>You can add friends with their Discord username.</h3>
                     <input value={newFriend} onChange={(e)=> setNewFriend(e.target.value)} placeholder="You can add friends with their Discord username." id='friend-request-input' type="text"/>
                     <div onClick={e=>handleSubmit(e)} id='send-friend-request' className="discord-button button-hover">Send Friend Request</div>
-                    {error && <div>{error}</div>}
+                    {message && <div>{message}</div>}
                 </div>
             </div>
         )
@@ -71,9 +80,9 @@ export default function FriendsListBody(){
         return(
             
             <div className="friends-body">
-                <div className="friend-search-holder">
+                {/* <div className="friend-search-holder">
                     <input type="text"/>
-                </div>
+                </div> */}
                 <div>
                     <div className="list-title"></div>
                     <div className="list-of-friends">

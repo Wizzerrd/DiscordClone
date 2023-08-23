@@ -1,5 +1,6 @@
 import csrfFetch from "./csrf"
 import { setFriends } from "./friends"
+import { setIncomingFriends } from "./incomingfriends"
 import * as serverActions from './servers'
 import { SET_SERVER } from "./ui"
 
@@ -15,6 +16,7 @@ export const fetchUser = userId => async dispatch => {
     const data = await res.json()
     dispatch(serverActions.setServers(data.servers))
     dispatch(setFriends(data.friends)) 
+    dispatch(setIncomingFriends(data.incomingFriendships))
 }
 
 export const findUser = username => async dispatch => {
