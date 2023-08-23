@@ -1,0 +1,21 @@
+:root{
+    --channel-box-width: 460px;
+    --channel-box-height: 482px;
+}
+
+.new-channel-modal-foreground{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: #313338;
+    top: calc(50vh - (var(--channel-box-height) / 2));
+    left: calc(50vw - (var(--channel-box-width) / 2));
+    width: var(--channel-box-width);
+    height: var(--channel-box-height);
+    border-radius: 15px;
+}
+
+.new-channel-bottom{
+    display: flex;
+    flex-direction: row;
+}

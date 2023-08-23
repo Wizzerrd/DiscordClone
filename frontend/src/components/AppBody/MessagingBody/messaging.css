@@ -1,0 +1,38 @@
+.messaging-body{
+    position: absolute;
+    top: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+
+.messaging-box-holder{
+    padding: 24px;
+}
+
+.messages-holder{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100%;
+    overflow: auto;
+}
+
+.message-holder{
+}
+
+.message-holder:hover{
+    background-color: #2E3035;
+}
+
+.message-box{
+    color: #DBDEE1;
+    background-color: #383A40;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    padding: 11px 10px 11px 10px;
+}

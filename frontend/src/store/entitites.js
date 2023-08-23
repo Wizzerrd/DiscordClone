@@ -2,6 +2,7 @@ import { combineReducers } from "redux"
 import serversReducer from "./servers"
 import usersReducer from './users'
 import channelsReducer from "./channels"
+import messagesReducer from "./messages"
 
 
 export const DUMP_ENTITIES = 'entities/DUMP_ENTITIES'
@@ -19,7 +20,8 @@ const entitiesReducer = combineReducers({
     servers: serversReducer,
     channels: channelsReducer,
     buckets: {},
-    messages: {}
+    messages: {},
+    messages: messagesReducer
 })
 
 export default entitiesReducer

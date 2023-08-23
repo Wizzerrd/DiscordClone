@@ -22,7 +22,6 @@ export default function NewServerModal({ modalPage }){
         e.preventDefault();
         dispatch(createServer(serverObj)).catch( async res => {
             let data = res.json
-            console.log(data)
         })
 
         dispatch(fetchUser(user.id))

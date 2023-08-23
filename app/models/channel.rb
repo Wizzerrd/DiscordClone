@@ -13,10 +13,14 @@ class Channel < ApplicationRecord
     validates :title, presence: true
     
     belongs_to :server
+
+    belongs_to :owner,
+        foreign_key: :owner_id,
+        class_name: :User
         
     has_many :memberships, :as => :membershipable,
         dependent: :destroy
 
-    has_one :ownership, :as => :ownershipable,
+    has_many :messages,
         dependent: :destroy
 end

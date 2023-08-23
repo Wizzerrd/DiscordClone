@@ -1,0 +1,7 @@
+#top-bar{
+    height: 48px;
+    box-sizing: border-box;
+
+    color: #F2F3F5;
+    border-bottom: 1px solid #1F2023;
+}

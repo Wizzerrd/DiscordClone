@@ -1,6 +1,7 @@
 :root{
     --label-text-color: #949BA4;
     --channel-link-color: #949BA4;
+    --server-options-wheel-color: #F2F3F5;
 }
 
 .left-panel{
@@ -11,14 +12,19 @@
     width: 240px;
     height: 100%;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .left-panel-drop-down{
+    box-sizing: border-box;
     height: 48px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
+    align-items: center;
     border-bottom: 1px solid #1F2023;
+    color: #F2F3F5;
 }
 
 .search-bar{
@@ -32,21 +38,6 @@
 
 .left-panel > div{
     width: 100%;
-    padding: 5px;
-}
-
-.dm-label-div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.left-panel-option{
-}
-
-.left-panel-option:hover{
-    background-color: #35373C;
-    cursor: pointer;
 }
 
 .in-channel{
@@ -54,13 +45,11 @@
 }
 
 .label-for-channels-drop-down{
-    display: flex;
-    justify-content: space-between;
     color: var(--label-text-color);
-}
-
-.label-for-channels-drop-down > * {
-    padding: 5px;
+    display: flex;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .label-for-channels-drop-down:hover{
@@ -69,6 +58,7 @@
 
 .label-for-channels-drop-down > label {
     width: 100%;
+    box-sizing: border-box;
     cursor: pointer;
 }
 
@@ -87,5 +77,39 @@
 }
 
 .channels-drop-down > div:hover{
-    --channel-link-color: white;
+    --channel-link-color: #DBDEE1;
+}
+
+.left-panel-option{
+    font-size: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.left-panel-option:hover{
+    color: #DBDEE1;
+    background-color: #35373C;
+    cursor: pointer;
+}
+
+.selected-channel{
+    background-color: #35373C;
+    color: white;
+}
+
+.left-panel-drop-down:hover{
+    background-color: #35373C;
+    cursor: pointer;
+}
+
+.server-options-wheel{
+    transition: color 0.25s ease;
+    color: var(--server-options-wheel-color)
+}
+
+.server-options-wheel:hover{
+    cursor: pointer;
 }

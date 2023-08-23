@@ -4,11 +4,11 @@ import { Link, useParams } from 'react-router-dom';
 import { logout } from '../../store/session';
 
 import { AiOutlinePlus } from 'react-icons/ai'
-import { IconContext } from "react-icons";
 
 import { uiInitialState, setModalType, selectServer } from '../../store/ui';
 
 import './servers.css'
+import { fetchServer } from '../../store/servers';
 
 export default function ServerScroller({ serverId }){
 
@@ -24,6 +24,10 @@ export default function ServerScroller({ serverId }){
         else if (server === 0 && modalType === 'newServer' ) className += ' making-server'
         return className
     }
+
+    useEffect(()=>{
+        dispatch(selectServer(serverId))
+    }, [serverId])
     
     return(
         <div className='server-scroller'>
@@ -37,7 +41,7 @@ export default function ServerScroller({ serverId }){
 
             {/* Server Selectors */}
             <div className='server-list'>
-                {serverList.map( server => <Link key={server.id} to={`/channels/${server.id}`}><div className={amIChosen(server.id)}>{server.id}</div></Link>)}
+                {serverList.map( server => <Link key={server.id} to={`/channels/${server.id}/${server.primaryChannel}`}><div className={amIChosen(server.id)}>{server.id}</div></Link>)}
             </div>
 
             {/* New Server Selector */}

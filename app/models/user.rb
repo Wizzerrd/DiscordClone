@@ -25,7 +25,8 @@ class User < ApplicationRecord
   validates :email, :username, :session_token, uniqueness: true
   validates :session_token, :dob, presence: true
 
-  has_many :memberships
+  has_many :memberships,
+    dependent: :destroy
 
   has_many :servers,
     through: :memberships,
@@ -38,10 +39,19 @@ class User < ApplicationRecord
     source_type: :Channel
 
   has_many :owned_servers,
-    as: :ownershipable
+    foreign_key: :owner_id,
+    class_name: :Server,
+    dependent: :destroy
 
   has_many :owned_channels,
-    as: :ownershipable
+    foreign_key: :owner_id,
+    class_name: :Channel,
+    dependent: :destroy
+
+  has_many :composed_messages,
+    foreign_key: :author_id,
+    class_name: :Message,
+    dependent: :destroy
 
   def self.find_by_credentials(cred, pass)
     if cred && cred.include?('@')

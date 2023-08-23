@@ -8,6 +8,7 @@ json.servers do
 
     json.set! server.id do
       json.extract! server, :id, :title
+      json.primary_channel server.channels.first.id
     end
 
   end

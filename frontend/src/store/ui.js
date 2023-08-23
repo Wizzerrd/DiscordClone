@@ -1,5 +1,6 @@
-import { dumpChannels, setChannels } from "./channels"
+import { setChannels } from "./channels"
 import { fetchServer } from "./servers"
+import { addUsers } from "./users"
 
 export const UI_TO_DEFAULT = 'ui/UI_TO_DEFAULT'
 
@@ -43,12 +44,16 @@ export const setServer = serverId => ({
 
 export const selectServer = serverId => async dispatch => {
     if (serverId > 0) {
-        let {channels} = await dispatch(fetchServer(serverId))
+        let {channels, members} = await dispatch(fetchServer(serverId))
+        console.log(members)
+        dispatch(addUsers(members))
         dispatch(setChannels(channels))
         dispatch(selectChannel(Number(Object.keys(channels)[0])))
     }
     dispatch(setServer(serverId))
 }
+
+// Channel Selection
 
 export const SELECT_CHANNEL = 'ui/SELECT_CHANNEL'
 
@@ -61,6 +66,15 @@ export const selectChannel = channelId => async dispatch => {
 export const setChannel = channelId => ({
     type: SET_CHANNEL,
     channelId
+})
+
+// centerPanel Selection Actions
+
+export const SET_CENTER_PANEL = 'ui/SET_CENTER_PANEL'
+
+export const setCenterPanel = panelType => ({
+    type: SET_CENTER_PANEL,
+    panelType
 })
 
 // Reducer
@@ -88,6 +102,8 @@ export default function uiReducer(state = uiInitialState, action){
             return({...state, selectedServer: action.serverId})
         case SET_CHANNEL:
             return({...state, selectedChannel: action.channelId})
+        case SET_CENTER_PANEL:
+            return({...state, centerPanel: action.panelType})
         case UI_TO_DEFAULT:
             return uiInitialState
         default:

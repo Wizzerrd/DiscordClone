@@ -13,4 +13,6 @@ class Membership < ApplicationRecord
     validates :user_id, :membershipable_type, :membershipable_id, presence: true
 
     belongs_to :membershipable, :polymorphic => true
+
+    belongs_to :user
 end
