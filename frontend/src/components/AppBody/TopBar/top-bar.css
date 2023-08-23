@@ -34,6 +34,16 @@
     background-color: #393C41;
 }
 
+.selected-on-top{
+    color: #F2F3F5;
+    background-color: #4E505899;
+}
+
+.selected-on-top:hover{
+    color: #F2F3F5;
+    background-color: #393C41;
+}
+
 #wave-icon-top-bar{
     color: #80848E;
     padding-right: 8px;

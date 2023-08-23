@@ -13,6 +13,7 @@
     width: var(--channel-box-width);
     height: var(--channel-box-height);
     border-radius: 15px;
+    z-index: 11;
 }
 
 .new-channel-bottom{

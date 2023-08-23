@@ -1,0 +1,18 @@
+.new-friend-search-holder{
+    padding: 20px 30px 20px 30px;
+}
+
+#friend-request-input{
+    width: 100%;
+    font-size: 16px;
+    padding: 15px;
+    background-color: #1E1F22;
+    border: none;
+    border-radius: 10px;
+    color: #DBDEE1;
+}
+
+.button-hover{
+    box-sizing: content-box;
+    width: fit-content;
+}

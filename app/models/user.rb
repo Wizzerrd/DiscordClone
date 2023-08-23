@@ -52,6 +52,18 @@ class User < ApplicationRecord
     foreign_key: :author_id,
     class_name: :Message,
     dependent: :destroy
+  
+  has_many :friendships,
+    foreign_key: :sender_id,
+    class_name: :Friendship
+
+  has_many :incoming_friendships,
+    foreign_key: :receiver_id,
+    class_name: :Friendship
+
+  has_many :friends,
+    through: :friendships,
+    source: :receiver
 
   def self.find_by_credentials(cred, pass)
     if cred && cred.include?('@')

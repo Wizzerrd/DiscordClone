@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf"
+import { setFriends } from "./friends"
 import * as serverActions from './servers'
 import { SET_SERVER } from "./ui"
 
@@ -12,11 +13,13 @@ export const addUser = payload => ({
 export const fetchUser = userId => async dispatch => {
     const res = await csrfFetch(`/api/users/${userId}`)
     const data = await res.json()
-    dispatch(serverActions.setServers(data.servers)) 
+    dispatch(serverActions.setServers(data.servers))
+    dispatch(setFriends(data.friends)) 
 }
 
-export const fetchOnlyUser = userId => async dispatch => {
-    const res = await csrfFetch(`/api/users/minimal/${userId}`)
+export const findUser = username => async dispatch => {
+    const res = await csrfFetch(`/api/users?username=${username}`)
+    const data = await res.json()
 
 }
 
@@ -26,6 +29,24 @@ export const addUsers = users => ({
     type: ADD_USERS,
     users
 })
+
+export const addFriend = (username, senderId) => async dispatch => {
+    const res = await csrfFetch(`/api/users?username=${username}`)
+    let data = await res.json()
+    if(res.ok){
+        const fRes = await csrfFetch(`/api/friendships`, {
+            method: 'POST',
+            body: JSON.stringify({sender_id: senderId, receiver_id: data.user.id })
+        })
+        if(fRes.ok){
+            return fRes
+        } else {
+            throw ( fRes )
+        }
+    } else{
+        throw( res )
+    }
+}
 
 export default function usersReducer(state = {}, action){
     switch(action.type){
