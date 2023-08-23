@@ -4,4 +4,55 @@
 
     color: #F2F3F5;
     border-bottom: 1px solid #1F2023;
+
+    display: flex;
+    align-items: center;
+}
+
+.top-bar-legend{
+    padding-left: 20px ;
+    padding-right: 20px ;
+    display: flex;
+    align-items: center;
+}
+
+.top-bar-buttons{
+    display: flex;
+}
+
+.top-bar-button{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 8px;
+    color: #B5BAC1;
+    border-radius: 3px;
+}
+
+.top-bar-button:hover{
+    cursor: pointer;
+    color: #DBDEDC;
+    background-color: #393C41;
+}
+
+#wave-icon-top-bar{
+    color: #80848E;
+    padding-right: 8px;
+}
+
+#add-friend-button{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 8px;
+    border-radius: 3px;
+    cursor: pointer;
+
+    background-color: #248046;
+    color: white;
+}
+
+#in-adding-friends{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 8px;
+    color: #248046;;
 }

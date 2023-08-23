@@ -77,12 +77,20 @@ export const setCenterPanel = panelType => ({
     panelType
 })
 
+export const SET_CENTER_PANEL_PAGE = 'ui/SET_CENTER_PANEL_PAGE'
+
+export const setCenterPanelPage = page => ({
+    type: SET_CENTER_PANEL_PAGE,
+    page
+})
+
 // Reducer
 
 export const uiInitialState = {
     modalType: false,
     loading: false,
     centerPanel: 'friends',
+    centerPanelPage: 0,
     leftPanelChannelList: false,
     rightPanel: false,
     modalPage: 0,
@@ -104,6 +112,8 @@ export default function uiReducer(state = uiInitialState, action){
             return({...state, selectedChannel: action.channelId})
         case SET_CENTER_PANEL:
             return({...state, centerPanel: action.panelType})
+        case SET_CENTER_PANEL_PAGE:
+            return({...state, centerPanelPage: action.page})
         case UI_TO_DEFAULT:
             return uiInitialState
         default:
