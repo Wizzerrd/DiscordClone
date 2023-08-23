@@ -12,7 +12,7 @@ export default function TopBar({channelId}){
     }
 
     return(
-        <div className="top-bar">
+        <div id="top-bar">
             {channelTitle && `${channelTitle}`}
         </div>
     )

@@ -10,3 +10,11 @@ json.channels do
         end
     end
 end
+
+json.members do
+    @server.users.each do |member|
+        json.set! member.id do
+            json.extract! member, :id, :username
+        end
+    end
+end

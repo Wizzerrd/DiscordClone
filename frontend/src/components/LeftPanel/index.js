@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux"
 import { setModalPage, setModalType } from "../../store/ui"
 
 import { FaGear } from 'react-icons/fa' 
-import { AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlinePlus, AiOutlineDown } from 'react-icons/ai'
 
 import {PiGearSixFill} from 'react-icons/pi'
 
@@ -63,12 +63,12 @@ export default function LeftPanel({serverId}){
         return(
             <>
                 <div className="left-panel">
-                    <div className="left-panel-drop-down">
+                    <div onClick={() => dispatch(setModalType('serverOptions'))} className="left-panel-drop-down">
                         <div>
                             {servers[serverId] && servers[serverId].title}
                         </div>
                         <div className="server-options-wheel">
-                            <PiGearSixFill/>
+                            <AiOutlineDown/>
                         </div>
                     </div>
 

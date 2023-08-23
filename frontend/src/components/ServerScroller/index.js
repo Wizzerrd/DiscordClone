@@ -8,6 +8,7 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { uiInitialState, setModalType, selectServer } from '../../store/ui';
 
 import './servers.css'
+import { fetchServer } from '../../store/servers';
 
 export default function ServerScroller({ serverId }){
 

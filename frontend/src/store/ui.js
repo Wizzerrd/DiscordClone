@@ -1,5 +1,6 @@
 import { setChannels } from "./channels"
 import { fetchServer } from "./servers"
+import { addUsers } from "./users"
 
 export const UI_TO_DEFAULT = 'ui/UI_TO_DEFAULT'
 
@@ -43,7 +44,9 @@ export const setServer = serverId => ({
 
 export const selectServer = serverId => async dispatch => {
     if (serverId > 0) {
-        let {channels} = await dispatch(fetchServer(serverId))
+        let {channels, members} = await dispatch(fetchServer(serverId))
+        console.log(members)
+        dispatch(addUsers(members))
         dispatch(setChannels(channels))
         dispatch(selectChannel(Number(Object.keys(channels)[0])))
     }

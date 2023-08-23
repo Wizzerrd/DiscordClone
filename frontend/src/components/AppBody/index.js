@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import RightPanel from "../RightPanel";
-import BodySelector from "./BodySelector";
 import TopBar from "./TopBar";
+import BodySelector from "./BodySelector";
 
 import './app-body.css'
 

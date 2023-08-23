@@ -1,7 +1,7 @@
 :root{
     --label-text-color: #949BA4;
     --channel-link-color: #949BA4;
-    --server-options-wheel-color: #2B2D31;
+    --server-options-wheel-color: #F2F3F5;
 }
 
 .left-panel{
@@ -101,7 +101,6 @@
 }
 
 .left-panel-drop-down:hover{
-    --server-options-wheel-color: #F2F3F5;
     background-color: #35373C;
     cursor: pointer;
 }

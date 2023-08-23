@@ -14,6 +14,7 @@ export default function MessagingBody(){
     const dispatch = useDispatch()
 
     const { user } = useSelector(state => state.session)
+    const { users } = useSelector(state => state.entities)
     const { messages } = useSelector(state => state.entities.messages)
 
     const messageList = () => {
@@ -31,7 +32,6 @@ export default function MessagingBody(){
           { channel: 'ChannelsChannel', id: channelId },
           {
             received: message => {
-                console.log(message)
                 dispatch(receiveMessage(message))
             }
           }
@@ -53,11 +53,20 @@ export default function MessagingBody(){
             server_id: serverId
         })).catch(res => setErrors(prev => [...prev, res])).then(setMessage(''))
     }
+
+    function Message(ele){
+        return(
+            <div className='message-holder' key={ele.id}>
+                <div className='author-details'>{(users[ele.authorId] && users[ele.authorId].username) || users[ele.author_id] && users[ele.author_id].username}</div>
+                <div className='message-contents'>{ele.body}</div>
+            </div>
+        )
+    }
     
     return(
         <div className="messaging-body">
             <div className="messages-holder">
-                {messageList().map( ele => <div key={ele.id}>{ele.body}</div> )}
+                {messageList().map( ele => Message(ele) )}
             </div>
 
             <form onSubmit={(e)=> handleSubmit(e)} className="messaging-box-holder">
