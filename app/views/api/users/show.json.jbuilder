@@ -53,7 +53,7 @@ json.incoming_friendships do
       end
     end
 
-    if accepted 
+    if !accepted 
       json.set! incoming_friendship.sender_id do
         json.user_id incoming_friendship.sender_id
         json.username incoming_friendship.sender.username

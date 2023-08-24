@@ -14,3 +14,7 @@
     flex-direction: row;
     background-color: #313338;
 }
+
+* {
+    scrollbar-color: #313338 #1E1F22;
+}

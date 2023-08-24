@@ -50,16 +50,17 @@ export default function FriendsListBody(){
             )
         } else if (centerPanelPage === 1) {
             return(
-                <>
-                    <h1>Outgoing</h1>
-                    <div className="outgoing-requests">
+                <div className="friends-body">
+                    <div className="list-title">Outgoing</div>
+                    <div id="outgoing-requests">
                         {friendsList.map(friend => {if(!friend.accepted) return (<div className="friends-list-item" key={friend.userId}><h1>{friend.username}</h1></div>)})}
                     </div>
-                    <h1>Incoming</h1>
-                    <div className="incoming-requests">
-                        {incomingFriendsList.map(incoming => <div className="friends-list-item" key={incoming.userId}><h1>{incoming.username}</h1></div>)}
+
+                    <div className="list-title">Incoming</div>
+                    <div id="incoming-requests">
+                        {incomingFriendsList.map(incoming =>  <div className="friends-list-item" key={incoming.userId}><h1>{incoming.username}</h1></div>)}
                     </div>
-                </>
+                </div>          
             )
         }
     }
@@ -77,22 +78,8 @@ export default function FriendsListBody(){
             </div>
         )
     } else {
-        return(
-            
-            <div className="friends-body">
-                {/* <div className="friend-search-holder">
-                    <input type="text"/>
-                </div> */}
-                <div>
-                    <div className="list-title"></div>
-                    <div className="list-of-friends">
-                        <ListOfFriends/>
-                    </div>
-                </div>
-                
-            </div>
-            
-            
+        return(     
+            <ListOfFriends/>
         )
     }
 
