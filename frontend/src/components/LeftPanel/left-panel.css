@@ -7,7 +7,6 @@
 .left-panel{
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
     background-color: #2B2D31;
     width: 240px;
     height: 100%;

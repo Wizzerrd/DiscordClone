@@ -1,18 +1,36 @@
 import { useSelector } from 'react-redux'
 import './server-options.css'
+import { useDispatch } from 'react-redux'
+import { createInvitation } from '../../../../store/users'
 
 export default function ServerOptionsModal({modalPage}){
+    const dispatch = useDispatch()
+    
     const { friends } = useSelector(state => state.entities)
+    const { selectedServer } = useSelector(state => state.ui)
     const friendsList = Object.values(friends)
 
     function Friend(friend){
+
+        const {userId, username} = friend
+
+        function sendInvite(id){
+            let server = {
+                user_id: id,
+                membershipable_type: "Server",
+                membershipable_id: Number(selectedServer)
+            }
+            dispatch(createInvitation(server)).catch( res => console.log(res) )
+        }
+
         return(
-            <div className='invite-friends-item' key={friend.id}>
-                <div>{friend.username}</div>
-                <div className='invite-button'>Invite</div>
+            <div className='invite-friends-item' key={userId}>
+                <div>{username}</div>
+                <div onClick={()=>sendInvite(userId)} className='invite-button'>Invite</div>
             </div>
         )
     }
+
 
     function ModalContents(){
         switch(modalPage){

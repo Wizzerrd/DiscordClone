@@ -1,7 +1,6 @@
 :root{
     --invite-button-background: #313338;
     --invite-button-border: #248046;
-    /* #313338 */
 }
 
 .server-options-modal-foreground{
@@ -38,4 +37,10 @@
     padding: 2px 16px;
     border: var(--invite-button-border) 1px solid;
     background-color: var(--invite-button-background);
+}
+
+.invite-button:hover{
+    cursor: pointer;
+    background-color: #1A6334;
+    border-color: #1A6334;
 }
