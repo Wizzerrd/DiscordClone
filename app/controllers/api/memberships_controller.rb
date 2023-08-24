@@ -13,7 +13,7 @@ class Api::MembershipsController < ApplicationController
     def create
         @membership = Membership.new(membership_params)
         if @membership.save!
-            render 'api/membership/show'
+            render 'api/memberships/show'
         else
             render json: {error: 'Problem creating membership'}, status: 422
         end

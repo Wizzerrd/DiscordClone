@@ -1,28 +1,14 @@
 .messaging-body{
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     box-sizing: border-box;
     flex-grow: 1;
+    max-height: 100%;
 }
 
 .messaging-box-holder{
-    padding: 24px;
-}
-
-.messages-holder{
-    display: flex;
-    flex-direction: column;
     box-sizing: border-box;
-    height: 100%;
-    overflow: auto;
-}
-
-.message-holder{
-}
-
-.message-holder:hover{
-    background-color: #2E3035;
+    padding: 24px;
 }
 
 .message-box{
@@ -32,4 +18,19 @@
     border-radius: 5px;
     width: 100%;
     padding: 11px 10px 11px 10px;
+}
+
+.messages-holder{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    flex-grow: 1;
+}
+
+.message-holder{
+}
+
+.message-holder:hover{
+    background-color: #2E3035;
 }

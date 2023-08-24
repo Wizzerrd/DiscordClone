@@ -2,25 +2,32 @@ import { useSelector } from 'react-redux'
 import './server-options.css'
 import { useDispatch } from 'react-redux'
 import { createInvitation } from '../../../../store/users'
+import { addMember } from '../../../../store/servers'
 
 export default function ServerOptionsModal({modalPage}){
     const dispatch = useDispatch()
     
-    const { friends } = useSelector(state => state.entities)
+    const { friends, servers } = useSelector(state => state.entities)
     const { selectedServer } = useSelector(state => state.ui)
     const friendsList = Object.values(friends)
-
+    
     function Friend(friend){
-
+        const {members} = servers[Number(selectedServer)]
         const {userId, username} = friend
-
-        function sendInvite(id){
+        
+        if(members && members.includes(userId)){
+            return null
+        }
+        
+        async function sendInvite(id){
             let server = {
                 user_id: id,
                 membershipable_type: "Server",
                 membershipable_id: Number(selectedServer)
             }
-            dispatch(createInvitation(server)).catch( res => console.log(res) )
+            const res = dispatch(createInvitation(server))
+            .catch( res => console.log(res) )
+            .then(dispatch(addMember(server.membershipable_id, id)))
         }
 
         return(

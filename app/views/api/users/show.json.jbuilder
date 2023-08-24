@@ -7,8 +7,16 @@ json.servers do
   @user.servers.each do |server|
 
     json.set! server.id do
-      json.extract! server, :id, :title
+      json.extract! server, :id, :title, :owner_id
       json.primary_channel server.channels.first.id
+      
+      arr = []
+      server.users.each do |member|
+        arr.push member.id
+      end
+
+      json.members arr
+      
     end
 
   end

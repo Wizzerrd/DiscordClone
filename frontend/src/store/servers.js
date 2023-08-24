@@ -41,6 +41,14 @@ export const fetchServer = serverId => async dispatch => {
     return data
 }
 
+export const ADD_MEMBER = 'servers/ADD_MEMBER'
+
+export const addMember = (serverId, memberId) => ({
+    type: ADD_MEMBER,
+    serverId,
+    memberId
+})
+
 export default function serversReducer(state = {}, action){
     switch(action.type){
         case SET_SERVERS:
@@ -49,7 +57,12 @@ export default function serversReducer(state = {}, action){
             return({...state, [action.server.id]: action.server})
         case ADD_SERVERS:
             return({...state, ...action.servers})
-        default:
+        case ADD_MEMBER:
+            let newState = {...state}
+            newState[action.serverId].members ||= []
+            newState[action.serverId].members.push(action.memberId)
+            return newState
+        default: 
             return state
     }
 }
