@@ -9,12 +9,6 @@ export const sendMessage = message => async dispatch => {
         method: 'POST',
         body: JSON.stringify(message)
     })
-    // if(res.ok){
-    //     let data = await res.json()
-    //     dispatch(receiveMessage(data.message))
-    // } else {
-    //     throw(res)
-    // }
 }
 
 export const receiveMessage = message => ({

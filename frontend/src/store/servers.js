@@ -28,11 +28,11 @@ export const createServer = (server) => async dispatch => {
     const res = await csrfFetch('/api/servers', {
         method:'POST',
         body: JSON.stringify(server)
-    }).throw(res)
-    if (res.ok){
-        let data = await res.json()
-        dispatch(addServer(data.server))
-    }
+    })
+    let data = await res.json()
+    console.log(data)
+    dispatch(addServer(data.server))
+ 
 }
 
 export const fetchServer = serverId => async dispatch => {

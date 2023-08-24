@@ -68,7 +68,7 @@ export default function LeftPanel({serverId}){
                             {servers[serverId] && servers[serverId].title}
                         </div>
                         <div className="server-options-wheel">
-                            <AiOutlineDown/>
+                            <AiOutlinePlus/>
                         </div>
                     </div>
 
