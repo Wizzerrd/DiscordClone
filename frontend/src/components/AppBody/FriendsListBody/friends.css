@@ -1,6 +1,20 @@
 .new-friend-search-holder{
     padding: 20px 30px 20px 30px;
+    color: #B5Bac1;
 }
+
+.new-friend-search-holder > * {
+    margin-bottom: 20px;
+}
+
+.new-friend-search-holder > h1 {
+    color: #F2F3F5;
+}
+
+.new-friend-search-holder > h3 {
+
+}
+
 
 #friend-request-input{
     width: 100%;
@@ -36,4 +50,5 @@
 .friends-list-item:hover{
     cursor: pointer;
     background-color: #393C41;
+    border-radius: 10px;
 }
