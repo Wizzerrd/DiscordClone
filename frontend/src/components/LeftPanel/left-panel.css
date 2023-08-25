@@ -128,3 +128,8 @@
 #wave-icon-list{
     padding-right: 10px;
 }
+
+.left-panel-scroller{
+    height: 100%;
+    overflow: auto;
+}

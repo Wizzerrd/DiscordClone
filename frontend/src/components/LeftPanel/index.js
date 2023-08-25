@@ -55,6 +55,7 @@ export default function LeftPanel({serverId}){
         return(
             <>
                 <div className="left-panel">
+
                     <div onClick={() => dispatch(setModalType('serverOptions'))} className="left-panel-drop-down">
                         <div>
                             {servers[serverId] && servers[serverId].title}
@@ -64,13 +65,16 @@ export default function LeftPanel({serverId}){
                         </div>
                     </div>
 
-                    <div className="label-for-channels-drop-down">
-                        <label>Text Channels</label>
-                        <div onClick={()=>dispatch(setModalType('newChannel'))} id="add-channel-button"><AiOutlinePlus/></div>
+                    <div className="left-panel-scroller">
+                        <div className="label-for-channels-drop-down">
+                            <label>Text Channels</label>
+                            <div onClick={()=>dispatch(setModalType('newChannel'))} id="add-channel-button"><AiOutlinePlus/></div>
+                        </div>
+                        <div className="channels-drop-down">
+                            {channelList.map(channel => <Link key={channel.id} to={`/channels/${serverId}/${channel.id}`}><div className={amIChosen(channel.id)}>{channel.title}</div></Link>)}
+                        </div>
                     </div>
-                    <div className="channels-drop-down">
-                        {channelList.map(channel => <Link key={channel.id} to={`/channels/${serverId}/${channel.id}`}><div className={amIChosen(channel.id)}>{channel.title}</div></Link>)}
-                    </div>
+
                 </div>
             </>
         )
