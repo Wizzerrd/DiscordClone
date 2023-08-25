@@ -1,31 +1,14 @@
 .messaging-body{
-    position: absolute;
-    top: 48px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     box-sizing: border-box;
-    height: 100%;
-    width: 100%;
+    height: calc(100% - 48px) ;
 }
 
 .messaging-box-holder{
-    padding: 24px;
-}
-
-.messages-holder{
-    display: flex;
-    flex-direction: column;
     box-sizing: border-box;
-    height: 100%;
-    overflow: auto;
-}
-
-.message-holder{
-}
-
-.message-holder:hover{
-    background-color: #2E3035;
+    padding: 24px;
+    padding-top: 0px;
 }
 
 .message-box{
@@ -35,4 +18,38 @@
     border-radius: 5px;
     width: 100%;
     padding: 11px 10px 11px 10px;
+    box-sizing: border-box;
+}
+
+.messages-holder{
+    display: flex;
+    flex-direction: column-reverse;
+    box-sizing: border-box;
+    overflow: auto;
+    flex-grow: 1;
+}
+
+.message-holder{
+    padding: 20px;
+    color: #DBDEE1;
+}
+
+.author-details{
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.author-details:hover{
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration:underline;
+}
+
+.message-contents{
+    font-size: 16px;
+    font-weight: lighter;
+}
+
+.message-holder:hover{
+    background-color: #2E3035;
 }

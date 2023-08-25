@@ -20,7 +20,7 @@ export default function MessagingBody(){
     const messageList = () => {
         let list = []
         if (messages) {
-            list = Object.values(messages).sort((ele1, ele2) => ele2.created_at - ele1.created_at)  
+            list = Object.values(messages).sort((ele1, ele2) => ele2.id - ele1.id)  
         } 
         return list
     }

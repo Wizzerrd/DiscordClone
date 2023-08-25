@@ -10,6 +10,17 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def index
+    if params[:username]
+      @user = User.find_by(username: params[:username])
+      if @user
+        render 'api/users/show'
+      else
+        render json: { errors: 'User Not Found' }, status: 404
+      end
+    end
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save

@@ -18,7 +18,8 @@ class Server < ApplicationRecord
         through: :memberships,
         source: :user
 
-    has_many :channels
+    has_many :channels,
+        dependent: :destroy
 
     belongs_to :owner,
         foreign_key: :owner_id,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_22_163436) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_24_182928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,16 +52,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_22_163436) do
     t.index ["server_id"], name: "index_channels_on_server_id"
   end
 
+  create_table "friendships", force: :cascade do |t|
+    t.bigint "sender_id", null: false
+    t.bigint "receiver_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_friendships_on_receiver_id"
+    t.index ["sender_id"], name: "index_friendships_on_sender_id"
+  end
+
   create_table "memberships", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "membershipable_type", null: false
     t.bigint "membershipable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["membershipable_id"], name: "index_memberships_on_membershipable_id"
-    t.index ["membershipable_type", "membershipable_id"], name: "index_memberships_on_membership"
-    t.index ["membershipable_type"], name: "index_memberships_on_membershipable_type"
-    t.index ["user_id"], name: "index_memberships_on_user_id"
+    t.boolean "accepted", null: false
+    t.index ["membershipable_id", "membershipable_type", "user_id"], name: "triple_uniquester", unique: true
   end
 
   create_table "messages", force: :cascade do |t|
@@ -101,6 +108,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_22_163436) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "channels", "users", column: "owner_id"
+  add_foreign_key "friendships", "users", column: "receiver_id"
+  add_foreign_key "friendships", "users", column: "sender_id"
   add_foreign_key "memberships", "users"
   add_foreign_key "messages", "users", column: "author_id"
   add_foreign_key "servers", "users", column: "owner_id"

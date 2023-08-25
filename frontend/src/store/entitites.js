@@ -3,6 +3,8 @@ import serversReducer from "./servers"
 import usersReducer from './users'
 import channelsReducer from "./channels"
 import messagesReducer from "./messages"
+import friendsReducer from "./friends"
+import incomingFriendsReducer from "./incomingfriends"
 
 
 export const DUMP_ENTITIES = 'entities/DUMP_ENTITIES'
@@ -16,12 +18,13 @@ export const dumpEntities = () => ({
 const entitiesReducer = combineReducers({
     users: usersReducer,
     memberships: {},
-    relationships: {},
+    friends: friendsReducer,
     servers: serversReducer,
     channels: channelsReducer,
     buckets: {},
     messages: {},
-    messages: messagesReducer
+    messages: messagesReducer,
+    incomingFriends: incomingFriendsReducer
 })
 
 export default entitiesReducer

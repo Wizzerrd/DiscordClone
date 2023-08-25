@@ -1,0 +1,37 @@
+:root{
+    --invite-button-background: #313338;
+    --invite-button-border: #248046;
+}
+
+.invite-friends-list{
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.invite-friends-item{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.invite-friends-item:hover{
+    background-color: #2E3035;
+}
+
+.invite-button{
+    display: inline;
+    color: white;
+    box-sizing: border-box;
+    font-size: 14px;
+    border-radius: 3px;
+    padding: 2px 16px;
+    border: var(--invite-button-border) 1px solid;
+    background-color: var(--invite-button-background);
+}
+
+.invite-button:hover{
+    cursor: pointer;
+    background-color: #1A6334;
+    border-color: #1A6334;
+}

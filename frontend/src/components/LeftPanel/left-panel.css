@@ -1,13 +1,12 @@
 :root{
     --label-text-color: #949BA4;
     --channel-link-color: #949BA4;
-    --server-options-wheel-color: #F2F3F5;
+    --server-options-wheel-color: #2B2D31;
 }
 
 .left-panel{
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
     background-color: #2B2D31;
     width: 240px;
     height: 100%;
@@ -48,8 +47,7 @@
     color: var(--label-text-color);
     display: flex;
     margin-top: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 20px;
 }
 
 .label-for-channels-drop-down:hover{
@@ -87,6 +85,8 @@
     margin-top: 5px;
     padding: 10px;
     border-radius: 5px;
+    box-sizing: border-box;
+    color: #F2F3F5;
 }
 
 .left-panel-option:hover{
@@ -103,6 +103,7 @@
 .left-panel-drop-down:hover{
     background-color: #35373C;
     cursor: pointer;
+    --server-options-wheel-color: #F2F3F5;
 }
 
 .server-options-wheel{
@@ -112,4 +113,18 @@
 
 .server-options-wheel:hover{
     cursor: pointer;
+}
+
+#left-panel-friends-button{
+    display: flex;
+    align-items: center;
+}
+
+#add-channel-button{
+    position: relative;
+    right: 20px;
+}
+
+#wave-icon-list{
+    padding-right: 10px;
 }

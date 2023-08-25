@@ -49,13 +49,13 @@ export default function TopBar({channelId}){
         case 'messages':
             return(
                 <div id="top-bar">
-                    {channelTitle && `${channelTitle}`}
+                    <div className='channel-title'>{channelTitle && `${channelTitle}`}</div>
                 </div>
             )
         default:
             return(
                 <div id="top-bar">
-                    {channelTitle && `${channelTitle}`}
+                    <div className='channel-title'>{channelTitle && `${channelTitle}`}</div>
                 </div>
             )
     }

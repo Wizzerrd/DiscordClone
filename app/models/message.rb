@@ -2,13 +2,13 @@
 #
 # Table name: messages
 #
-#  id          :bigint           not null, primary key
-#  author_id   :bigint           not null
-#  server_id   :bigint           not null
-#  body        :text             not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  channels_id :bigint           not null
+#  id         :bigint           not null, primary key
+#  author_id  :bigint           not null
+#  server_id  :bigint           not null
+#  body       :text             not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  channel_id :bigint           not null
 #
 class Message < ApplicationRecord
     validates_length_of :body, :minimum => 1

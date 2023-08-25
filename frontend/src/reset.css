@@ -50,4 +50,5 @@ table {
 
 body{
 	font-family: 'gg sans';
+	overflow: hidden;
 }

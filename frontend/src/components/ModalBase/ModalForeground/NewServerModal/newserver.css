@@ -1,49 +1,26 @@
-:root{
-    --server-box-width: 440px;
-    --server-box-height: 558px;
-}
-
-.new-server-foreground{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: white;
-    position: absolute;
-    top: calc(50vh - (var(--server-box-height) / 2));
-    left: calc(50vw - (var(--server-box-width) / 2));
-    width: var(--server-box-width);
-    height: var(--server-box-height);
-    border-radius: 3px;
-    padding: 15px;
-}
-
-.new-server-foreground-green{
-    background-color: green;
-    position: absolute;
-    top: calc(50vh - (var(--server-box-height) / 2));
-    left: calc(50vw - (var(--server-box-width) / 2));
-    width: var(--server-box-width);
-    height: var(--server-box-height);
-    border-radius: 3px;
-}
-
 .new-server-modal-button{
     height: 66px;
-    width: 100%;
-    border: #E1E2E4 solid 1px ;
-    border-radius: 10px;
+    width: 90%;
+    margin: 20px;
     box-sizing: border-box;
+
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: #E1E2E4 solid 2px ;
+
+    color: #313338;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
 }
 
 .new-server-modal-button:hover{
     background-color: #EAEBED;
     cursor: pointer;
-    border: #D1D3D6 solid 1px ;
+    border: #D1D3D6 solid 2px ;
     border-radius: 10px;
-}
-
-.new-server-back{
-
 }
 
 .new-server-back:hover{
@@ -53,8 +30,8 @@
 .new-server-bottom-buttons{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+    margin-top: 20px;
 }
 
 .button-small{
@@ -65,4 +42,49 @@
     box-sizing: border-box;
     text-align: center;
     justify-content: center;
+    margin: 5px;
+}
+
+#new-server-heading{
+    text-align: center;
+    padding: 20px;
+}
+
+#new-server-heading > *{
+    margin: 10px;
+}
+
+#new-server-heading > h1 {
+    font-size: 24px;
+}
+
+#new-server-heading > h3 {
+    font-size: 16px;
+}
+
+#new-server-fields{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.modal-foreground h2{
+    font-size: 12px;
+    margin-left: 15px;
+    color: #949Ba4;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.modal-foreground > h3 {
+    text-align: center;
+}
+
+.server-text-input{
+    background-color: #EBEBEB ;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: 15px;
+    width: 75%;
 }

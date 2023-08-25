@@ -28,11 +28,11 @@ export const createServer = (server) => async dispatch => {
     const res = await csrfFetch('/api/servers', {
         method:'POST',
         body: JSON.stringify(server)
-    }).throw(res)
-    if (res.ok){
-        let data = await res.json()
-        dispatch(addServer(data.server))
-    }
+    })
+    let data = await res.json()
+    console.log(data)
+    dispatch(addServer(data.server))
+ 
 }
 
 export const fetchServer = serverId => async dispatch => {
@@ -40,6 +40,14 @@ export const fetchServer = serverId => async dispatch => {
     let data = await res.json()
     return data
 }
+
+export const ADD_MEMBER = 'servers/ADD_MEMBER'
+
+export const addMember = (serverId, memberId) => ({
+    type: ADD_MEMBER,
+    serverId,
+    memberId
+})
 
 export default function serversReducer(state = {}, action){
     switch(action.type){
@@ -49,7 +57,12 @@ export default function serversReducer(state = {}, action){
             return({...state, [action.server.id]: action.server})
         case ADD_SERVERS:
             return({...state, ...action.servers})
-        default:
+        case ADD_MEMBER:
+            let newState = {...state}
+            newState[action.serverId].members ||= []
+            newState[action.serverId].members.push(action.memberId)
+            return newState
+        default: 
             return state
     }
 }

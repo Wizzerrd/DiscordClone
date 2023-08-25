@@ -12,7 +12,6 @@ export default function AppBody(){
         <div className="app-body-main">
             <TopBar channelId={channelId}/>
             <BodySelector />
-            <RightPanel/>
         </div>
     )
 }
