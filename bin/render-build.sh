@@ -7,4 +7,4 @@ bundle install
 
 # rails db:drop
 rails db:migrate
-rails db:seed:replant
+rails db:seed

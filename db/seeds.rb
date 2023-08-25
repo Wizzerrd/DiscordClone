@@ -7,14 +7,20 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 ApplicationRecord.transaction do 
-    # puts "Destroying tables..."
+    puts "Destroying tables..."
     # Unnecessary if using `rails db:seed:replant`
-    # User.destroy_all
+    Friendship.destroy_all
+    Membership.destroy_all
+    Message.destroy_all
+    Channel.destroy_all
+    Server.destroy_all
+    User.destroy_all
   
-    # puts "Resetting primary keys..."
-    # # For easy testing, so that after seeding, the first `User` has `id` of 1
-    # ApplicationRecord.connection.reset_pk_sequence!('users')
+    puts "Resetting primary keys..."
+    # For easy testing, so that after seeding, the first `User` has `id` of 1
+    ApplicationRecord.connection.reset_pk_sequence!('users','servers','channels','messages','memberships','friendships')
   
+       
     puts "Seeding Users..."
 
     User.create(
