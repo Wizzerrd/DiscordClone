@@ -11,9 +11,9 @@ ApplicationRecord.transaction do
     # Unnecessary if using `rails db:seed:replant`
     # User.destroy_all
   
-    puts "Resetting primary keys..."
-    # For easy testing, so that after seeding, the first `User` has `id` of 1
-    ApplicationRecord.connection.reset_pk_sequence!('users')
+    # puts "Resetting primary keys..."
+    # # For easy testing, so that after seeding, the first `User` has `id` of 1
+    # ApplicationRecord.connection.reset_pk_sequence!('users')
   
     puts "Seeding Users..."
 
