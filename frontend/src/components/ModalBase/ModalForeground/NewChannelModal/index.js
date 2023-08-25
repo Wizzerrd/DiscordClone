@@ -43,7 +43,7 @@ export default function NewChannelModal(){
                 <div onClick={(e)=>handleSubmit(e)} className='discord-button button-small'>
                     Create Channel
                 </div>
-                <div className='discord-button button-small'>
+                <div onClick={()=>dispatch(setModalType(0))} className='discord-button button-small'>
                     Cancel
                 </div>
             </div>
