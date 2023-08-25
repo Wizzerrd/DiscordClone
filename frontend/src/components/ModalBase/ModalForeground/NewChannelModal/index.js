@@ -30,20 +30,20 @@ export default function NewChannelModal(){
     }
     
     return(
-        <div className="new-channel-modal-foreground">
+        <div className="modal-foreground">
             
             <h1>Create Channel</h1>
                 
             <div>
-                <label htmlFor='new-channel-name-input'>CHANNEL NAME</label>
-                <input value={channelObj.title} onChange={(e)=>setChannelObj({...channelObj, title: e.target.value})} id='new-channel-name-input' type='text' placeholder='new-channel'/>
+                <label htmlFor='new-channel-name-input'><h2>CHANNEL NAME</h2></label>
+                <input value={channelObj.title} onChange={(e)=>setChannelObj({...channelObj, title: e.target.value})} className='server-text-input' id='new-channel-name-input' type='text' placeholder='new-channel'/>
             </div>
 
             <div className='new-channel-bottom'>
-                <div onClick={(e)=>handleSubmit(e)} className='discord-button'>
+                <div onClick={(e)=>handleSubmit(e)} className='discord-button button-small'>
                     Create Channel
                 </div>
-                <div>
+                <div className='discord-button button-small'>
                     Cancel
                 </div>
             </div>

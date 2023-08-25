@@ -34,13 +34,15 @@ export default function AppBase(){
     }, [channelId])
     
     return(
+        <>
         <div className='app-main'>
-            {!sessionUser && <Redirect to="/login" />}
             <ModalBase/>
+            {!sessionUser && <Redirect to="/login" />}
             <button className='god-button' onClick={()=>dispatch(logout())}>Log Out</button>
             <ServerScroller serverId={serverId}/>
             <LeftPanel serverId={serverId} />
             <AppBody  />
         </div> 
+        </>
     )
 }

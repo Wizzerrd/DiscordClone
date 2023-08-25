@@ -9,6 +9,8 @@ import { setModalPage, setModalType } from "../../store/ui"
 import { FaGear } from 'react-icons/fa' 
 import { AiOutlinePlus, AiOutlineDown } from 'react-icons/ai'
 
+import { ReactComponent as WaveIcon } from '../../Assets/wave.svg';
+
 import {PiGearSixFill} from 'react-icons/pi'
 
 const landingRedirect = () => {
@@ -36,28 +38,18 @@ export default function LeftPanel({serverId}){
     }
     
     if(serverId === '@me'){
-        return(
-            <>
-                <div className="left-panel">
-                    <div className="left-panel-drop-down">
-                        <input className="search-bar" type="text" placeholder="Find or start a conversation"></input>
-                    </div>
-                    <div className={amIChosen()}>
-                        <div className="left-panel-option" id="friend-list-button">Friends</div>
-                    </div>
-                    <div className="dm-label-div">
-                        <div>
-                            DIRECT MESSAGES
-                        </div>
-                        <div>
-                            <AiOutlinePlus/>
-                        </div>
-                    </div>
-                    <div className="left-panel-dms">
-                    </div>
-                    {/* <UserPreview/> */}
+        return(     
+            <div className="left-panel">
+                <div className="left-panel-drop-down">
+                    <input className="search-bar" type="text" placeholder="Find or start a conversation"></input>
                 </div>
-            </>
+ 
+                <div id="left-panel-friends-button" className={amIChosen()}>
+                    <WaveIcon id='wave-icon-list'/>
+                    <div>Friends</div>
+                </div>
+
+            </div>
         )
     } else {
         return(
@@ -79,7 +71,6 @@ export default function LeftPanel({serverId}){
                     <div className="channels-drop-down">
                         {channelList.map(channel => <Link key={channel.id} to={`/channels/${serverId}/${channel.id}`}><div className={amIChosen(channel.id)}>{channel.title}</div></Link>)}
                     </div>
-                    {/* <UserPreview/> */}
                 </div>
             </>
         )

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { createServer } from '../../../../store/servers';
 import { fetchUser } from '../../../../store/users';
+import { FaChevronRight } from 'react-icons/fa';
 
 export default function NewServerModal({ modalPage }){
     const dispatch = useDispatch()
@@ -31,25 +32,26 @@ export default function NewServerModal({ modalPage }){
     switch(modalPage){
         case 0:
             return(
-                <div className="new-server-foreground">
+                <div className="modal-foreground">
                     <div className='new-server-modal-button' id='create-my-own' onClick={()=>dispatch(setModalPage(1))}>
-                        Create my Own
+                        <div>Create my Own</div>
+                        <FaChevronRight/>
                     </div>
                 </div>
             )
         case 1:
             return(
-                <div className="new-server-foreground">
-                    <div>
+                <div className="modal-foreground">
+                    <div id='new-server-heading'>
                         <h1>Customize your server</h1>
                         <p>Give your new server a personality with a name. You can always change it later.</p>
                     </div>
-                    <div>
+                    <div id='new-server-fields'>
                         <h2>SERVER NAME</h2>
-                        <input value={serverObj.title} onChange={(e) => setServerObj({...serverObj, title: e.target.value})} type='text' className='new-server-text-input'></input>
+                        <input value={serverObj.title} onChange={(e) => setServerObj({...serverObj, title: e.target.value})} type='text' className='server-text-input' id='new-server-text-input'></input>
                     </div>
                     <div className='new-server-bottom-buttons'>
-                        <label className='new-server-back' onClick={()=>dispatch(setModalPage(modalPage - 1))}>Back</label>
+                        <div className='discord-button button-small' onClick={()=>dispatch(setModalPage(modalPage - 1))}>Back</div>
                         <div onClick={handleSubmit} className='discord-button button-small' >Create</div>
                     </div>
                 </div>

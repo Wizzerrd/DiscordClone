@@ -43,21 +43,22 @@ export default function ServerOptionsModal({modalPage}){
         switch(modalPage){
             case 0:
                 return(
-                    <div className='modal-contents'>
+                    <>
                         <h1>What would you like to do?</h1>
-                        <div className='settings-holder'>
-                            <h2>Edit Server Settings</h2>
-                            <label htmlFor='update-server-name'>Update Server Name</label>
-                            <input id='update-server-name' type='text'/>
+                            <h3>Edit Server Settings</h3>
+                        <div className='server-settings-holder'>
+                            <h2><label htmlFor='update-server-name'>Update Server Name</label></h2>
+                            <input className='server-text-input' id='update-server-name' type='text'/>
                         </div>
                         <h1>or</h1>
-                        <div className='invite-option-holder'>
-                            <h2>Invite Friends to the Server</h2>
+                            <h3>Invite Friends to the Server</h3>
+                        <div className='server-settings-holder'>
                             <div className='invite-friends-list'>
                                 {friendsList.map( friend => Friend(friend))}
                             </div>
                         </div>
-                    </div>
+                    
+                    </>
                 )
             case 1:
                 return(
@@ -69,7 +70,7 @@ export default function ServerOptionsModal({modalPage}){
     }
 
     return(
-        <div className="server-options-modal-foreground">
+        <div className="modal-foreground">
             <ModalContents/>
         </div>
     )
