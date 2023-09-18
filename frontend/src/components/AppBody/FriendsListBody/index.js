@@ -33,7 +33,7 @@ export default function FriendsListBody(){
                 return dispatch(addFriend(pending.username, user.id))
                 .then(dispatch(removeIncomingFriend(pending.userId)))
                 .then(dispatch(receiveFriend({username: pending.username, userId: pending.userId, accepted: true})))
-                .then(setMessage('Added!'))
+                .then(setMessage(`${pending.username} added!`))
             case 2:
                 if( newFriend === user.username ){
                     setMessage("You can't add yourself as a friend, silly")
@@ -45,7 +45,7 @@ export default function FriendsListBody(){
                             let data = await res.json()
                             await dispatch(receiveFriend({...data, username: newFriend}))
                             setNewFriend('')
-                            setMessage('success')
+                            setMessage(`Success! Friend request sent to ${newFriend}`)
                         }
                     })
                 }
@@ -59,15 +59,18 @@ export default function FriendsListBody(){
                 return dispatch(removeFriend(user.id, friend.userId))
                 .catch((err)=>console.log(err))
                 .then(dispatch(removeFriendRedux(friend.userId)))
+                .then(setMessage(`${friend.username} removed`))
             case 1:
                 if(receiver){
                     return dispatch(cancelRequest(friend.userId , receiver.id))
                     .catch((err)=>console.log(err))
                     .then(dispatch(removeIncomingFriend(friend.userId)))
+                    .then(setMessage(`Request from ${friend.username} rejected`))
                 }else{
                     return dispatch(cancelRequest(user.id, friend.userId))
                     .catch((err)=>console.log(err))
                     .then(dispatch(removeFriendRedux(friend.userId)))
+                    .then(setMessage(`Request to ${friend.username} canceled`))
                 }
         }
     }
@@ -101,6 +104,7 @@ export default function FriendsListBody(){
                         </div>
                         )
                     })}
+                    {message && <div className='friend-error'>{message}</div>}
                 </div>
             )
         } else if (centerPanelPage === 1) {
@@ -131,7 +135,7 @@ export default function FriendsListBody(){
                             )
                         })}
                     </div>
-                    {message && <div>{message}</div>}
+                    {message && <div className='friend-error'>{message}</div>}
                 </div>          
             )
         }
@@ -145,7 +149,7 @@ export default function FriendsListBody(){
                     <h3>You can add friends with their Discord username.</h3>
                     <input value={newFriend} onChange={(e)=> setNewFriend(e.target.value)} placeholder="You can add friends with their Discord username." id='friend-request-input' type="text"/>
                     <div onClick={e=>handleSubmit(e)} id='send-friend-request' className="discord-button button-hover">Send Friend Request</div>
-                    {message && <div>{message}</div>}
+                    {message && <div className='friend-error'>{message}</div>}
                 </div>
             </div>
         )
