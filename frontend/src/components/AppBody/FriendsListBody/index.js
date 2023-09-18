@@ -4,10 +4,11 @@ import { useSelector } from "react-redux"
 import { setCenterPanelPage } from "../../../store/ui"
 
 import './friends.css'
-import { addFriend  } from "../../../store/utils/friends"
+import { addFriend, cancelRequest, removeFriend  } from "../../../store/utils/friends"
 import { receiveFriend } from "../../../store/friends"
 
 import { ReactComponent as CancelSymbol } from '../../../Assets/cancel.svg'
+import { ReactComponent as AcceptSymbol} from '../../../Assets/accept.svg'
 
 export default function FriendsListBody(){
 
@@ -43,8 +44,18 @@ export default function FriendsListBody(){
         }
     }
 
-    function handleRemove(e){
-
+    function handleRemove(e, friend, receiver){
+        e.preventDefault()
+        switch(centerPanelPage){
+            case 0:
+                dispatch(removeFriend(user.id, friend.userId)).catch((err)=>console.log(err))
+            case 1:
+                if(receiver){
+                    dispatch(cancelRequest(friend.userId , receiver.id)).catch((err)=>console.log(err))
+                }else{
+                    dispatch(cancelRequest(user.id, friend.userId)).catch((err)=>console.log(err))
+                }
+        }
     }
     
     useEffect(()=>{
@@ -54,7 +65,6 @@ export default function FriendsListBody(){
 
     function ListOfFriends(){
         const friendsList = Object.values(friends)
-        console.log(friendsList)
         const incomingFriendsList = Object.values(incomingFriends)
         if(centerPanelPage === 0){
             return(
@@ -65,7 +75,7 @@ export default function FriendsListBody(){
                         <div className="friends-list-item" key={friend.userId}>
                             <h1>{friend.username}</h1>
                             <div className="friends-list-item-button-holder">
-                                <CancelSymbol onClick={(e)=>handleRemove()} className="cancel-request-button" />
+                                <CancelSymbol onClick={(e)=>handleRemove(e, friend)} className="cancel-request-button" />
                             </div>
                         </div>
                         )
@@ -81,7 +91,7 @@ export default function FriendsListBody(){
                         <div className="friends-list-item" key={friend.userId}>
                             <h1>{friend.username}</h1>
                             <div className="friends-list-item-button-holder">
-                                <CancelSymbol className="cancel-request-button" />
+                                <CancelSymbol onClick={(e)=>handleRemove(e, friend)} className="cancel-request-button" />
                             </div>
                         </div>)})}
                     </div>
@@ -93,8 +103,8 @@ export default function FriendsListBody(){
                                 <div className="friends-list-item" key={incoming.userId}>
                                     <h1>{incoming.username}</h1>
                                     <div className="friends-list-item-button-holder">
-                                        <CancelSymbol className="accept-request-button" />
-                                        <CancelSymbol className="cancel-request-button" />
+                                        <AcceptSymbol onClick={()=>dispatch(addFriend(incoming.username, user.id))} className="accept-request-button" />
+                                        <CancelSymbol onClick={(e)=>handleRemove(e, incoming, user)} className="cancel-request-button" />
                                     </div>
                                 </div>
                             )
