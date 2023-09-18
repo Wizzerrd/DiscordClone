@@ -28,7 +28,7 @@ export default function friendsReducer(state = {}, action){
         case RECEIVE_FRIEND:
             let userId;
             if (action.payload.friendship){
-                userId = action.payload.friendship.receiverI
+                userId = action.payload.friendship.receiverId
             } else {
                 userId = action.payload.userId
             }

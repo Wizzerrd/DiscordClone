@@ -30,19 +30,20 @@ export default function FriendsListBody(){
         setMessage('')
         switch(centerPanelPage){
             case 1:
-                dispatch(addFriend(pending.username, user.id))
+                return dispatch(addFriend(pending.username, user.id))
                 .then(dispatch(removeIncomingFriend(pending.userId)))
                 .then(dispatch(receiveFriend({username: pending.username, userId: pending.userId, accepted: true})))
+                .then(setMessage('Added!'))
             case 2:
                 if( newFriend === user.username ){
                     setMessage("You can't add yourself as a friend, silly")
                 }else {
-                    dispatch(addFriend(newFriend, user.id)).catch(res => {
+                    return dispatch(addFriend(newFriend, user.id)).catch(res => {
                         setMessage('error')
                     }).then( async res => {
                         if(res){
                             let data = await res.json()
-                            dispatch(receiveFriend({...data, username: newFriend}))
+                            await dispatch(receiveFriend({...data, username: newFriend}))
                             setNewFriend('')
                             setMessage('success')
                         }
@@ -55,16 +56,16 @@ export default function FriendsListBody(){
         e.preventDefault()
         switch(centerPanelPage){
             case 0:
-                dispatch(removeFriend(user.id, friend.userId))
+                return dispatch(removeFriend(user.id, friend.userId))
                 .catch((err)=>console.log(err))
                 .then(dispatch(removeFriendRedux(friend.userId)))
             case 1:
                 if(receiver){
-                    dispatch(cancelRequest(friend.userId , receiver.id))
+                    return dispatch(cancelRequest(friend.userId , receiver.id))
                     .catch((err)=>console.log(err))
                     .then(dispatch(removeIncomingFriend(friend.userId)))
                 }else{
-                    dispatch(cancelRequest(user.id, friend.userId))
+                    return dispatch(cancelRequest(user.id, friend.userId))
                     .catch((err)=>console.log(err))
                     .then(dispatch(removeFriendRedux(friend.userId)))
                 }
