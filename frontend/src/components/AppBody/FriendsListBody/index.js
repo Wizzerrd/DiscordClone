@@ -5,10 +5,11 @@ import { setCenterPanelPage } from "../../../store/ui"
 
 import './friends.css'
 import { addFriend, cancelRequest, removeFriend  } from "../../../store/utils/friends"
-import { receiveFriend } from "../../../store/friends"
+import { receiveFriend, removeFriendRedux } from "../../../store/friends"
 
 import { ReactComponent as CancelSymbol } from '../../../Assets/cancel.svg'
 import { ReactComponent as AcceptSymbol} from '../../../Assets/accept.svg'
+import { removeIncomingFriend } from "../../../store/incomingfriends"
 
 export default function FriendsListBody(){
 
@@ -21,11 +22,17 @@ export default function FriendsListBody(){
     const [newFriend, setNewFriend] = useState('')
     const [message, setMessage] = useState('')
 
+    const [friendsList, setFriendsList] = useState([])
+    const [incomingFriendsList, setIncomingFriendsList] = useState([])
+
     function handleSubmit(e, pending){
         e.preventDefault();
         setMessage('')
         switch(centerPanelPage){
             case 1:
+                dispatch(addFriend(pending.username, user.id))
+                .then(dispatch(removeIncomingFriend(pending.userId)))
+                .then(dispatch(receiveFriend({username: pending.username, userId: pending.userId, accepted: true})))
             case 2:
                 if( newFriend === user.username ){
                     setMessage("You can't add yourself as a friend, silly")
@@ -48,12 +55,18 @@ export default function FriendsListBody(){
         e.preventDefault()
         switch(centerPanelPage){
             case 0:
-                dispatch(removeFriend(user.id, friend.userId)).catch((err)=>console.log(err))
+                dispatch(removeFriend(user.id, friend.userId))
+                .catch((err)=>console.log(err))
+                .then(dispatch(removeFriendRedux(friend.userId)))
             case 1:
                 if(receiver){
-                    dispatch(cancelRequest(friend.userId , receiver.id)).catch((err)=>console.log(err))
+                    dispatch(cancelRequest(friend.userId , receiver.id))
+                    .catch((err)=>console.log(err))
+                    .then(dispatch(removeIncomingFriend(friend.userId)))
                 }else{
-                    dispatch(cancelRequest(user.id, friend.userId)).catch((err)=>console.log(err))
+                    dispatch(cancelRequest(user.id, friend.userId))
+                    .catch((err)=>console.log(err))
+                    .then(dispatch(removeFriendRedux(friend.userId)))
                 }
         }
     }
@@ -63,15 +76,22 @@ export default function FriendsListBody(){
         setMessage("")
     },[centerPanelPage])
 
+    useEffect(()=>{
+        setFriendsList(Object.values(friends))
+    }, [friends])
+
+    useEffect(()=>{
+        setIncomingFriendsList(Object.values(incomingFriends))
+    }, [incomingFriends])
+
     function ListOfFriends(){
-        const friendsList = Object.values(friends)
-        const incomingFriendsList = Object.values(incomingFriends)
+
         if(centerPanelPage === 0){
             return(
                 <div className="friends-body">
                     <div className="list-title">ALL FRIENDS</div>
                     {friendsList.map(friend => {
-                        if(friend.accepted) return (
+                        if(friend?.accepted) return (
                         <div className="friends-list-item" key={friend.userId}>
                             <h1>{friend.username}</h1>
                             <div className="friends-list-item-button-holder">
@@ -87,7 +107,7 @@ export default function FriendsListBody(){
                 <div className="friends-body">
                     <div className="list-title">OUTGOING</div>
                     <div id="outgoing-requests">
-                        {friendsList.map(friend => {if(!friend.accepted) return (
+                        {friendsList.map(friend => { if( friend && !friend?.accepted) return (
                         <div className="friends-list-item" key={friend.userId}>
                             <h1>{friend.username}</h1>
                             <div className="friends-list-item-button-holder">
@@ -99,11 +119,11 @@ export default function FriendsListBody(){
                     <div className="list-title">INCOMING</div>
                     <div id="incoming-requests">
                         {incomingFriendsList.map(incoming => {
-                            return(
+                            if(incoming) return(
                                 <div className="friends-list-item" key={incoming.userId}>
                                     <h1>{incoming.username}</h1>
                                     <div className="friends-list-item-button-holder">
-                                        <AcceptSymbol onClick={()=>dispatch(addFriend(incoming.username, user.id))} className="accept-request-button" />
+                                        <AcceptSymbol onClick={(e)=>handleSubmit(e, incoming)} className="accept-request-button" />
                                         <CancelSymbol onClick={(e)=>handleRemove(e, incoming, user)} className="cancel-request-button" />
                                     </div>
                                 </div>
