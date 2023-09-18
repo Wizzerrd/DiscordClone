@@ -11,6 +11,12 @@ export const receivIncomingFriends = incomingFriends => ({
     incomingFriends
 })
 
+export const REMOVE_INCOMING_FRIEND = 'incomingFriends/REMOVE_INCOMING_FRIEND'
+
+export const removeIncomingFriend = incomingFriendId => ({
+    type: REMOVE_INCOMING_FRIEND,
+    incomingFriendId
+})
 
 export default function incomingFriendsReducer(state = {}, action){
     switch(action.type){
@@ -18,6 +24,10 @@ export default function incomingFriendsReducer(state = {}, action){
             return({...state, ...action.incomingFriends})
         case SET_INCOMING_FRIENDS:
             return({...action.incomingFriends})
+        case REMOVE_INCOMING_FRIEND:
+            let newState = {...state}
+            newState[action.incomingFriendId] = undefined
+            return newState
         default:
             return state
     }

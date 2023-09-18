@@ -20,6 +20,26 @@ class Api::FriendshipsController < ApplicationController
     end
 
     def destroy
+        if(params[:mutual])
+            friendship1 = Friendship.where(sender_id: params[:sender_id]).find_by(receiver_id: params[:receiver_id])
+            friendship2 = Friendship.where(sender_id: params[:receiver_id]).find_by(receiver_id: params[:sender_id])
+            if friendship1 && friendship2
+                friendship1.destroy
+                friendship2.destroy
+                @friendship = friendship1
+                render 'api/friendships/show' 
+            else
+                render json: {errors: 'Not Found'}, status: 404
+            end
+        else
+            @friendship = Friendship.where(sender_id: params[:sender_id]).find_by(receiver_id: params[:receiver_id])
+            if @friendship
+                @friendship.destroy
+                render 'api/friendships/show'
+            else
+                render json: {errors: 'Not Found'}, status: 404
+            end
+        end
     end
 
     private
