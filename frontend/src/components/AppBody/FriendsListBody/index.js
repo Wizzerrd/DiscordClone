@@ -92,20 +92,20 @@ export default function FriendsListBody(){
 
         if(centerPanelPage === 0){
             return(
-                <div className="friends-body">
-                    <div className="list-title">ALL FRIENDS</div>
-                    {friendsList.map(friend => {
-                        if(friend?.accepted) return (
-                        <div className="friends-list-item" key={friend.userId}>
-                            <h1>{friend.username}</h1>
-                            <div className="friends-list-item-button-holder">
-                                <CancelSymbol onClick={(e)=>handleRemove(e, friend)} className="cancel-request-button" />
+                    <div className="friends-body">
+                        <div className="list-title">ALL FRIENDS</div>
+                        {friendsList.map(friend => {
+                            if(friend?.accepted) return (
+                            <div className="friends-list-item" key={friend.userId}>
+                                <h1>{friend.username}</h1>
+                                <div className="friends-list-item-button-holder">
+                                    <CancelSymbol onClick={(e)=>handleRemove(e, friend)} className="cancel-request-button" />
+                                </div>
                             </div>
-                        </div>
-                        )
-                    })}
+                            )
+                        })}
                     {message && <div className='friend-error'>{message}</div>}
-                </div>
+                    </div>
             )
         } else if (centerPanelPage === 1) {
             return(
@@ -149,8 +149,8 @@ export default function FriendsListBody(){
                     <h3>You can add friends with their Discord username.</h3>
                     <input value={newFriend} onChange={(e)=> setNewFriend(e.target.value)} placeholder="You can add friends with their Discord username." id='friend-request-input' type="text"/>
                     <div onClick={e=>handleSubmit(e)} id='send-friend-request' className="discord-button button-hover">Send Friend Request</div>
-                    {message && <div className='friend-error'>{message}</div>}
                 </div>
+                {message && <div className='friend-error'>{message}</div>}
             </div>
         )
     } else {
