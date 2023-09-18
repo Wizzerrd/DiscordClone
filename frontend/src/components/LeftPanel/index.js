@@ -12,10 +12,9 @@ import { AiOutlinePlus, AiOutlineDown } from 'react-icons/ai'
 import { ReactComponent as WaveIcon } from '../../Assets/wave.svg';
 
 import {PiGearSixFill} from 'react-icons/pi'
-
-const landingRedirect = () => {
-
-}
+import { useEffect } from "react"
+import consumer from "../../consumer"
+import { addChannel } from "../../store/channels"
 
 export default function LeftPanel({serverId}){
 
@@ -36,6 +35,21 @@ export default function LeftPanel({serverId}){
         }
         return(className)
     }
+
+    useEffect(()=>{
+        if(serverId){
+            const subscription = consumer.subscriptions.create(
+                {channel: 'ServersChannel', id: serverId},
+                {
+                    received: channel => {
+                        console.log(channel)
+                        dispatch(addChannel({channel: {...channel}}))
+                    }
+                }
+            );
+            return () => subscription?.unsubscribe();
+        }
+    },[serverId, dispatch])
     
     if(serverId === '@me'){
         return(     

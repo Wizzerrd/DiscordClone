@@ -45,7 +45,9 @@ export default function channelsReducer(state = {}, action){
         case ADD_CHANNELS:
             return {...state, ...action.channels}
         case ADD_CHANNEL:
-            return {...state, ...action.channel}
+            let nextState = {...state}
+            nextState[action.channel.channel.id] = action.channel.channel
+            return nextState
         case DUMP_CHANNELS:
             return {}
         default:

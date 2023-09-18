@@ -11,6 +11,7 @@ class Api::ChannelsController < ApplicationController
     def create
         @channel = Channel.new(channel_params)
         if @channel.save!
+            ServersChannel.broadcast_to(@channel.server, @channel)
             render 'api/channels/show'
         else
             render json: {errors: @channel.errors}, status: :unprocessable_entity
