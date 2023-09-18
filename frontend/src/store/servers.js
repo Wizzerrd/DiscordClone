@@ -1,5 +1,6 @@
 import csrfFetch from "./csrf"
 import { ADD_USER } from "./users"
+import { fetchServer } from "./utils/servers"
 
 // Servers
 
@@ -33,12 +34,6 @@ export const createServer = (server) => async dispatch => {
     console.log(data)
     dispatch(addServer(data.server))
  
-}
-
-export const fetchServer = serverId => async dispatch => {
-    const res = await csrfFetch(`/api/servers/${serverId}`)
-    let data = await res.json()
-    return data
 }
 
 export const ADD_MEMBER = 'servers/ADD_MEMBER'

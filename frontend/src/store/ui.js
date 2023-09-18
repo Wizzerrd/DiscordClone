@@ -1,5 +1,5 @@
 import { setChannels } from "./channels"
-import { fetchServer } from "./servers"
+import { fetchServer } from "./utils/servers"
 import { addUsers } from "./users"
 
 export const UI_TO_DEFAULT = 'ui/UI_TO_DEFAULT'

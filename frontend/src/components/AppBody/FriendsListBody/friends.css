@@ -11,10 +11,6 @@
     color: #F2F3F5;
 }
 
-.new-friend-search-holder > h3 {
-
-}
-
 
 #friend-request-input{
     width: 100%;
@@ -45,6 +41,36 @@
     margin-left: 20px;
     margin-right: 20px;
     padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.friends-list-item-button-holder{
+    display: flex;
+    align-items: center;
+}
+
+.cancel-request-button{
+    background-color: #2B2D31;
+    padding: 10px;
+    border-radius: 22px;
+    margin-left: 10px;
+}
+
+.cancel-request-button:hover{
+    color: #F23F42;
+}
+
+.accept-request-button{
+    background-color: #2B2D31;
+    padding: 10px;
+    border-radius: 22px;
+}
+
+.accept-request-button:hover{
+    color: #248046;
 }
 
 .friends-list-item:hover{

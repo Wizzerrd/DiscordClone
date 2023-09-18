@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import './server-options.css'
 import { useDispatch } from 'react-redux'
-import { createInvitation } from '../../../../store/users'
+import { createInvitation } from '../../../../store/utils/servers'
 import { addMember } from '../../../../store/servers'
 
 export default function ServerOptionsModal({modalPage}){
