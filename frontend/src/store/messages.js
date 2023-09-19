@@ -28,6 +28,8 @@ export const fetchMessages = channelId => async dispatch => {
     if(res.ok){
         let data = await res.json()
         dispatch(setMessages(data))
+    } else {
+        throw res
     }
 }
 

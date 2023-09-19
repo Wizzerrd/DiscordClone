@@ -9,6 +9,7 @@ import { uiInitialState, setModalType, selectServer } from '../../store/ui';
 
 import './servers.css'
 import { fetchServer } from '../../store/servers';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function ServerScroller({ serverId }){
 
@@ -26,9 +27,11 @@ export default function ServerScroller({ serverId }){
     }
 
     useEffect(()=>{
-        dispatch(selectServer(serverId))
+        dispatch(selectServer(serverId)).catch(err => {
+            console.error("server not found. redirecting...")
+        })
     }, [serverId])
-    
+
     return(
         <div className='server-scroller'>
 
@@ -41,7 +44,10 @@ export default function ServerScroller({ serverId }){
 
             {/* Server Selectors */}
             <div className='server-list'>
-                {serverList.map( server => <Link key={server.id} to={`/channels/${server.id}/${server.primaryChannel}`}><div className={amIChosen(server.id)}>{server.id}</div></Link>)}
+                {serverList.map( server => 
+                    server?.id && <Link key={server.id} to={`/channels/${server.id}/${server.primaryChannel}`}><div className={amIChosen(server.id)}>{server.id}</div></Link>)
+                }
+
             </div>
 
             {/* New Server Selector */}

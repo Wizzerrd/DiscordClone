@@ -44,12 +44,15 @@ export const setServer = serverId => ({
 
 export const selectServer = serverId => async dispatch => {
     if (serverId > 0) {
-        let {channels, members} = await dispatch(fetchServer(serverId))
-        dispatch(addUsers(members))
-        dispatch(setChannels(channels))
-        dispatch(selectChannel(Number(Object.keys(channels)[0])))
+        const res = await dispatch(fetchServer(serverId)).catch(err => {throw err})
+        if(res){
+            let {channels, members} = res
+            dispatch(addUsers(members))
+            dispatch(setChannels(channels))
+            dispatch(selectChannel(Number(Object.keys(channels)[0])))
+            dispatch(setServer(serverId))
+        }
     }
-    dispatch(setServer(serverId))
 }
 
 // Channel Selection

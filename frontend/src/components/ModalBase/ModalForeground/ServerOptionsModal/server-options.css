@@ -35,3 +35,25 @@
     background-color: #1A6334;
     border-color: #1A6334;
 }
+
+.server-settings-button-holder{
+    display: flex;
+    justify-content: center;
+}
+
+#delete-server-button{
+    background-color: #313338;
+    color: #F2F3F5;
+    border: 1px solid #F2F3F5;
+}
+
+#delete-server-button:hover{
+    transition: all 0.25s ease;
+    background-color: #2E3035;
+    color: #F23F42;
+    border: 1px solid #F23F42;
+}
+
+#delete-server-button:not(:hover){
+    transition: all 0.25s ease; 
+}

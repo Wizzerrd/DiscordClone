@@ -6,12 +6,15 @@ import { useDispatch } from 'react-redux'
 import { fetchMessages, receiveMessage, sendMessage, setMessages } from '../../../store/messages'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function MessagingBody(){
 
     const [message, setMessage] = useState('')
     const [errors, setErrors] = useState([])
+    
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const { user } = useSelector(state => state.session)
     const { users } = useSelector(state => state.entities)
@@ -41,7 +44,9 @@ export default function MessagingBody(){
     }, [channelId, dispatch]);
 
     useEffect(()=>{
-        if(channelId) dispatch(fetchMessages(channelId))
+        if(channelId) dispatch(fetchMessages(channelId)).catch(err => {
+            history.push('/channels/@me')
+        })
     }, [channelId])
 
     function handleSubmit(e){
