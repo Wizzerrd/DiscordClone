@@ -9,11 +9,12 @@ import { uiInitialState, setModalType, selectServer } from '../../store/ui';
 
 import './servers.css'
 import { fetchServer } from '../../store/servers';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import { Redirect, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function ServerScroller({ serverId }){
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const { servers } = useSelector(state => state.entities)
     const { selectedServer, modalType } = useSelector(state => state.ui)
@@ -28,7 +29,7 @@ export default function ServerScroller({ serverId }){
 
     useEffect(()=>{
         dispatch(selectServer(serverId)).catch(err => {
-            console.error("server not found. redirecting...")
+            history.push('/channels/@me')
         })
     }, [serverId])
 

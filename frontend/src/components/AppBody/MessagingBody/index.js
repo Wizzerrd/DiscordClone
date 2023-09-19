@@ -45,7 +45,7 @@ export default function MessagingBody(){
 
     useEffect(()=>{
         if(channelId) dispatch(fetchMessages(channelId)).catch(err => {
-            history.push('/channels/@me')
+            history.push(`/channels/${serverId}`)
         })
     }, [channelId])
 

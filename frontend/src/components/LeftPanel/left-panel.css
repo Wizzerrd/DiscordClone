@@ -87,6 +87,8 @@
     border-radius: 5px;
     box-sizing: border-box;
     color: #F2F3F5;
+    display: flex;
+    justify-content: space-between;
 }
 
 .left-panel-option:hover{

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import NewServerModal from './NewServerModal'
 import NewChannelModal from './NewChannelModal';
 import ServerOptionsModal from './ServerOptionsModal';
+import ChannelOptionsModal from './ChannelOptionsModal';
 
 export default function ModalForeground({ modalPage, modalType }){
 
@@ -14,6 +15,8 @@ export default function ModalForeground({ modalPage, modalType }){
             return <NewChannelModal/>
         case 'serverOptions':
             return <ServerOptionsModal modalPage={modalPage}/>
+        case 'channelOptions':
+            return <ChannelOptionsModal />
         default:
             return null
     }

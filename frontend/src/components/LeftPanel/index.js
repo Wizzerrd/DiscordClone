@@ -1,4 +1,4 @@
-import { Link, Redirect, useParams } from "react-router-dom/cjs/react-router-dom.min"
+import { Link, Redirect, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min"
 import UserPreview from "../UserPreview"
 
 import './left-panel.css'
@@ -19,10 +19,13 @@ import { addChannel } from "../../store/channels"
 export default function LeftPanel({serverId}){
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const { channels, servers } = useSelector(state => state.entities)
     const { selectedChannel } = useSelector(state => state.ui)
     const channelList = Object.values(channels)
+
+    const { channelId } = useParams()
 
     function amIChosen(channelId){
         let className = "left-panel-option";
@@ -42,7 +45,6 @@ export default function LeftPanel({serverId}){
                 {channel: 'ServersChannel', id: serverId},
                 {
                     received: channel => {
-                        console.log(channel)
                         dispatch(addChannel({channel: {...channel}}))
                     }
                 }
@@ -50,6 +52,14 @@ export default function LeftPanel({serverId}){
             return () => subscription?.unsubscribe();
         }
     },[serverId, dispatch])
+
+    useEffect(()=>{
+        if(serverId !== '@me' && !channelId){
+            if(channelList.length > 0){
+                history.push(`/channels/${serverId}/${channelList[0].id}`)
+            }
+        }
+    },[history])
     
     if(serverId === '@me'){
         return(     
@@ -85,7 +95,16 @@ export default function LeftPanel({serverId}){
                             <div onClick={()=>dispatch(setModalType('newChannel'))} id="add-channel-button"><AiOutlinePlus/></div>
                         </div>
                         <div className="channels-drop-down">
-                            {channelList.map(channel => <Link key={channel.id} to={`/channels/${serverId}/${channel.id}`}><div className={amIChosen(channel.id)}>{channel.title}</div></Link>)}
+                            {channelList.map(channel => 
+                                <Link key={channel.id} to={`/channels/${serverId}/${channel.id}`}>
+                                    <div className={amIChosen(channel.id)}>
+                                        {channel.title}
+                                        <div onClick={()=>dispatch(setModalType('channelOptions'))}>
+                                            <AiOutlinePlus/>
+                                        </div>
+                                    </div>
+                                </Link>
+                            )}
                         </div>
                     </div>
 

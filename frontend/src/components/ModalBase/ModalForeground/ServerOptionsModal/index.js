@@ -36,7 +36,7 @@ export default function ServerOptionsModal({modalPage}){
                 membershipable_id: Number(selectedServer)
             }
             const res = dispatch(createInvitation(server))
-            .catch( res => console.log(res) )
+            .catch( res => console.error(res) )
             .then(dispatch(addMember(server.membershipable_id, id)))
         }
 
