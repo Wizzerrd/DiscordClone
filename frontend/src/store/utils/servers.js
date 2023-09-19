@@ -1,7 +1,6 @@
 import csrfFetch from "../csrf"
 
 export const createInvitation = (membershipable) => async dispatch => {
-    console.log(membershipable)
     const res = await csrfFetch(`/api/memberships`, {
         method: 'POST',
         body: JSON.stringify({
@@ -15,6 +14,21 @@ export const createInvitation = (membershipable) => async dispatch => {
         return res
     } else {
         throw(res)
+    }
+}
+
+export const deleteMembership = (userId, serverId) => async dispatch => {
+    const res = await csrfFetch(`/api/memberships`, {
+        method: 'DELETE',
+        body: JSON.stringify({
+            user_id: userId,
+            server_id: serverId
+        })
+    })
+    if(res.ok){
+        return await res.json()
+    } else {
+        throw (res)
     }
 }
 

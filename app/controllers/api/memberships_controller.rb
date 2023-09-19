@@ -20,6 +20,18 @@ class Api::MembershipsController < ApplicationController
     end
 
     def destroy
+        if(params[:server_id])
+            @membership = Membership.where(membershipable_type: 'Server').where(membershipable_id: params[:server_id]).find_by(user_id: params[:user_id])
+        elsif(params[:channel_id])
+            
+        end
+        if @membership
+            @membership.destroy
+            @membership = nil
+            render json: {message: 'successfully left server'}
+        else
+            render json: {error: 'Not Found'}, status: 404
+        end
     end
     
     private
