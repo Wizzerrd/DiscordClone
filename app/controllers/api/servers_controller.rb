@@ -23,9 +23,23 @@ class Api::ServersController < ApplicationController
     end
 
     def update
+        @server = Server.find(params[:id])
+        if @server
+            @server.update(server_params)
+            render 'api/servers/show'
+        else
+            render json: {errors: 'Server Not Found'}, status: 404           
+        end
     end
 
     def destroy
+        @server = Server.find(params[:id])
+        if @server
+            @server.destroy
+            render json: {message: 'Server successfully deleted'}
+        else
+            render json: {errors: 'Server Not Found'}, status: 404           
+        end
     end
 
     private

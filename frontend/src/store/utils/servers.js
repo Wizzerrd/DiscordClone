@@ -23,3 +23,26 @@ export const fetchServer = serverId => async dispatch => {
     let data = await res.json()
     return data
 }
+
+export const updateServer = server => async dispatch => {
+    const res = await csrfFetch(`/api/servers/${server.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(server)
+    })
+    if (res.ok){
+        return await res.json()
+    } else {
+        throw(res)
+    }
+}
+
+export const deleteServer = serverId => async dispatch => {
+    const res = await csrfFetch(`/api/servers/${serverId}`, {
+        method: 'DELETE'
+    })
+    if(res.ok){
+        return await res.json()
+    } else {
+        throw(res)
+    }
+}

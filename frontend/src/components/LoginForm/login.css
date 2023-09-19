@@ -89,6 +89,10 @@
     background-color: var(--hover-color);
 }
 
+.discord-button:not(:hover){
+    transition: all 0.25s ease;
+}
+
 .demo-buttons{
     display: flex;
     flex-direction: column;
