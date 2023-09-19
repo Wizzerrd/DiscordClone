@@ -20,8 +20,11 @@ export const createInvitation = (membershipable) => async dispatch => {
 
 export const fetchServer = serverId => async dispatch => {
     const res = await csrfFetch(`/api/servers/${serverId}`)
-    let data = await res.json()
-    return data
+    if(res.ok){
+        return await res.json()
+    } else{
+        throw(res)
+    }
 }
 
 export const updateServer = server => async dispatch => {
