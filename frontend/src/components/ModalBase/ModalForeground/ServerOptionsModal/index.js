@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import './server-options.css'
 import { useDispatch } from 'react-redux'
-import { createInvitation, deleteServer } from '../../../../store/utils/servers'
+import { createInvitation, deleteServer, updateServer } from '../../../../store/utils/servers'
 import { addMember, setServers } from '../../../../store/servers'
 import { useEffect, useState } from 'react'
 import { useHistory } from "react-router-dom";
@@ -52,8 +52,15 @@ export default function ServerOptionsModal({modalPage}){
         setEditTitle(currentServer.title)
     },[currentServer])
 
-    function handleUpdate(){
-        
+    function handleUpdate(e){
+        e.preventDefault()
+        let serverInfo = {
+            id: Number(selectedServer),
+            title: editTitle
+        }
+        dispatch(updateServer(serverInfo))
+        .then(dispatch(setServers({...servers, [Number(selectedServer)]: serverInfo})))
+        .then(dispatch(setModalType(false)))
     }
 
     function handleDelete(e){
@@ -76,7 +83,7 @@ export default function ServerOptionsModal({modalPage}){
                     <h2><label htmlFor='update-server-name'>Update Server Name</label></h2>
                     <input value={editTitle} onChange={(e) => setEditTitle(e.target.value)} className='server-text-input' id='update-server-name' type='text'/>
                     <div className='server-settings-button-holder'>
-                        <div className='discord-button button-small'>Save</div>
+                        <div onClick={(e)=>handleUpdate(e)} className='discord-button button-small'>Save</div>
                         <div onClick={(e)=>handleDelete(e)} className='discord-button button-small' id='delete-server-button'>Delete Server</div>
                     </div>
                 </div>
