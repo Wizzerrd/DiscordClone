@@ -12,10 +12,7 @@
 }
 
 .svg-image{
-    width: 100%;
     box-sizing: content-box;
-    position: absolute;
-    bottom: 78px;
 }
 
 #splash-left{
@@ -38,11 +35,12 @@
 .splash-last{
     display: flex;
     justify-content: space-between;
+    align-items: end;
     position: relative;
     background-color: #404EED;
     background-image: url('../../Assets/splash-back.png');
     height: 626px;
-    padding-bottom: 78px;
+    padding-bottom: 64px;
 }
 
 #auth-on-splash{
