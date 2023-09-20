@@ -61,3 +61,24 @@
     cursor: pointer;
     color: #2331B5;
 }
+
+.div-404{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #404EED;
+    background-color: white;
+}
+
+.div-404 > * {
+    margin-top: 20px;
+}
+
+.div-404 > p{
+    font-size: 20px;
+    width: 500px;
+}
+
+.link-404{
+    color: #404EED;
+}
