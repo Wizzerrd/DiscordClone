@@ -1,4 +1,4 @@
-import { Link, Redirect, useParams } from "react-router-dom/cjs/react-router-dom.min"
+import { Link, Redirect, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min"
 import UserPreview from "../UserPreview"
 
 import './left-panel.css'
@@ -12,17 +12,21 @@ import { AiOutlinePlus, AiOutlineDown } from 'react-icons/ai'
 import { ReactComponent as WaveIcon } from '../../Assets/wave.svg';
 
 import {PiGearSixFill} from 'react-icons/pi'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import consumer from "../../consumer"
 import { addChannel } from "../../store/channels"
 
 export default function LeftPanel({serverId}){
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const { channels, servers } = useSelector(state => state.entities)
     const { selectedChannel } = useSelector(state => state.ui)
-    const channelList = Object.values(channels)
+
+    const [channelList, setChannelList] = useState([])
+
+    const { channelId } = useParams()
 
     function amIChosen(channelId){
         let className = "left-panel-option";
@@ -37,12 +41,19 @@ export default function LeftPanel({serverId}){
     }
 
     useEffect(()=>{
+        setChannelList(Object.values(channels).filter(ele => {
+            if(ele){
+                return true
+            }
+        }))
+    },[channels])
+
+    useEffect(()=>{
         if(serverId){
             const subscription = consumer.subscriptions.create(
                 {channel: 'ServersChannel', id: serverId},
                 {
                     received: channel => {
-                        console.log(channel)
                         dispatch(addChannel({channel: {...channel}}))
                     }
                 }
@@ -50,6 +61,14 @@ export default function LeftPanel({serverId}){
             return () => subscription?.unsubscribe();
         }
     },[serverId, dispatch])
+
+    useEffect(()=>{
+        if(serverId !== '@me' && !channelId){
+            if(channelList.length > 0){
+                history.push(`/channels/${serverId}/${channelList[0]?.id || channelList[1]?.id}`)
+            }
+        }
+    },[channelId])
     
     if(serverId === '@me'){
         return(     
@@ -85,7 +104,16 @@ export default function LeftPanel({serverId}){
                             <div onClick={()=>dispatch(setModalType('newChannel'))} id="add-channel-button"><AiOutlinePlus/></div>
                         </div>
                         <div className="channels-drop-down">
-                            {channelList.map(channel => <Link key={channel.id} to={`/channels/${serverId}/${channel.id}`}><div className={amIChosen(channel.id)}>{channel.title}</div></Link>)}
+                            {channelList.map(channel => {
+                                if(channel?.id) return (<Link key={channel.id} to={`/channels/${serverId}/${channel.id}`}>
+                                    <div className={amIChosen(channel.id)}>
+                                        {channel.title}
+                                        <div onClick={()=>dispatch(setModalType('channelOptions'))}>
+                                            <AiOutlinePlus/>
+                                        </div>
+                                    </div>
+                                </Link>)}
+                            )}
                         </div>
                     </div>
 

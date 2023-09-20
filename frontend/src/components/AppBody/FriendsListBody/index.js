@@ -57,18 +57,18 @@ export default function FriendsListBody(){
         switch(centerPanelPage){
             case 0:
                 return dispatch(removeFriend(user.id, friend.userId))
-                .catch((err)=>console.log(err))
+                .catch((err)=>console.error(err))
                 .then(dispatch(removeFriendRedux(friend.userId)))
                 .then(setMessage(`${friend.username} removed`))
             case 1:
                 if(receiver){
                     return dispatch(cancelRequest(friend.userId , receiver.id))
-                    .catch((err)=>console.log(err))
+                    .catch((err)=>console.error(err))
                     .then(dispatch(removeIncomingFriend(friend.userId)))
                     .then(setMessage(`Request from ${friend.username} rejected`))
                 }else{
                     return dispatch(cancelRequest(user.id, friend.userId))
-                    .catch((err)=>console.log(err))
+                    .catch((err)=>console.error(err))
                     .then(dispatch(removeFriendRedux(friend.userId)))
                     .then(setMessage(`Request to ${friend.username} canceled`))
                 }

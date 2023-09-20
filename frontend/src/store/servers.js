@@ -31,7 +31,6 @@ export const createServer = (server) => async dispatch => {
         body: JSON.stringify(server)
     })
     let data = await res.json()
-    console.log(data)
     dispatch(addServer(data.server))
  
 }

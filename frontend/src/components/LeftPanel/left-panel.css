@@ -87,6 +87,8 @@
     border-radius: 5px;
     box-sizing: border-box;
     color: #F2F3F5;
+    display: flex;
+    justify-content: space-between;
 }
 
 .left-panel-option:hover{
@@ -117,6 +119,7 @@
 
 #left-panel-friends-button{
     display: flex;
+    justify-content: flex-start;
     align-items: center;
 }
 
