@@ -37,8 +37,7 @@ export default function AppBase(){
         <>
         <div className='app-main'>
             <ModalBase/>
-            {!sessionUser && <Redirect to="/login" />}
-            <button className='god-button' onClick={()=>dispatch(logout())}>Log Out</button>
+            {!sessionUser && <Redirect to="/" />}
             <ServerScroller serverId={serverId}/>
             <LeftPanel serverId={serverId} />
             <AppBody  />

@@ -136,3 +136,12 @@
     height: 100%;
     overflow: auto;
 }
+
+.logout-button{
+    transition: all 0.25s ease;
+}
+
+.logout-button:hover{
+    transition: all 0.25s ease;
+    color: #F23F42;
+}
