@@ -4,29 +4,37 @@ import SiteNavBar from '../SiteNavBar';
 import { ReactComponent as RightImage } from '../../Assets/right-splash.svg';
 import { ReactComponent as LeftImage } from '../../Assets/left-splash.svg';
 
+import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai'
+
 import './splash.css'
 
 export default function Splash(){
     return (
         <>
+            <SiteNavBar/>
             <div className="splash-main">
-                <SiteNavBar/>
-                <div>
-                    <div className="splash-first">
-                        <LeftImage id='splash-left' className='svg-image'/>
-                        <div>
-                            <h1>IMAGINE A PLACE...</h1>
-                            <p>...where you can belong to a school club, a gaming group, or a worldwide art community. Where just you and a handful of friends can spend time together. A place that makes it easy to talk every day and hang out more often.</p>
-                            <button>Open Discord in your browser</button>
+
+                <div className='splash-first'>
+                    <h1>DISCORD CLONE</h1>
+                    <p>By Luis Laffitte</p>
+                    <br/>
+                    <br/>
+                    <p>To begin, simply press <Link className='splash-auth' id='auth-on-splash' to="/login">Login</Link> at the top of the screen</p>
+                    <br/>
+                    <br/>
+                    <div className='my-links'>
+                        <h1>My Links:</h1>
+                        <div className='links-holder'>
+                            <a className='my-link' href='https://github.com/Wizzerrd/'><AiFillGithub /></a>
+                            <a className='my-link' href='https://www.linkedin.com/in/luis-laffitte-276238286/'><AiFillLinkedin /></a>
                         </div>
-                        <RightImage id='splash-right' className='svg-image'/>
                     </div>
-
-                    <div className=''>
-
-                    </div>
-
                 </div>
+                <div className="splash-last">
+                    <LeftImage id='splash-left' className='svg-image'/>
+                    <RightImage id='splash-right' className='svg-image'/>
+                </div>
+
             </div>
         </>
     )

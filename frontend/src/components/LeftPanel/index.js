@@ -15,6 +15,7 @@ import {PiGearSixFill} from 'react-icons/pi'
 import { useEffect, useState } from "react"
 import consumer from "../../consumer"
 import { addChannel } from "../../store/channels"
+import { logout } from "../../store/session"
 
 export default function LeftPanel({serverId}){
 
@@ -80,6 +81,9 @@ export default function LeftPanel({serverId}){
                 <div id="left-panel-friends-button" className={amIChosen()}>
                     <WaveIcon id='wave-icon-list'/>
                     <div>Friends</div>
+                </div>
+                <div onClick={()=>dispatch(logout())} className="left-panel-option logout-button">
+                    Log Out
                 </div>
 
             </div>
