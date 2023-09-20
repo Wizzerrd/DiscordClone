@@ -12,7 +12,7 @@ import { AiOutlinePlus, AiOutlineDown } from 'react-icons/ai'
 import { ReactComponent as WaveIcon } from '../../Assets/wave.svg';
 
 import {PiGearSixFill} from 'react-icons/pi'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import consumer from "../../consumer"
 import { addChannel } from "../../store/channels"
 
@@ -23,7 +23,8 @@ export default function LeftPanel({serverId}){
 
     const { channels, servers } = useSelector(state => state.entities)
     const { selectedChannel } = useSelector(state => state.ui)
-    const channelList = Object.values(channels)
+
+    const [channelList, setChannelList] = useState([])
 
     const { channelId } = useParams()
 
@@ -38,6 +39,14 @@ export default function LeftPanel({serverId}){
         }
         return(className)
     }
+
+    useEffect(()=>{
+        setChannelList(Object.values(channels).filter(ele => {
+            if(ele){
+                return true
+            }
+        }))
+    },[channels])
 
     useEffect(()=>{
         if(serverId){
@@ -56,10 +65,10 @@ export default function LeftPanel({serverId}){
     useEffect(()=>{
         if(serverId !== '@me' && !channelId){
             if(channelList.length > 0){
-                history.push(`/channels/${serverId}/${channelList[0].id}`)
+                history.push(`/channels/${serverId}/${channelList[0]?.id || channelList[1]?.id}`)
             }
         }
-    },[history])
+    },[channelId])
     
     if(serverId === '@me'){
         return(     
@@ -95,15 +104,15 @@ export default function LeftPanel({serverId}){
                             <div onClick={()=>dispatch(setModalType('newChannel'))} id="add-channel-button"><AiOutlinePlus/></div>
                         </div>
                         <div className="channels-drop-down">
-                            {channelList.map(channel => 
-                                <Link key={channel.id} to={`/channels/${serverId}/${channel.id}`}>
+                            {channelList.map(channel => {
+                                if(channel?.id) return (<Link key={channel.id} to={`/channels/${serverId}/${channel.id}`}>
                                     <div className={amIChosen(channel.id)}>
                                         {channel.title}
                                         <div onClick={()=>dispatch(setModalType('channelOptions'))}>
                                             <AiOutlinePlus/>
                                         </div>
                                     </div>
-                                </Link>
+                                </Link>)}
                             )}
                         </div>
                     </div>

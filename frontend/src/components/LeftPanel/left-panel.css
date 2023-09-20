@@ -119,6 +119,7 @@
 
 #left-panel-friends-button{
     display: flex;
+    justify-content: flex-start;
     align-items: center;
 }
 

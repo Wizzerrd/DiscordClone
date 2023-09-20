@@ -16,8 +16,9 @@ export const deleteChannel = channelId => async dispatch => {
     const res = await csrfFetch(`/api/channels/${channelId}`, {
         method: 'DELETE'
     })
+    console.log(res)
     if(res.ok){
-        return await res.json()
+        return res
     } else {
         throw res
     }

@@ -33,10 +33,14 @@ class Api::ChannelsController < ApplicationController
 
     def destroy
         @channel = Channel.find(params[:id])
-        if @channel
-            # ServersChannel.broadcast_to(@channel.server, {[@channel.id]: nil})
+        if @channel && Channel.where(server_id: @channel.server_id).length > 1
             @channel.destroy
+            obj = {}
+            obj[params[:id]] = nil
+            ServersChannel.broadcast_to(@channel.server, obj)
             render json: {message: 'Channel succesfully deleted'}
+        elsif @channel
+            render json: {errors: 'Cannot delete last channel'}, status: :unprocessable_entity
         else
             render json: {errors: 'Channel Not Found'}, status: 404
         end
