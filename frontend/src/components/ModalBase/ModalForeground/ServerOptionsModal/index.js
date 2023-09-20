@@ -14,10 +14,12 @@ export default function ServerOptionsModal({modalPage}){
     const { selectedServer } = useSelector(state => state.ui)
     const {user} = useSelector(state => state.session)
     const state = useSelector(state => state)
-    const friendsList = Object.values(friends)
 
+    const friendsList = Object.values(friends)
     const currentServer = servers[selectedServer]
+
     const [editTitle, setEditTitle] = useState('')
+    const [message, setMessage] = useState('')
 
     const history = useHistory()
     
@@ -58,9 +60,13 @@ export default function ServerOptionsModal({modalPage}){
             id: Number(selectedServer),
             title: editTitle
         }
-        dispatch(updateServer(serverInfo))
-        .then(dispatch(setServers({...servers, [Number(selectedServer)]: serverInfo})))
-        .then(dispatch(setModalType(false)))
+        if(editTitle){
+            dispatch(updateServer(serverInfo))
+            .then(dispatch(setServers({...servers, [Number(selectedServer)]: serverInfo})))
+            .then(dispatch(setModalType(false)))
+        }else{
+            setMessage('Title cannot be blank')
+        }
     }
 
     function handleDelete(e){
@@ -95,6 +101,7 @@ export default function ServerOptionsModal({modalPage}){
                         <div onClick={(e)=>handleUpdate(e)} className='discord-button button-small'>Save</div>
                         <div onClick={(e)=>handleDelete(e)} className='discord-button button-small' id='delete-server-button'>Delete Server</div>
                     </div>
+                    <div className='error-message modal-error'>{message}</div>
                 </div>
             </>
         )
