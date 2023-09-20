@@ -14,6 +14,7 @@ export default function NewServerModal({ modalPage }){
 
     const { user } = useSelector(state => state.session);
 
+    const [message, setMessage] = useState('')
     const [serverObj, setServerObj] = useState({
         owner_id: user.id,
         title: `${user.username}'s server`
@@ -21,12 +22,15 @@ export default function NewServerModal({ modalPage }){
 
     function handleSubmit(e){
         e.preventDefault();
-        dispatch(createServer(serverObj)).catch( async res => {
-            let data = res.json
-        })
-
-        dispatch(fetchUser(user.id))
-        dispatch(setModalType(false))
+        if(serverObj.title.length > 0){
+            dispatch(createServer(serverObj)).catch( async res => {
+                
+            })
+            dispatch(fetchUser(user.id))
+            dispatch(setModalType(false))
+        } else {
+            setMessage('Title cannot be blank')
+        }
     }
 
     switch(modalPage){
@@ -49,6 +53,9 @@ export default function NewServerModal({ modalPage }){
                     <div id='new-server-fields'>
                         <h2>SERVER NAME</h2>
                         <input value={serverObj.title} onChange={(e) => setServerObj({...serverObj, title: e.target.value})} type='text' className='server-text-input' id='new-server-text-input'></input>
+                    </div>
+                    <div className='message-holder'>
+                        <div className='error-message modal-error'>{message}</div>
                     </div>
                     <div className='new-server-bottom-buttons'>
                         <div className='discord-button button-small' onClick={()=>dispatch(setModalPage(modalPage - 1))}>Back</div>

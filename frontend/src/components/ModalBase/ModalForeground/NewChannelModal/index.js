@@ -14,6 +14,7 @@ export default function NewChannelModal(){
     const { user } = useSelector(state => state.session);
     const { serverId } = useParams()
 
+    const [message, setMessage] = useState('')
     const [channelObj, setChannelObj] = useState({
         owner_id: user.id,
         server_id: serverId,
@@ -22,11 +23,15 @@ export default function NewChannelModal(){
 
     function handleSubmit(e){
         e.preventDefault();
-        dispatch(createChannel(channelObj)).catch( async res => {
-            let data = res.json
-        })
-        dispatch(fetchUser(user.id))
-        dispatch(setModalType(false))
+        if(channelObj.title.length > 0){
+            dispatch(createChannel(channelObj)).catch( async res => {
+                let data = res.json
+            })
+            dispatch(fetchUser(user.id))
+            dispatch(setModalType(false))
+        }else{
+            setMessage('Title cannot be blank')
+        }
     }
     
     return(
@@ -39,6 +44,7 @@ export default function NewChannelModal(){
                 <input value={channelObj.title} onChange={(e)=>setChannelObj({...channelObj, title: e.target.value})} className='server-text-input' id='new-channel-name-input' type='text' placeholder='new-channel'/>
             </div>
 
+            <div className='message-holder'><div className='error-message modal-error'>{message}</div></div>
             <div className='new-channel-bottom'>
                 <div onClick={(e)=>handleSubmit(e)} className='discord-button button-small'>
                     Create Channel
@@ -47,6 +53,8 @@ export default function NewChannelModal(){
                     Cancel
                 </div>
             </div>
+
+           
             
         </div>
     )

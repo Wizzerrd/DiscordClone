@@ -58,8 +58,12 @@ export default function ChannelOptionsModal(){
 
     function handleUpdate(e){
         e.preventDefault()
-        dispatch(updateChannel(channelObj))
-        .then(dispatch(setModalType(false)))
+        if(channelObj.title){
+            dispatch(updateChannel(channelObj))
+            .then(dispatch(setModalType(false)))
+        }else{
+            setMessage('Title cannot be blank')
+        }
     }
     
     return(
@@ -71,7 +75,7 @@ export default function ChannelOptionsModal(){
                         <div onClick={(e)=>handleUpdate(e)} className='discord-button button-small'>Save</div>
                         <div onClick={(e)=>handleDelete(e)} className='discord-button button-small' id='delete-server-button'>Delete Channel</div>
                 </div>
-                {message && message}
+                <div className='message-holder'><div className='error-message modal-error'>{message}</div></div>
             <div>
 
             </div>
