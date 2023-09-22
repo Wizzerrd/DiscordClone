@@ -29,6 +29,7 @@
 .search-bar{
     width: 90%;
     background-color: var(--input-box-background) ;
+    color: #F2F3F5;
     border: none;
     border-radius: 3px;
     padding: 5px;

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {login} from '../../store/session'
 
+import {ReactComponent as AuthBack} from '../../Assets/auth-back.svg'
+
 import './login.css'
 
 export default function LoginForm(){
@@ -55,6 +57,7 @@ export default function LoginForm(){
     return(
         
         <div className='login-zone'>
+            <AuthBack/>
             <div className='login-box'>
                 <div className='login-fields'>
                     <div className='login-fields-welcome'>

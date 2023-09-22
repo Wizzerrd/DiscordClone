@@ -3,8 +3,9 @@ import { Redirect, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {login, register} from '../../store/session'
-
 import * as sessionActions from '../../store/session'
+
+import {ReactComponent as AuthBack} from '../../Assets/auth-back.svg'
 
 import '../LoginForm/login.css'
 import './register.css'
@@ -46,6 +47,7 @@ export default function RegisterForm(){
 
     return(
         <div className='register-zone'>
+            <AuthBack/>
             <div className='register-box'>
                 <div className='register-fields'>
                     <h1>Create an account</h1>

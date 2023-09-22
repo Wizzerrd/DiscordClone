@@ -12,8 +12,8 @@ export default function NotFound(){
                     Where are you going? Ask yourself these questions, and gather your bearings. Navigate away using the links above.
                     Oh, you need something to read? These might help you:</p>
                     <div className='links-holder'>
-                            <a className='my-link link-404' href='https://github.com/Wizzerrd/'><AiFillGithub /></a>
-                            <a className='my-link link-404' href='https://www.linkedin.com/in/luis-laffitte-276238286/'><AiFillLinkedin /></a>
+                            <a target="_blank" className='my-link link-404' href='https://github.com/Wizzerrd/'><AiFillGithub /></a>
+                            <a target="_blank" className='my-link link-404' href='https://www.linkedin.com/in/luis-laffitte-276238286/'><AiFillLinkedin /></a>
                     </div>
             </div>
         </>
