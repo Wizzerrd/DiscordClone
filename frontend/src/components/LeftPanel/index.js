@@ -75,7 +75,7 @@ export default function LeftPanel({serverId}){
         return(     
             <div className="left-panel">
                 <div className="left-panel-drop-down">
-                    <input className="search-bar" type="text" placeholder="Find or start a conversation"></input>
+                    <input className="search-bar" type="text" placeholder="DMs coming soon!"></input>
                 </div>
  
                 <div id="left-panel-friends-button" className={amIChosen()}>
