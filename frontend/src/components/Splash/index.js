@@ -25,8 +25,8 @@ export default function Splash(){
                     <div className='my-links'>
                         <h1>My Links:</h1>
                         <div className='links-holder'>
-                            <a className='my-link' href='https://github.com/Wizzerrd/'><AiFillGithub /></a>
-                            <a className='my-link' href='https://www.linkedin.com/in/luis-laffitte-276238286/'><AiFillLinkedin /></a>
+                            <a target="_blank" className='my-link' href='https://github.com/Wizzerrd/'><AiFillGithub /></a>
+                            <a target="_blank" className='my-link' href='https://www.linkedin.com/in/luis-laffitte-276238286/'><AiFillLinkedin /></a>
                         </div>
                     </div>
                 </div>
