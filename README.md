@@ -13,6 +13,8 @@ To use the application, follow the link above to the Live Demo, and either creat
 #### A User can sign up, sign in, and sign out
 To use the messaging functionality, a user must have an account. Navigate to the log in page by pressing the log in button at the top of the screen. Register for an account, log in, or use a demo account to access the application. To sign out, navigate to the friends section by pressing the Discord icon in the top left at the top of the server list. Once on the friend screen an option to log out should be present in the column next to the server list.
 
+![Capture1](https://github.com/Wizzerrd/DiscordClone/assets/133073175/18668501-6782-474b-aa4c-6b1f18c41e2f)
+
 #### A User can add friends
 On the friends page navigate to the "Add a friend" tab, located in the top bar. Search for a user by their username and, if they exist, a friend request will be sent. The other account can accept the request and the two will become friends. Friends can be invited to servers.
 
@@ -20,6 +22,9 @@ On the friends page navigate to the "Add a friend" tab, located in the top bar. 
 
 #### A User can create servers with messaging channels
 In the server list, press the "+" button. This will display a modal where a user can input the server name to be created. Inside the server a user can press the "+" button next to Text Channels to create a new messaging channel. To invite a friend to a server press the box containing the server name, and it will display a modal where you can invite friends, leave the server, or, if you are the owner, modify the server name.
+
+![Capture2](https://github.com/Wizzerrd/DiscordClone/assets/133073175/bfeccd35-70d3-40c7-bc53-22e141e6cc86)
+
 
 #### A User can send messages in channels
 To select a server, press an icon in the server list and it will take you to the first channel in that server. A specific channel can be selected from the channel list, and once in a channel, a message can be send by filling the field on the bottom of the screen and pressing enter.
