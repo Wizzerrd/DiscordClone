@@ -9,7 +9,7 @@ import ModalBase from '../ModalBase';
 import ServerScroller from '../ServerScroller';
 import { useEffect } from 'react';
 import { fetchUser } from '../../store/users';
-import { selectChannel, setCenterPanel } from '../../store/ui';
+import { setCenterPanel, setChannel } from '../../store/ui';
 import AppBody from '../AppBody';
 
 export default function AppBase(){
@@ -27,7 +27,7 @@ export default function AppBase(){
     useEffect(()=>{
         if(channelId){
             dispatch(setCenterPanel('messages'))
-            dispatch(selectChannel(channelId))
+            dispatch(setChannel(channelId))
         } else if(serverId === '@me') {
             dispatch(setCenterPanel('friends'))
         }

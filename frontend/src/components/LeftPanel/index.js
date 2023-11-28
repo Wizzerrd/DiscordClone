@@ -12,6 +12,7 @@ import { useEffect, useState } from "react"
 import consumer from "../../consumer"
 import { addChannel } from "../../store/channels"
 import { logout } from "../../store/session"
+import UserInfo from "./UserInfo"
 
 export default function LeftPanel({serverId}){
 
@@ -81,8 +82,11 @@ export default function LeftPanel({serverId}){
                 <div onClick={()=>dispatch(logout())} className="left-panel-option logout-button">
                     Log Out
                 </div>
-
+                <div className="list-spacer"></div>
+                <UserInfo/>
             </div>
+
+            
         )
     } else {
         return(
@@ -116,6 +120,8 @@ export default function LeftPanel({serverId}){
                             )}
                         </div>
                     </div>
+
+                    <UserInfo/>
 
                 </div>
             </>

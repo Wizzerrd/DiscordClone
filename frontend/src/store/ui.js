@@ -43,7 +43,7 @@ export const selectServer = serverId => async dispatch => {
             let {channels, members} = res
             dispatch(addUsers(members))
             dispatch(setChannels(channels))
-            dispatch(selectChannel(Number(Object.keys(channels)[0])))
+            dispatch(setChannel(Number(Object.keys(channels)[0])))
             dispatch(setServer(serverId))
         }
     }
@@ -55,9 +55,9 @@ export const SELECT_CHANNEL = 'ui/SELECT_CHANNEL'
 
 export const SET_CHANNEL = 'ui/SET_CHANNEL'
 
-export const selectChannel = channelId => async dispatch => {
-    dispatch(setChannel(channelId))
-}
+// export const selectChannel = channelId => async dispatch => {
+//     dispatch(setChannel(channelId))
+// }
 
 export const setChannel = channelId => ({
     type: SET_CHANNEL,
