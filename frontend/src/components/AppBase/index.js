@@ -9,7 +9,7 @@ import ModalBase from '../ModalBase';
 import ServerScroller from '../ServerScroller';
 import { useEffect } from 'react';
 import { fetchUser } from '../../store/users';
-import { selectChannel, selectServer, setCenterPanel } from '../../store/ui';
+import { selectChannel, setCenterPanel } from '../../store/ui';
 import AppBody from '../AppBody';
 
 export default function AppBase(){

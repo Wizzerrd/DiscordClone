@@ -32,7 +32,6 @@ export const login = (user) => async dispatch => {
   const data = await res.json();
   storeCurrentUser(data.user);
   dispatch(setSessionUser(data.user));
-  dispatch(uiToDefault())
   
   return res;
   

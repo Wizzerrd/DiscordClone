@@ -2,12 +2,6 @@ import { setChannels } from "./channels"
 import { fetchServer } from "./utils/servers"
 import { addUsers } from "./users"
 
-export const UI_TO_DEFAULT = 'ui/UI_TO_DEFAULT'
-
-export const uiToDefault = () => ({
-    type: UI_TO_DEFAULT
-})
-
 // Modal & Modal Page
 
 export const SET_MODAL_TYPE = 'ui/SET_MODAL_TYPE'
@@ -116,8 +110,6 @@ export default function uiReducer(state = uiInitialState, action){
             return({...state, centerPanel: action.panelType})
         case SET_CENTER_PANEL_PAGE:
             return({...state, centerPanelPage: action.page})
-        case UI_TO_DEFAULT:
-            return uiInitialState
         default:
             return state
     }

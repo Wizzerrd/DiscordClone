@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
-import { setCenterPanelPage } from "../../../store/ui"
 
 import './friends.css'
 import { addFriend, cancelRequest, removeFriend  } from "../../../store/utils/friends"
