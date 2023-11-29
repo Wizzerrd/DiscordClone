@@ -5,6 +5,7 @@ import NewServerModal from './NewServerModal'
 import NewChannelModal from './NewChannelModal';
 import ServerOptionsModal from './ServerOptionsModal';
 import ChannelOptionsModal from './ChannelOptionsModal';
+import UserOptionsModal from './UserOptionsModal';
 
 export default function ModalForeground({ modalPage, modalType }){
 
@@ -17,6 +18,8 @@ export default function ModalForeground({ modalPage, modalType }){
             return <ServerOptionsModal modalPage={modalPage}/>
         case 'channelOptions':
             return <ChannelOptionsModal />
+        case 'userOptions':
+            return <UserOptionsModal modalPage={modalPage}/>
         default:
             return null
     }
