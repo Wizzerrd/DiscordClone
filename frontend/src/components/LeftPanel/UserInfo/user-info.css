@@ -2,4 +2,28 @@
     height: 52px;
     min-height: 52px;
     background-color: #232428;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    box-sizing: border-box;
+}
+
+#user-profile-section{
+    display: flex;
+    align-items: center;
+}
+
+#user-profile-picture{
+    height: 32px;
+    width: 32px;
+    background-color: #23A559;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+#user-profile-name{
+    color: #F2F3F5;
+    font-size: 14px;
 }
