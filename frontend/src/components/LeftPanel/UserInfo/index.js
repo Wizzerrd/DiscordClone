@@ -7,7 +7,7 @@ import { setModalType } from '../../../store/ui';
 export default function UserInfo(){
 
     const dispatch = useDispatch();
-    const {username} = useSelector(state => state.session.user);
+    const {user} = useSelector(state => state.session);
     
     return(
         <div id="user-info-box">
@@ -16,7 +16,7 @@ export default function UserInfo(){
                 <div id="user-profile-picture">
 
                 </div>
-                <div id="user-profile-name">{username}</div>
+                <div id="user-profile-name">{user?.username}</div>
 
             </div>
             <div id='user-profile-options-button' onClick={()=>dispatch(setModalType("userOptions"))}>

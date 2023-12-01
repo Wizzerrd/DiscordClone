@@ -54,6 +54,18 @@ export const signup = (user) => async (dispatch) => {
   dispatch(login(user))
 };
 
+export const updateUser = user => async dispatch => {
+  const res = await csrfFetch(`/api/users/${user.id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(user)
+  })
+  if(res.ok){
+    return await res.json()
+  }else{
+    throw res
+  }
+}
+
 const storeCurrentUser = user => {
   if (user) sessionStorage.setItem("currentUser", JSON.stringify(user));
   else sessionStorage.removeItem("currentUser");
