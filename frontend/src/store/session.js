@@ -4,12 +4,19 @@ import { uiToDefault } from './ui';
 export const SET_SESSION_USER = 'session/SET_SESSION_USER';
 export const REMOVE_SESSION_USER = 'session/REMOVE_SESSION_USER';
 export const SET_ERRORS = "session/SET_ERRORS";
+export const UPDATE_USERNAME = "session/UPDATE_USERNAME"
+export const ADD_ERROR = "session/ADD_ERROR"
 
 
 export const setErrors = (errors) => ({
   type: SET_ERRORS,
   errors,
 });
+
+export const addError = error => ({
+  type: ADD_ERROR,
+  error
+})
 
 export const setSessionUser = (user) => ({
     type: SET_SESSION_USER,
@@ -19,6 +26,11 @@ export const setSessionUser = (user) => ({
 export const removeSessionUser = () => ({
     type: REMOVE_SESSION_USER
 });
+
+export const updateUsername = (user) => ({
+  type: UPDATE_USERNAME,
+  user
+})
 
 export const login = (user) => async dispatch => {
   let {credential, password} = user
@@ -59,8 +71,10 @@ export const updateUser = user => async dispatch => {
     method: 'PATCH',
     body: JSON.stringify(user)
   })
+  let newUser = await res.json()
   if(res.ok){
-    return await res.json()
+    sessionStorage.setItem("currentUser", JSON.stringify(newUser.user));
+    await dispatch(updateUsername(newUser.user));
   }else{
     throw res
   }
@@ -93,7 +107,11 @@ export default function sessionReducer(state = initialState, action){
         case REMOVE_SESSION_USER:
           return { ...state, user: null };
         case SET_ERRORS:
-          return {...state, signupErrors: action.errors,};
+          return {...state, errors: action.errors, signupErrors: action.errors};
+        case ADD_ERROR:
+          return {...state, errors: [...state.errors, action.error]}
+        case UPDATE_USERNAME:
+          return {...state, user: {...state.user, username: action.user.username}}
         default:
           return state;
       }
