@@ -31,6 +31,20 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def update 
+    @user = User.find(params[:id])
+    if(@user)
+      if(User.find_by(username: params[:username]))
+        render json: {errors: 'Username taken'}, status: :unprocessable_entity
+      else
+        @user.update(username: params[:username])
+        render 'api/users/show'
+      end
+    else
+      render json: {errors: 'User Not Found'}, status: 404
+    end
+  end
+
   private
 
   def user_params

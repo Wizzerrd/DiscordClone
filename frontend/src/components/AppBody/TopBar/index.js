@@ -40,9 +40,9 @@ export default function TopBar({channelId}){
                         <label>Friends</label>
                     </div>
                     <div className='top-bar-buttons'>
-                        <div onClick={()=>  dispatch(setCenterPanelPage(0))} className={amIChosen(0)}>All</div>
-                        <div onClick={()=>  dispatch(setCenterPanelPage(1))} className={amIChosen(1)}>Pending</div>
-                        <div onClick={()=>  dispatch(setCenterPanelPage(2))} id={amIChosen(2)}>Add Friend</div>
+                        <div onClick={()=> dispatch(setCenterPanelPage(0))} className={amIChosen(0)}>All</div>
+                        <div onClick={()=> dispatch(setCenterPanelPage(1))} className={amIChosen(1)}>Pending</div>
+                        <div onClick={()=> dispatch(setCenterPanelPage(2))} id={amIChosen(2)}>Add Friend</div>
                     </div>
                 </div>
             )

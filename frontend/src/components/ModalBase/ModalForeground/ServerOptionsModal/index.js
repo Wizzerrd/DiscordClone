@@ -99,7 +99,7 @@ export default function ServerOptionsModal({modalPage}){
                     <input value={editTitle} onChange={(e) => setEditTitle(e.target.value)} className='server-text-input' id='update-server-name' type='text'/>
                     <div className='server-settings-button-holder'>
                         <div onClick={(e)=>handleUpdate(e)} className='discord-button button-small'>Save</div>
-                        <div onClick={(e)=>handleDelete(e)} className='discord-button button-small' id='delete-server-button'>Delete Server</div>
+                        <div onClick={(e)=>handleDelete(e)} className='discord-button button-small negative-button' id='delete-server-button'>Delete Server</div>
                     </div>
                     <div className='error-message modal-error'>{message}</div>
                 </div>
@@ -114,7 +114,7 @@ export default function ServerOptionsModal({modalPage}){
                     <>
                         <h1>What would you like to do?</h1>
                         {currentServer.ownerId === user.id && <SettingsDiv/> }
-                        {currentServer.ownerId !== user.id && <div className='server-settings-button-holder'><div onClick={(e)=>handleLeave(e)} className='discord-button button-small' id='delete-server-button'>Leave Server</div></div> }
+                        {currentServer.ownerId !== user.id && <div className='server-settings-button-holder'><div onClick={(e)=>handleLeave(e)} className='discord-button button-small negative-button' id='leave-server-button'>Leave Server</div></div> }
                         <h1>or</h1>
                         <h3>Invite Friends to the Server</h3>
                         <div className='server-settings-holder'>

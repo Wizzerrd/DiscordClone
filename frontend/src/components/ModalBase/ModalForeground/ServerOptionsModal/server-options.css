@@ -41,19 +41,20 @@
     justify-content: center;
 }
 
-#delete-server-button{
+.negative-button{
     background-color: #313338;
     color: #F2F3F5;
     border: 1px solid #F2F3F5;
 }
 
-#delete-server-button:hover{
+.negative-button:hover{
+    cursor: pointer;
     transition: all 0.25s ease;
     background-color: #2E3035;
     color: #F23F42;
     border: 1px solid #F23F42;
 }
 
-#delete-server-button:not(:hover){
+.negative-button:not(:hover){
     transition: all 0.25s ease; 
 }

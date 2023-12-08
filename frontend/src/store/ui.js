@@ -2,12 +2,6 @@ import { setChannels } from "./channels"
 import { fetchServer } from "./utils/servers"
 import { addUsers } from "./users"
 
-export const UI_TO_DEFAULT = 'ui/UI_TO_DEFAULT'
-
-export const uiToDefault = () => ({
-    type: UI_TO_DEFAULT
-})
-
 // Modal & Modal Page
 
 export const SET_MODAL_TYPE = 'ui/SET_MODAL_TYPE'
@@ -49,7 +43,7 @@ export const selectServer = serverId => async dispatch => {
             let {channels, members} = res
             dispatch(addUsers(members))
             dispatch(setChannels(channels))
-            dispatch(selectChannel(Number(Object.keys(channels)[0])))
+            dispatch(setChannel(Number(Object.keys(channels)[0])))
             dispatch(setServer(serverId))
         }
     }
@@ -61,9 +55,9 @@ export const SELECT_CHANNEL = 'ui/SELECT_CHANNEL'
 
 export const SET_CHANNEL = 'ui/SET_CHANNEL'
 
-export const selectChannel = channelId => async dispatch => {
-    dispatch(setChannel(channelId))
-}
+// export const selectChannel = channelId => async dispatch => {
+//     dispatch(setChannel(channelId))
+// }
 
 export const setChannel = channelId => ({
     type: SET_CHANNEL,
@@ -116,8 +110,6 @@ export default function uiReducer(state = uiInitialState, action){
             return({...state, centerPanel: action.panelType})
         case SET_CENTER_PANEL_PAGE:
             return({...state, centerPanelPage: action.page})
-        case UI_TO_DEFAULT:
-            return uiInitialState
         default:
             return state
     }

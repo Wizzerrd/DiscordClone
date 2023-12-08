@@ -1,21 +1,18 @@
-import { Link, Redirect, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min"
-import UserPreview from "../UserPreview"
+import { Link, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min"
 
 import './left-panel.css'
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
-import { setModalPage, setModalType } from "../../store/ui"
+import { setModalType } from "../../store/ui"
 
-import { FaGear } from 'react-icons/fa' 
-import { AiOutlinePlus, AiOutlineDown } from 'react-icons/ai'
+import { AiOutlinePlus } from 'react-icons/ai'
 
 import { ReactComponent as WaveIcon } from '../../Assets/wave.svg';
-
-import {PiGearSixFill} from 'react-icons/pi'
 import { useEffect, useState } from "react"
 import consumer from "../../consumer"
 import { addChannel } from "../../store/channels"
 import { logout } from "../../store/session"
+import UserInfo from "./UserInfo"
 
 export default function LeftPanel({serverId}){
 
@@ -85,8 +82,11 @@ export default function LeftPanel({serverId}){
                 <div onClick={()=>dispatch(logout())} className="left-panel-option logout-button">
                     Log Out
                 </div>
-
+                <div className="list-spacer"></div>
+                <UserInfo/>
             </div>
+
+            
         )
     } else {
         return(
@@ -120,6 +120,8 @@ export default function LeftPanel({serverId}){
                             )}
                         </div>
                     </div>
+
+                    <UserInfo/>
 
                 </div>
             </>

@@ -9,6 +9,7 @@
     flex-direction: column;
     background-color: #2B2D31;
     width: 240px;
+    min-width: 240px;
     height: 100%;
     align-items: center;
     box-sizing: border-box;
