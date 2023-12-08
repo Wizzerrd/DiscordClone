@@ -73,7 +73,7 @@ export default function ChannelOptionsModal(){
                 <input value={channelObj?.title} onChange={(e)=>setChannelObj({...channelObj, title: e.target.value})} className='server-text-input' id='new-channel-name-input' type='text' placeholder='new-channel'/>
                 <div className='server-settings-button-holder'>
                         <div onClick={(e)=>handleUpdate(e)} className='discord-button button-small'>Save</div>
-                        <div onClick={(e)=>handleDelete(e)} className='discord-button button-small' id='delete-server-button'>Delete Channel</div>
+                        <div onClick={(e)=>handleDelete(e)} className='discord-button button-small negative-button' id='delete-server-button'>Delete Channel</div>
                 </div>
                 <div className='message-holder'><div className='error-message modal-error'>{message}</div></div>
             <div>

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux"
-import { addError, setErrors, updateUser } from "../../../../store/session";
+import { addError, logout, setErrors, updateUser } from "../../../../store/session";
 import { setModalType } from "../../../../store/ui";
-import "./user-options.css"
+import "./user-options.css" 
 
 export default function UserOptionsModal({modalPage}){
 
@@ -39,6 +39,11 @@ export default function UserOptionsModal({modalPage}){
             }
         }
     }
+
+    const closeAndLogout = async () => {
+        await dispatch(setModalType(false))
+        await dispatch(logout());
+    }
     
     useEffect(()=>{
         dispatch(setErrors([]));
@@ -60,7 +65,12 @@ export default function UserOptionsModal({modalPage}){
                 </div>
 
                 <div id="save-button-div">
-                    <button className="discord-button button-small" onClick={()=>{saveUserDetails()}}>Save Changes</button>
+                    <button className="discord-button button-small" onClick={()=>{saveUserDetails()}}>
+                        Save Changes
+                    </button>
+                    <div onClick={()=>closeAndLogout()} id="user-options-logout" className="discord-button button-small negative-button">
+                        Logout
+                    </div>
                 </div>
 
             </div>)
