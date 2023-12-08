@@ -12,11 +12,13 @@ export const addUser = payload => ({
 })
 
 export const fetchUser = userId => async dispatch => {
-    const res = await csrfFetch(`/api/users/${userId}`)
+    const res = await csrfFetch(`/api/users/${userId}`).catch(err => {throw err})
     const data = await res.json()
-    dispatch(serverActions.setServers(data.servers))
-    dispatch(setFriends(data.friends)) 
-    dispatch(setIncomingFriends(data.incomingFriendships))
+    if(res.ok){
+        dispatch(serverActions.setServers(data.servers))
+        dispatch(setFriends(data.friends)) 
+        dispatch(setIncomingFriends(data.incomingFriendships))
+    }
 }
 
 export const ADD_USERS = 'users/ADD_USERS'

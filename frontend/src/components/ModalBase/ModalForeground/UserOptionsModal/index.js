@@ -15,15 +15,16 @@ export default function UserOptionsModal({modalPage}){
     const saveUserDetails = async () => {
         await dispatch(setErrors([]));
         if((newUsername.length >= 2 || newUsername.length <= 32) && newUsername.match(/^[a-zA-Z0-9._]+$/) && !newUsername.includes("..")){ 
-            const res = await dispatch(updateUser({
+            let caught;
+            await dispatch(updateUser({
                 username: newUsername,
                 id: id
             })).catch(async err => {
                 const data = await err.json()
-                console.log(data)
-                errors.push(err)
+                await dispatch(addError(data.errors))
+                caught = true;
             })
-            if(res){
+            if(!caught){
                 await dispatch(setModalType(false))
             }
         }else{

@@ -40,12 +40,12 @@ export default function LoginForm(){
         let demoUser;
         if(e.target.value === '1'){
             demoUser = {
-                username: 'Boolean',
+                email: 'demo1@lol.lol',
                 password: 'truefalse'
             }
         } else {
             demoUser = {
-                username: 'Quanta',
+                email: 'demo2@lol.lol',
                 password: 'emergent'
             }
         }

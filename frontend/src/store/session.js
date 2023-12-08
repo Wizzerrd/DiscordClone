@@ -35,6 +35,7 @@ export const updateUsername = (user) => ({
 export const login = (user) => async dispatch => {
   let {credential, password} = user
   credential ||= user.username;
+  credential ||= user.email;
 
   const res = await csrfFetch('/api/session', {
     method: 'POST',

@@ -34,12 +34,12 @@ class Api::UsersController < ApplicationController
   def update 
     @user = User.find(params[:id])
     if(@user)
-      if(User.find_by(username: params[:username])){
-        render json: {errors: 'Username taken'}, status: 404
-      }else{
+      if(User.find_by(username: params[:username]))
+        render json: {errors: 'Username taken'}, status: :unprocessable_entity
+      else
         @user.update(username: params[:username])
         render 'api/users/show'
-      }
+      end
     else
       render json: {errors: 'User Not Found'}, status: 404
     end
