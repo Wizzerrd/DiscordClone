@@ -72,3 +72,5 @@ yarn-debug.log*
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+/laffitte-discord-clone-admin_accessKeys.csv
