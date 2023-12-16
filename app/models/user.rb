@@ -65,6 +65,8 @@ class User < ApplicationRecord
     through: :friendships,
     source: :receiver
 
+  has_one_attached :avatar
+
   def self.find_by_credentials(cred, pass)
     if cred && cred.include?('@')
       user = User.find_by(email: cred)
