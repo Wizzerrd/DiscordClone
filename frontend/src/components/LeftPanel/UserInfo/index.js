@@ -8,13 +8,16 @@ export default function UserInfo(){
 
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.session);
-    console.log(user.avatar)
+
+    if(user){
+        console.log(user)
+    }
     
     return(
         <div id="user-info-box">
 
             <div id="user-profile-section">
-                <img src={user.avatarUrl || "https://laffitte-discord-clone-seeds.s3.us-west-1.amazonaws.com/default.png"} id="user-profile-picture"/>
+                <img src={user?.avatarUrl || "https://laffitte-discord-clone-seeds.s3.us-west-1.amazonaws.com/default.png"} id="user-profile-picture"/>
                 <div id="user-profile-name">{user?.username}</div>
 
             </div>
