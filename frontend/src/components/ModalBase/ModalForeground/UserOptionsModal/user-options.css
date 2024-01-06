@@ -3,9 +3,30 @@
     flex-direction: column;
 }
 
-#username-change-section{
+#user-options-modal > div{
     padding-left: 20px;
     padding-bottom: 20px;
+}
+
+#user-options-avatar-sizes{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#user-options-avatar-sizes > img{
+    padding-right: 10px;
+}
+
+#user-options-avatar-large{
+    width: 128px;
+}
+
+#user-options-avatar-medium{
+    width: 64px;
+}
+
+#user-options-avatar-small{
+    width: 32px;
 }
 
 #save-button-div{
