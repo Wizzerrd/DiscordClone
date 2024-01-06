@@ -1,5 +1,6 @@
 json.user do
     json.extract! @user, :id, :email, :username, :bio, :dob, :created_at, :updated_at
+    json.avatarUrl @user.avatar.attached? ? @user.avatar.url : nil
 end
 
 json.servers do 
@@ -14,11 +15,8 @@ json.servers do
       end
 
       json.members arr
-      
     end
-
   end
-  
 end
 
 json.friends do
@@ -38,7 +36,6 @@ json.friends do
       json.accepted accepted
     end
   end
-  
 end
 
 json.incoming_friendships do
@@ -57,7 +54,5 @@ json.incoming_friendships do
         json.username incoming_friendship.sender.username
       end
     end
-    
   end
-  
 end
