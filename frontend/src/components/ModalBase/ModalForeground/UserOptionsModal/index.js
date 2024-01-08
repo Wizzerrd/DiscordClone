@@ -13,10 +13,16 @@ export default function UserOptionsModal({modalPage}){
     const [newAvatar, setNewAvatar] = useState(null)
     const {errors} = useSelector(state => state.session)
 
+    const newAvatarUrl = newAvatar ? URL.createObjectURL(newAvatar) : null
+
     const saveUserDetails = async () => {
         await dispatch(setErrors([]));
         if(newUsername !== username){
-            await handleUsername()
+            // await handleUsername(formData)
+        }
+        if(newAvatar){
+            const formData = new FormData()
+            formData.append('user[avatar]', newAvatar)
         }
     }
 
@@ -85,9 +91,9 @@ export default function UserOptionsModal({modalPage}){
                 <div id="user-avatar-change-section">
                     <h3>Change Profile Picture: </h3>
                     <div id="user-options-avatar-sizes">
-                        <img className="user-options-avatar" id="user-options-avatar-large" src={newAvatar || avatarUrl || "https://laffitte-discord-clone-seeds.s3.us-west-1.amazonaws.com/default.png"}/>
-                        <img className="user-options-avatar" id="user-options-avatar-medium" src={newAvatar || avatarUrl || "https://laffitte-discord-clone-seeds.s3.us-west-1.amazonaws.com/default.png"}/>
-                        <img className="user-options-avatar" id="user-options-avatar-small" src={newAvatar || avatarUrl || "https://laffitte-discord-clone-seeds.s3.us-west-1.amazonaws.com/default.png"}/>
+                        <img className="user-options-avatar" id="user-options-avatar-large" src={newAvatarUrl || avatarUrl || "https://laffitte-discord-clone-seeds.s3.us-west-1.amazonaws.com/default.png"}/>
+                        <img className="user-options-avatar" id="user-options-avatar-medium" src={newAvatarUrl || avatarUrl || "https://laffitte-discord-clone-seeds.s3.us-west-1.amazonaws.com/default.png"}/>
+                        <img className="user-options-avatar" id="user-options-avatar-small" src={newAvatarUrl || avatarUrl || "https://laffitte-discord-clone-seeds.s3.us-west-1.amazonaws.com/default.png"}/>
                     </div>
 
                     <input id="user-avatar-box" type="file" onChange={handleFile}/>
