@@ -17,44 +17,46 @@ export default function UserOptionsModal({modalPage}){
 
     const saveUserDetails = async () => {
         await dispatch(setErrors([]));
+
+        const formData = new FormData()
+        let invalid;
+        
         if(newUsername !== username){
-            // await handleUsername(formData)
+            invalid = await checkValidUsername()
+            if(!invalid){
+                formData.append('user[username]', newUsername)
+            }
         }
         if(newAvatar){
-            const formData = new FormData()
             formData.append('user[avatar]', newAvatar)
         }
-    }
-
-    const handleUsername = async () => {
-        if((newUsername.length >= 2 || newUsername.length <= 32) && newUsername.match(/^[a-zA-Z0-9._]+$/) && !newUsername.includes("..")){ 
-            let caught;
-            await dispatch(updateUser({
-                username: newUsername,
-                id: id
-            })).catch(async err => {
+        if(!invalid){
+            await dispatch(updateUser(formData, id)).catch(async err => {
                 const data = await err.json()
                 await dispatch(addError(data.errors))
-                caught = true;
+                invalid = true;
             })
-            if(!caught){
-                await dispatch(setModalType(false))
-            }
-        }else{
-            if(newUsername.length < 2 || newUsername.length > 32){
-                await dispatch(addError("Username must be between 2-32 in length"))
-            }
-            if(!newUsername.match(/^[a-zA-Z0-9._]+$/)){
-                await dispatch(addError("Please only use numbers, letters, underscores _ , or periods ."))
-            }
-            if(newUsername.includes("..")){
-                await dispatch(addError("Username cannot contain repeating dots ( .. )"))
-            }
+        }
+        if(!invalid){
+            await dispatch(setModalType(false))
         }
     }
 
-    const handleAvatar = async () => {
-        
+    const checkValidUsername = async () => {
+        let err;
+        if(newUsername.length < 2 || newUsername.length > 32){
+            await dispatch(addError("Username must be between 2-32 in length"))
+            err = true;
+        }
+        if(!newUsername.match(/^[a-zA-Z0-9._]+$/)){
+            await dispatch(addError("Please only use numbers, letters, underscores _ , or periods ."))
+            err = true;
+        }
+        if(newUsername.includes("..")){
+            await dispatch(addError("Username cannot contain repeating dots ( .. )"))
+            err = true;
+        }
+        return err;
     }
 
     const closeAndLogout = async () => {
@@ -63,18 +65,13 @@ export default function UserOptionsModal({modalPage}){
     }
     
     const handleFile = ({currentTarget}) => {
-        const file = currentTarget.files[0];
-        setNewAvatar(file);
+        setNewAvatar(currentTarget.files[0]);
     }
     
     useEffect(()=>{
         dispatch(setErrors([]));
         setNewUsername(username);
     }, [username])
-
-    useEffect(()=>{
-        console.log(newAvatar)
-    }, [newAvatar])
     
     switch(modalPage){
         case 0:

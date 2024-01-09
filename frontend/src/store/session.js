@@ -4,7 +4,7 @@ import { uiToDefault } from './ui';
 export const SET_SESSION_USER = 'session/SET_SESSION_USER';
 export const REMOVE_SESSION_USER = 'session/REMOVE_SESSION_USER';
 export const SET_ERRORS = "session/SET_ERRORS";
-export const UPDATE_USERNAME = "session/UPDATE_USERNAME"
+export const UPDATE_USER = "session/UPDATE_USER"
 export const ADD_ERROR = "session/ADD_ERROR"
 
 
@@ -27,9 +27,10 @@ export const removeSessionUser = () => ({
     type: REMOVE_SESSION_USER
 });
 
-export const updateUsername = (user) => ({
-  type: UPDATE_USERNAME,
-  user
+export const updateUsername = (user, avatarUrl) => ({
+  type: UPDATE_USER,
+  user,
+  avatarUrl
 })
 
 export const login = (user) => async dispatch => {
@@ -67,15 +68,15 @@ export const signup = (user) => async (dispatch) => {
   dispatch(login(user))
 };
 
-export const updateUser = user => async dispatch => {
-  const res = await csrfFetch(`/api/users/${user.id}`, {
+export const updateUser = (user, userId) => async dispatch => {
+  const res = await csrfFetch(`/api/users/${user.id || userId}`, {
     method: 'PATCH',
-    body: JSON.stringify(user)
+    body: user
   })
   let newUser = await res.json()
   if(res.ok){
     sessionStorage.setItem("currentUser", JSON.stringify(newUser.user));
-    await dispatch(updateUsername(newUser.user));
+    await dispatch(updateUsername(newUser.user, newUser.avatarUrl));
   }else{
     throw res
   }
@@ -111,8 +112,8 @@ export default function sessionReducer(state = initialState, action){
           return {...state, errors: action.errors, signupErrors: action.errors};
         case ADD_ERROR:
           return {...state, errors: [...state.errors, action.error]}
-        case UPDATE_USERNAME:
-          return {...state, user: {...state.user, username: action.user.username}}
+        case UPDATE_USER:
+          return {...state, user: {...state.user, avatarUrl: action.user.avatarUrl, username: action.user.username}}
         default:
           return state;
       }
