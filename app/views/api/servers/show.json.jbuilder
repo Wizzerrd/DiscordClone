@@ -14,6 +14,7 @@ json.members do
     @server.users.each do |member|
         json.set! member.id do
             json.extract! member, :id, :username
+            json.avatarUrl member.avatar.attached? ? url_for(member.avatar) : nil
         end
     end
 end

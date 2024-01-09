@@ -9,10 +9,6 @@ export default function UserInfo(){
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.session);
 
-    if(user){
-        console.log(user)
-    }
-    
     return(
         <div id="user-info-box">
 

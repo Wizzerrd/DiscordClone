@@ -87,3 +87,18 @@
     color: #B5BAc1;
     margin-left: 20px;
 }
+
+.friends-list-avatar{
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+}
+
+.friends-list-friend-information{
+    display: flex;
+    align-items: center;
+}
+
+.friends-list-friend-information > h1{
+    padding-left: 20px;
+}
