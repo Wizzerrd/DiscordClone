@@ -2,7 +2,6 @@ import csrfFetch from "./csrf"
 import { setFriends } from "./friends"
 import { setIncomingFriends } from "./incomingfriends"
 import * as serverActions from './servers'
-import { SET_SERVER } from "./ui"
 
 export const ADD_USER = 'users/ADD_USER'
 

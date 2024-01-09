@@ -32,6 +32,8 @@
 .message-holder{
     padding: 20px;
     color: #DBDEE1;
+    display: flex;
+    align-items: center;
 }
 
 .author-details{
@@ -52,4 +54,14 @@
 
 .message-holder:hover{
     background-color: #2E3035;
+}
+
+.message-details{
+    padding-left: 20px;
+}
+
+.message-avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }

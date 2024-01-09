@@ -62,8 +62,11 @@ export default function MessagingBody(){
     function Message(ele){
         return(
             <div className='message-holder' key={ele.id}>
-                <div className='author-details'>{(users[ele.authorId] && users[ele.authorId].username) || users[ele.author_id] && users[ele.author_id].username}</div>
-                <div className='message-contents'>{ele.body}</div>
+                <img src={users[ele.authorId]?.avatarUrl || "https://laffitte-discord-clone-seeds.s3.us-west-1.amazonaws.com/default.png"} className="message-avatar"/>
+                <div className='message-details'>
+                    <div className='author-details'>{(users[ele.authorId] && users[ele.authorId].username) || users[ele.author_id] && users[ele.author_id].username}</div>
+                    <div className='message-contents'>{ele.body}</div>
+                </div>
             </div>
         )
     }
