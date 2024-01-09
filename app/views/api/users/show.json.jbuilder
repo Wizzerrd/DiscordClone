@@ -33,6 +33,7 @@ json.friends do
     json.set! friendship.receiver_id do
       json.user_id friendship.receiver_id
       json.username friendship.receiver.username
+      json.avatarUrl friendship.receiver.avatar.attached? ? url_for(friendship.receiver.avatar) : nil
       json.accepted accepted
     end
   end
@@ -52,6 +53,7 @@ json.incoming_friendships do
       json.set! incoming_friendship.sender_id do
         json.user_id incoming_friendship.sender_id
         json.username incoming_friendship.sender.username
+        json.avatarUrl incoming_friendship.sender.avatar.attached? ? url_for(incoming_friendship.sender.avatar) : nil
       end
     end
   end

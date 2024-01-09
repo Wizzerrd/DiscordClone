@@ -87,22 +87,43 @@ export default function FriendsListBody(){
         setIncomingFriendsList(Object.values(incomingFriends))
     }, [incomingFriends])
 
+    function FriendsListItem(type, friend){
+        if(type === "friend" || type === "outgoing"){
+            return (
+            <div className="friends-list-item" key={friend.userId}>
+                <div className="friends-list-friend-information">
+                    <img src={friend?.avatarUrl || "https://laffitte-discord-clone-seeds.s3.us-west-1.amazonaws.com/default.png"} className="friends-list-avatar"/>
+                    <h1>{friend.username}</h1>
+                </div>
+                <div className="friends-list-item-button-holder">
+                    <CancelSymbol onClick={(e)=>handleRemove(e, friend)} className="cancel-request-button" />
+                </div>
+            </div>
+            )
+        }else if (type === "incoming"){
+            return (
+            <div className="friends-list-item" key={friend.userId}>
+                <div className="friends-list-friend-information">
+                    <img src={friend?.avatarUrl || "https://laffitte-discord-clone-seeds.s3.us-west-1.amazonaws.com/default.png"} className="friends-list-avatar"/>
+                    <h1>{friend.username}</h1>
+                </div>
+                <div className="friends-list-item-button-holder">
+                    <AcceptSymbol onClick={(e)=>handleSubmit(e, friend)} className="accept-request-button" />
+                    <CancelSymbol onClick={(e)=>handleRemove(e, friend, user)} className="cancel-request-button" />
+                </div>
+            </div>
+            )
+        }
+        
+    }
+
     function ListOfFriends(){
 
         if(centerPanelPage === 0){
             return(
                     <div className="friends-body">
                         <div className="list-title">ALL FRIENDS</div>
-                        {friendsList.map(friend => {
-                            if(friend?.accepted) return (
-                            <div className="friends-list-item" key={friend.userId}>
-                                <h1>{friend.username}</h1>
-                                <div className="friends-list-item-button-holder">
-                                    <CancelSymbol onClick={(e)=>handleRemove(e, friend)} className="cancel-request-button" />
-                                </div>
-                            </div>
-                            )
-                        })}
+                        {friendsList.map(friend => { if(friend?.accepted) return FriendsListItem("friend", friend) })}
                     {message && <div className='friend-error'>{message}</div>}
                     </div>
             )
@@ -111,27 +132,13 @@ export default function FriendsListBody(){
                 <div className="friends-body">
                     <div className="list-title">OUTGOING</div>
                     <div id="outgoing-requests">
-                        {friendsList.map(friend => { if( friend && !friend?.accepted) return (
-                        <div className="friends-list-item" key={friend.userId}>
-                            <h1>{friend.username}</h1>
-                            <div className="friends-list-item-button-holder">
-                                <CancelSymbol onClick={(e)=>handleRemove(e, friend)} className="cancel-request-button" />
-                            </div>
-                        </div>)})}
+                        {friendsList.map(friend => { if( friend && !friend?.accepted) return FriendsListItem("outgoing", friend) })}
                     </div>
 
                     <div className="list-title">INCOMING</div>
                     <div id="incoming-requests">
                         {incomingFriendsList.map(incoming => {
-                            if(incoming) return(
-                                <div className="friends-list-item" key={incoming.userId}>
-                                    <h1>{incoming.username}</h1>
-                                    <div className="friends-list-item-button-holder">
-                                        <AcceptSymbol onClick={(e)=>handleSubmit(e, incoming)} className="accept-request-button" />
-                                        <CancelSymbol onClick={(e)=>handleRemove(e, incoming, user)} className="cancel-request-button" />
-                                    </div>
-                                </div>
-                            )
+                            if(incoming) return FriendsListItem("incoming", incoming)
                         })}
                     </div>
                     {message && <div className='friend-error'>{message}</div>}
