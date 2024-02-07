@@ -39,11 +39,19 @@ export default function LeftPanel({serverId}){
     }
 
     useEffect(()=>{
-        setChannelList(Object.values(channels).filter(ele => {
-            if(ele){
-                return true
-            }
-        }))
+        if (channels){
+            let this_list = Object.keys(channels).filter(ele => {
+                if(ele){
+                    return true
+                }
+            })
+            let idx = this_list[0]
+            this_list = this_list.map(ele => {
+                return channels[ele]
+            })
+            setChannelList(this_list)
+            history.push(`/channels/${serverId}/${idx}`)
+        }
     },[channels])
 
     useEffect(()=>{
@@ -60,14 +68,6 @@ export default function LeftPanel({serverId}){
         }
     },[serverId, dispatch])
 
-    useEffect(()=>{
-        if(serverId !== '@me' && !channelId){
-            if(channelList.length > 0){
-                history.push(`/channels/${serverId}/${channelList[0]?.id || channelList[1]?.id}`)
-            }
-        }
-    },[channelId])
-    
     if(serverId === '@me'){
         return(     
             <div className="left-panel">
@@ -91,7 +91,7 @@ export default function LeftPanel({serverId}){
     } else {
         return(
             <>
-                <div className="left-panel">
+                {channels && <div className="left-panel">
 
                     <div onClick={() => dispatch(setModalType('serverOptions'))} className="left-panel-drop-down">
                         <div>
@@ -123,7 +123,7 @@ export default function LeftPanel({serverId}){
 
                     <UserInfo/>
 
-                </div>
+                </div>}
             </>
         )
     }

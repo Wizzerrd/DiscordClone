@@ -1,15 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { logout } from '../../store/session';
+import { Link  } from 'react-router-dom';
 
 import { AiOutlinePlus } from 'react-icons/ai'
 
-import { uiInitialState, setModalType, selectServer } from '../../store/ui';
+import { setModalType, selectServer } from '../../store/ui';
 
 import './servers.css'
-import { fetchServer } from '../../store/servers';
-import { Redirect, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function ServerScroller({ serverId }){
 
